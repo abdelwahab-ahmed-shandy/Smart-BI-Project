@@ -1,0 +1,73 @@
+/* assets/css/style.css */
+:root {
+    --primary-color: #0f172a;
+    --accent-color: #3b82f6;
+    --bg-light: #f8fafc;
+    --error-color: #ef4444;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+}
+
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.hero-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.upload-card {
+    border: none;
+    border-radius: 20px;
+}
+
+.upload-area {
+    border: 2px dashed #cbd5e1;
+    border-radius: 15px;
+    padding: 40px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.upload-area.dragover {
+    border-color: var(--accent-color);
+    background-color: #eff6ff;
+}
+
+.upload-area.is-invalid {
+    border-color: var(--error-color);
+    background-color: #fef2f2;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.stat-card {
+    border: none;
+    border-radius: 15px;
+    border-right: 4px solid var(--accent-color);
+}
+
+.ai-badge {
+    background-color: #dbeafe;
+    color: #1e40af;
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+#loading-spinner { display: none; }
+.error-feedback { color: var(--error-color); font-size: 0.85rem; margin-top: 10px; display: none; }
