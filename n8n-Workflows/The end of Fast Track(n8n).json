@@ -1,0 +1,213 @@
+{
+  "name": "Smart Business Intelligence Reporting System",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# Smart Business Intelligence Reporting System\n\n## Graduation Project | MCI Academy 2026\n\n",
+        "height": 192,
+        "width": 784,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -464,
+        -592
+      ],
+      "id": "03aacc5e-7afb-4765-a6a5-5470a8ed26c3",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "### Fast Track",
+        "height": 80,
+        "width": 150,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        240
+      ],
+      "id": "79766d82-474d-4273-a639-a24ffb558085",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "31fc8a26-7929-40cf-9b35-9a537e2c6f19",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*",
+          "binaryPropertyName": "file",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1168,
+        0
+      ],
+      "id": "b01e2d5e-cb2e-4eaa-a34c-1a2829d9a2da",
+      "name": "Receive Sales File",
+      "webhookId": "31fc8a26-7929-40cf-9b35-9a537e2c6f19"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "={{ Object.keys($binary)[0] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -912,
+        0
+      ],
+      "id": "7cd81568-ce67-4b64-935d-98b33cf9b521",
+      "name": "Parse Excel Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet totalRevenue = 0;\nlet productCounts = {};\nlet hourlySales = {};\n\nitems.forEach(item => {\n    const data = item.json;\n    const price = parseFloat(data.UnitPrice || data.Price || 0);\n    const qty = parseInt(data.Quantity || data.Qty || 0);\n    const productName = data.Product || data.Item || \"Unknown\";\n    \n    totalRevenue += (price * qty);\n    productCounts[productName] = (productCounts[productName] || 0) + qty;\n\n    if (data.Date) {\n        // معالجة التاريخ لـ Excel (أرقام) أو نصوص\n        const dateObj = isNaN(data.Date) ? new Date(data.Date) : new Date((data.Date - 25569) * 86400 * 1000);\n        const hour = dateObj.getHours();\n        hourlySales[hour] = (hourlySales[hour] || 0) + 1;\n    }\n});\n\nconst sortedProducts = Object.entries(productCounts).sort((a, b) => b[1] - a[1]);\nconst top5 = sortedProducts.slice(0, 5).map(p => `${p[0]} (${p[1]} قطعة)`);\nconst bottom5 = sortedProducts.slice(-5).map(p => `${p[0]} (${p[1]} قطعة)`);\n\n// تحديد ساعة الذروة\nconst peakHour = Object.entries(hourlySales).sort((a, b) => b[1] - a[1])[0];\n\nreturn {\n    totalSales: totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),\n    ordersCount: items.length,\n    topProduct: sortedProducts.length > 0 ? sortedProducts[0][0] : \"N/A\",\n    top5Products: top5.join(' | '),\n    bottom5Products: bottom5.join(' | '),\n    peakHour: peakHour ? `${peakHour[0]}:00` : \"غير محدد\",\n    // سحب الإيميل من النود الأولى بالاسم الجديد\n    userEmail: $node[\"Receive Sales File\"].json.body.email \n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -576,
+        192
+      ],
+      "id": "28637aa2-972d-44c4-a675-5f0b9c1c986f",
+      "name": "Calculate Quick Metrics"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -288,
+        192
+      ],
+      "id": "a1d6a407-d730-441a-a7bf-01c57e07fe68",
+      "name": "UI Instant Response"
+    },
+    {
+      "parameters": {
+        "fromEmail": "abdelwahabshandy@gmail.com",
+        "toEmail": "={{ $('Calculate Quick Metrics').item.json.userEmail }}",
+        "subject": "📑 التقرير السريع لمبيعاتك | Smart BI System",
+        "html": "=<div dir=\"rtl\" style=\"font-family: 'Cairo', sans-serif; background-color: #f8fafc; padding: 30px; border-radius: 15px;\">\n    <div style=\"text-align: center; margin-bottom: 30px;\">\n        <h1 style=\"color: #0f172a; margin-bottom: 5px;\">Smart BI <span style=\"color: #3b82f6;\">System</span></h1>\n        <p style=\"color: #64748b; font-size: 0.9rem;\">تقرير التحليل الفوري للمبيعات</p>\n    </div>\n\n    <div style=\"display: flex; gap: 15px; margin-bottom: 25px;\">\n        <div style=\"background: white; padding: 15px; border-radius: 12px; border-right: 5px solid #3b82f6; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.05);\">\n            <p style=\"color: #64748b; margin: 0; font-size: 0.8rem;\">إجمالي المبيعات</p>\n            <h2 style=\"color: #3b82f6; margin: 5px 0 0 0;\">{{ $json.totalSales }}</h2>\n        </div>\n        <div style=\"background: white; padding: 15px; border-radius: 12px; border-right: 5px solid #10b981; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.05);\">\n            <p style=\"color: #64748b; margin: 0; font-size: 0.8rem;\">عدد العمليات</p>\n            <h2 style=\"color: #10b981; margin: 5px 0 0 0;\">{{ $json.ordersCount }}</h2>\n        </div>\n    </div>\n\n    <div style=\"background: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);\">\n        <h3 style=\"color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-top: 0;\">🏆 مؤشرات سريعة</h3>\n        <p>🥇 <strong>أعلى منتج طلباً:</strong> <span style=\"color: #3b82f6;\">{{ $json.topProduct }}</span></p>\n        <p>⏰ <strong>وقت الذروة:</strong> <span style=\"color: #f59e0b;\">{{ $json.peakHour }}</span></p>\n    </div>\n\n    <div style=\"background: #eff6ff; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px dashed #3b82f6;\">\n        <h3 style=\"color: #1e40af; margin-top: 0;\">📈 تحليل المنتجات (Top 5)</h3>\n        <p style=\"color: #1e3a8a; line-height: 1.6;\">{{ $json.top5Products }}</p>\n        \n        <h3 style=\"color: #991b1b; margin-top: 20px;\">📉 المنتجات الأقل طلباً (Bottom 5)</h3>\n        <p style=\"color: #7f1d1d; line-height: 1.6;\">{{ $json.bottom5Products }}</p>\n    </div>\n\n    <div style=\"text-align: center; color: #94a3b8; font-size: 0.8rem; margin-top: 40px;\">\n        <p>هذا التقرير تم توليده آلياً بواسطة نظام الذكاء الاصطناعي الخاص بك.</p>\n        <p>مشروع تخرج | MCI Academy 2026</p>\n    </div>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -16,
+        192
+      ],
+      "id": "4d48d35e-18de-4711-967f-caba80cf650c",
+      "name": "Send Instant Smart Report",
+      "webhookId": "916bfca0-3560-40fa-8976-9e3857dcc303",
+      "credentials": {
+        "smtp": {
+          "id": "oqskIIBj8Ex9aUYP",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### The end of Fast Track\n\n",
+        "height": 80,
+        "width": 192,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        192,
+        208
+      ],
+      "id": "c95e44e8-313f-4965-a7f2-51523efc7437",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Receive Sales File": {
+      "main": [
+        [
+          {
+            "node": "Parse Excel Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Excel Data": {
+      "main": [
+        [
+          {
+            "node": "Calculate Quick Metrics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Quick Metrics": {
+      "main": [
+        [
+          {
+            "node": "UI Instant Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UI Instant Response": {
+      "main": [
+        [
+          {
+            "node": "Send Instant Smart Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Instant Smart Report": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "bcee344d-485c-4d58-9275-63ebca4ec81b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5432097ef030478e21b25f30699d819bd160e7e78ba30b06f6c0c37d85f1cf26"
+  },
+  "id": "PCUgfusdeFOovCsu",
+  "tags": []
+}

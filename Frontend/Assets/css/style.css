@@ -69,5 +69,31 @@ body {
     font-weight: 600;
 }
 
+/* تحديد حجم ثابت لحاوية الرسم البياني لمنع التضخم */
+.chart-container {
+    position: relative;
+    height: 350px; /* هذا الارتفاع سيثبت الرسم البياني تماماً */
+    width: 100%;
+}
+
+/* تحسين شكل الـ Dashboard عند الظهور */
+#dashboard {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* تنسيق إضافي لصندوق توصيات AI ليكون أوضح */
+#ai-response {
+    min-height: 100px;
+    background-color: #f1f5f9;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+
 #loading-spinner { display: none; }
 .error-feedback { color: var(--error-color); font-size: 0.85rem; margin-top: 10px; display: none; }
