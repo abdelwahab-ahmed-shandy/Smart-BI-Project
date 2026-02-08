@@ -170,7 +170,7 @@ This project demonstrates real-world concepts such as:
 - **Marwan Singer**  
 - **Hamed Tarek**  
 - **Doha Ñageh**   
-- Member Name  
+- **Hadeer Abdelaziz**
 - Member Name  
 - Member Name  
 
