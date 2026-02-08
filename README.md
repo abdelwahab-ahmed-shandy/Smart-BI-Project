@@ -164,10 +164,17 @@ This project demonstrates real-world concepts such as:
 
 ---
 
-## 👨‍💻 Author
+## 👥 Project Team
 
-**Abdelwahab Shandy**
-Graduation Project – MCI Academy 2026
+- **Abdelwahab Shandy**  
+- **Marwan Singer**  
+- Member Name  
+- Member Name  
+- Member Name  
+- Member Name  
+- Member Name  
+
+_Graduation Project – MCI Academy 2026_
 
 ---
 
