@@ -168,7 +168,7 @@ This project demonstrates real-world concepts such as:
 
 - **Abdelwahab Shandy**  
 - **Marwan Singer**  
-- Member Name  
+- **Hamed Tarek**  
 - Member Name  
 - Member Name  
 - Member Name  
