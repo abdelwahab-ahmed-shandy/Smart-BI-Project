@@ -171,7 +171,7 @@ This project demonstrates real-world concepts such as:
 - **Hamed Tarek**  
 - **Doha Ñageh**   
 - **Hadeer Abdelaziz**
-- Member Name  
+- **Abdelrahman-Taher**  
 - Member Name  
 
 _Graduation Project – MCI Academy 2026_
