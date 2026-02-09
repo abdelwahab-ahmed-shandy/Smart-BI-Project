@@ -172,7 +172,7 @@ This project demonstrates real-world concepts such as:
 - **Doha Ñageh**   
 - **Hadeer Abdelaziz**
 - **Abdelrahman Taher**  
-- Member Name  
+- **Howarah Ali Abdo**  
 
 _Graduation Project – MCI Academy 2026_
 

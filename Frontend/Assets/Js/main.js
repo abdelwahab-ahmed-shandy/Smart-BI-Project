@@ -6,6 +6,8 @@ const fileError = document.getElementById('fileError');
 const uploadContent = document.getElementById('uploadContent');
 const uploadForm = document.getElementById('uploadForm');
 
+
+
 // 1. إدارة اختيار الملف والتحقق منه
 if (dropZone) dropZone.onclick = () => fileInput.click();
 if (fileInput) fileInput.onchange = () => handleFile(fileInput.files[0]);
@@ -21,11 +23,17 @@ function handleFile(file) {
     uploadContent.innerHTML = `<i class="bi bi-file-earmark-check display-4 text-success"></i><h5 class="mt-3 text-success">تم اختيار: ${file.name}</h5>`;
 }
 
+
+
+
 function showError(msg) {
     fileError.innerText = msg;
     fileError.style.display = 'block';
     uploadContent.innerHTML = `<i class="bi bi-exclamation-circle display-4 text-danger"></i><h5 class="mt-3 text-danger">ملف غير صالح</h5>`;
 }
+
+
+
 
 // 2. إرسال البيانات إلى n8n
 uploadForm.onsubmit = async (e) => {
@@ -60,6 +68,9 @@ uploadForm.onsubmit = async (e) => {
     }
 };
 
+
+
+
 // 3. عرض النتائج وتوليد الرسم البياني "الديناميكي الوهمي"
 function showDashboard(data) {
     const dashboard = document.getElementById('dashboard');
@@ -82,6 +93,8 @@ function showDashboard(data) {
 
     initChart(labels, fakeValues);
 }
+
+
 
 // 4. دالة الرسم البياني مع التحكم الصارم في الحجم (Fix for "تكبر بشكل غبي")
 function initChart(labels, values) {
