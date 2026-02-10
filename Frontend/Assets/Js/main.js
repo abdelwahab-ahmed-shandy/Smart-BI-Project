@@ -8,6 +8,9 @@ const uploadForm = document.getElementById('uploadForm');
 
 
 
+// ???? 
+
+
 // 1. إدارة اختيار الملف والتحقق منه
 if (dropZone) dropZone.onclick = () => fileInput.click();
 if (fileInput) fileInput.onchange = () => handleFile(fileInput.files[0]);
