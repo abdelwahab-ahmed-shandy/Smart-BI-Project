@@ -11,8 +11,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -464,
-        -592
+        -1008,
+        -896
       ],
       "id": "03aacc5e-7afb-4765-a6a5-5470a8ed26c3",
       "name": "Sticky Note"
@@ -27,8 +27,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -864,
-        -96
+        -832,
+        544
       ],
       "id": "79766d82-474d-4273-a639-a24ffb558085",
       "name": "Sticky Note1"
@@ -58,7 +58,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1376,
+        -1840,
         0
       ],
       "id": "b01e2d5e-cb2e-4eaa-a34c-1a2829d9a2da",
@@ -74,7 +74,7 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        -1088,
+        -1296,
         0
       ],
       "id": "7cd81568-ce67-4b64-935d-98b33cf9b521",
@@ -87,8 +87,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -448,
-        -128
+        -256,
+        -16
       ],
       "id": "28637aa2-972d-44c4-a675-5f0b9c1c986f",
       "name": "Calculate Quick Metrics"
@@ -100,8 +100,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -176,
-        -128
+        240,
+        -16
       ],
       "id": "a1d6a407-d730-441a-a7bf-01c57e07fe68",
       "name": "UI Instant Response"
@@ -117,8 +117,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        96,
-        -128
+        688,
+        -16
       ],
       "id": "4d48d35e-18de-4711-967f-caba80cf650c",
       "name": "Send Instant Smart Report",
@@ -140,8 +140,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        48,
-        -240
+        864,
+        -16
       ],
       "id": "c95e44e8-313f-4965-a7f2-51523efc7437",
       "name": "Sticky Note2"
@@ -177,7 +177,7 @@
         0
       ],
       "id": "b0af2a21-1cdf-43e3-b82b-a686ec8d7781",
-      "name": "If"
+      "name": "Data Validation & Security Gate"
     },
     {
       "parameters": {
@@ -190,11 +190,102 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -464,
-        144
+        -256,
+        480
       ],
       "id": "c05a015f-6b28-4655-97a0-5bd466e1bc81",
-      "name": "Respond to Webhook"
+      "name": "API Response Handler"
+    },
+    {
+      "parameters": {
+        "content": "## Receive Sales File (Webhook) \n**تعتبر هذه النود \"بوابة استقبال البيانات\". وظيفتها استلام ملف المبيعات (Excel/CSV) والبريد الإلكتروني من واجهة المستخدم عبر بروتوكول HTTP POST، وهي نقطة انطلاق سير العمل بالكامل.**"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1920,
+        192
+      ],
+      "typeVersion": 1,
+      "id": "a726cb32-f56f-4868-b03f-d8acdb3b8018",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Parse Excel Data\n**تعمل كمحرك \"استخراج البيانات\". تقوم بتحويل الملف الثنائي (Binary) المرفوع إلى تنسيق JSON يمكن للنظام قراءته ومعالجته برمجياً. في تجربتك، نجحت هذه النود في استخراج العناصر من ملف البيانات.**"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1376,
+        192
+      ],
+      "typeVersion": 1,
+      "id": "17dbc84e-7452-4afe-9eb0-161de2dcb91b",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## (If Node)\n**هي \"صمام الأمان\" للنظام. تقوم بالتحقق من شرطين أساسيين عبر بوابة منطقية (AND):\nالتأكد من أن الملف يحتوي على بيانات (أكبر من 0).**"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -896,
+        192
+      ],
+      "typeVersion": 1,
+      "id": "ae246424-e96d-41d8-8af2-88b98f628c25",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## (Respond to Webhook) \n**وظيفتها \"تحديث واجهة المستخدم\". تقوم بإرسال نتائج التحليل النهائية فورياً لتعرض على الداشبورد في شكل أرقام ورسوم بيانية قبل إتمام العمليات الخلفية الأخرى.**"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -320,
+        640
+      ],
+      "typeVersion": 1,
+      "id": "96def73c-aad8-4eee-8cc5-45240a194d39",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## (Code Node)\n**تمثل \"محرك التحليل اللحظي\". تستخدم لغة JavaScript لحساب المؤشرات الرئيسية (KPIs) مثل إجمالي المبيعات، المنتج الأكثر طلباً، وتوليد \"الرؤية الذكية\" (Insight) بناءً على الأرقام المستخرجة.**"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -320,
+        144
+      ],
+      "typeVersion": 1,
+      "id": "1261d440-0f0c-4e94-8f4c-4f800d9abb15",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "## Respond to Webhook\n**وظيفتها \"تحديث واجهة المستخدم\". تقوم بإرسال نتائج التحليل النهائية فورياً لتعرض على الداشبورد في شكل أرقام ورسوم بيانية قبل إتمام العمليات الخلفية الأخرى.**"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        176,
+        144
+      ],
+      "typeVersion": 1,
+      "id": "36437d59-77fc-4946-a691-bd208042f3fe",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "## Email \n**هي \"خدمة التقارير المؤتمتة\". تقوم بصياغة إيميل احترافي يحتوي على ملخص التحليل وإرساله تلقائياً إلى بريد المستخدم المسجل، مما يضمن وصول المعلومات لصاحب القرار فوراً.**"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        624,
+        176
+      ],
+      "typeVersion": 1,
+      "id": "a6f18f05-d2b1-4309-9d00-25cfe7ddc957",
+      "name": "Sticky Note9"
     }
   ],
   "pinData": {},
@@ -214,7 +305,7 @@
       "main": [
         [
           {
-            "node": "If",
+            "node": "Data Validation & Security Gate",
             "type": "main",
             "index": 0
           }
@@ -248,7 +339,7 @@
         []
       ]
     },
-    "If": {
+    "Data Validation & Security Gate": {
       "main": [
         [
           {
@@ -259,7 +350,7 @@
         ],
         [
           {
-            "node": "Respond to Webhook",
+            "node": "API Response Handler",
             "type": "main",
             "index": 0
           }
@@ -271,7 +362,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "f8acb3fe-d745-466b-a432-044625cbcc9d",
+  "versionId": "5c877ed7-c0b7-42d6-9a04-ca361ded6bc4",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "5432097ef030478e21b25f30699d819bd160e7e78ba30b06f6c0c37d85f1cf26"
