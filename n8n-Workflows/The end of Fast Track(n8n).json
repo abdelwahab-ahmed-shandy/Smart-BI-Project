@@ -28,7 +28,7 @@
       "typeVersion": 1,
       "position": [
         -864,
-        240
+        -96
       ],
       "id": "79766d82-474d-4273-a639-a24ffb558085",
       "name": "Sticky Note1"
@@ -58,7 +58,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1168,
+        -1376,
         0
       ],
       "id": "b01e2d5e-cb2e-4eaa-a34c-1a2829d9a2da",
@@ -74,7 +74,7 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        -912,
+        -1088,
         0
       ],
       "id": "7cd81568-ce67-4b64-935d-98b33cf9b521",
@@ -82,13 +82,13 @@
     },
     {
       "parameters": {
-        "jsCode": "const items = $input.all();\nlet totalRevenue = 0;\nlet productCounts = {};\nlet hourlySales = {};\n\nitems.forEach(item => {\n    const data = item.json;\n    const price = parseFloat(data.UnitPrice || data.Price || 0);\n    const qty = parseInt(data.Quantity || data.Qty || 0);\n    const productName = data.Product || data.Item || \"Unknown\";\n    \n    totalRevenue += (price * qty);\n    productCounts[productName] = (productCounts[productName] || 0) + qty;\n\n    if (data.Date) {\n        // معالجة التاريخ لـ Excel (أرقام) أو نصوص\n        const dateObj = isNaN(data.Date) ? new Date(data.Date) : new Date((data.Date - 25569) * 86400 * 1000);\n        const hour = dateObj.getHours();\n        hourlySales[hour] = (hourlySales[hour] || 0) + 1;\n    }\n});\n\nconst sortedProducts = Object.entries(productCounts).sort((a, b) => b[1] - a[1]);\nconst top5 = sortedProducts.slice(0, 5).map(p => `${p[0]} (${p[1]} قطعة)`);\nconst bottom5 = sortedProducts.slice(-5).map(p => `${p[0]} (${p[1]} قطعة)`);\n\n// تحديد ساعة الذروة\nconst peakHour = Object.entries(hourlySales).sort((a, b) => b[1] - a[1])[0];\n\nreturn {\n    totalSales: totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),\n    ordersCount: items.length,\n    topProduct: sortedProducts.length > 0 ? sortedProducts[0][0] : \"N/A\",\n    top5Products: top5.join(' | '),\n    bottom5Products: bottom5.join(' | '),\n    peakHour: peakHour ? `${peakHour[0]}:00` : \"غير محدد\",\n    // سحب الإيميل من النود الأولى بالاسم الجديد\n    userEmail: $node[\"Receive Sales File\"].json.body.email \n};"
+        "jsCode": "const items = $input.all();\nlet totalRevenue = 0;\nlet productCounts = {};\nlet hourlySales = {};\nlet highValueOrders = 0; \nlet totalQty = 0;\n\nitems.forEach(item => {\n    const data = item.json;\n    \n    // 1. مرونة أسماء الأعمدة (دعم العربي والإنجليزي)\n    const price = parseFloat(data.UnitPrice || data.Price || data['سعر الوحدة'] || data['السعر'] || 0);\n    const qty = parseInt(data.Quantity || data.Qty || data['الكمية'] || 0);\n    const productName = data.Product || data.Item || data['المنتج'] || data['الصنف'] || \"غير معروف\";\n    \n    const lineTotal = price * qty;\n    totalRevenue += lineTotal;\n    totalQty += qty;\n    \n    // 2. كشف الصفقات الكبيرة (أعلى من 5000)\n    if (lineTotal > 5000) highValueOrders++;\n\n    // 3. تجميع بيانات المنتجات والوقت\n    productCounts[productName] = (productCounts[productName] || 0) + qty;\n\n    if (data.Date) {\n        // معالجة تاريخ إكسيل الرقمي أو النصوص\n        const dateObj = isNaN(data.Date) ? new Date(data.Date) : new Date((data.Date - 25569) * 86400 * 1000);\n        const hour = dateObj.getHours();\n        hourlySales[hour] = (hourlySales[hour] || 0) + 1;\n    }\n});\n\n// 4. ترتيب المنتجات تنازلياً لاستخراج القائمة\nconst sortedProducts = Object.entries(productCounts).sort((a, b) => b[1] - a[1]);\n\n// استخراج أفضل 5 منتجات بتنسيق نصي جذاب للإيميل\nconst top5List = sortedProducts.slice(0, 5).map(([name, qty]) => {\n    return `${name} (${qty} قطعة)`;\n}).join(' | ');\n\nconst topProductName = sortedProducts.length > 0 ? sortedProducts[0][0] : \"N/A\";\nconst peakHourEntry = Object.entries(hourlySales).sort((a, b) => b[1] - a[1])[0];\n\n// 5. استنتاج ذكي (Insight) مطور بناءً على المنتج الأول\nlet smartInsight = \"أداؤك مستقر اليوم.\";\nif (highValueOrders > 0) {\n    smartInsight = `انتباه: لديك ${highValueOrders} صفقات ضخمة تحتاج مراجعة دقيقة.`;\n} else if (totalQty > 100) {\n    smartInsight = `طلب مرتفع جداً على المنتج (${topProductName})! تأكد من توفر المخزون الكافي منه.`;\n}\n\n// 6. المخرجات النهائية\nreturn {\n    totalSales: totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),\n    ordersCount: items.length,\n    topProduct: topProductName, // المنتج الأول للواجهة\n    top5Products: top5List,      // القائمة الكاملة للخمسة الأوائل للإيميل\n    peakHour: peakHourEntry ? `${peakHourEntry[0]}:00` : \"غير محدد\",\n    insight: smartInsight, \n    userEmail: $node[\"Receive Sales File\"].json.body.email \n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -576,
-        192
+        -448,
+        -128
       ],
       "id": "28637aa2-972d-44c4-a675-5f0b9c1c986f",
       "name": "Calculate Quick Metrics"
@@ -100,8 +100,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -288,
-        192
+        -176,
+        -128
       ],
       "id": "a1d6a407-d730-441a-a7bf-01c57e07fe68",
       "name": "UI Instant Response"
@@ -111,14 +111,14 @@
         "fromEmail": "abdelwahabshandy@gmail.com",
         "toEmail": "={{ $('Calculate Quick Metrics').item.json.userEmail }}",
         "subject": "📑 التقرير السريع لمبيعاتك | Smart BI System",
-        "html": "=<div dir=\"rtl\" style=\"font-family: 'Cairo', sans-serif; background-color: #f8fafc; padding: 30px; border-radius: 15px;\">\n    <div style=\"text-align: center; margin-bottom: 30px;\">\n        <h1 style=\"color: #0f172a; margin-bottom: 5px;\">Smart BI <span style=\"color: #3b82f6;\">System</span></h1>\n        <p style=\"color: #64748b; font-size: 0.9rem;\">تقرير التحليل الفوري للمبيعات</p>\n    </div>\n\n    <div style=\"display: flex; gap: 15px; margin-bottom: 25px;\">\n        <div style=\"background: white; padding: 15px; border-radius: 12px; border-right: 5px solid #3b82f6; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.05);\">\n            <p style=\"color: #64748b; margin: 0; font-size: 0.8rem;\">إجمالي المبيعات</p>\n            <h2 style=\"color: #3b82f6; margin: 5px 0 0 0;\">{{ $json.totalSales }}</h2>\n        </div>\n        <div style=\"background: white; padding: 15px; border-radius: 12px; border-right: 5px solid #10b981; flex: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.05);\">\n            <p style=\"color: #64748b; margin: 0; font-size: 0.8rem;\">عدد العمليات</p>\n            <h2 style=\"color: #10b981; margin: 5px 0 0 0;\">{{ $json.ordersCount }}</h2>\n        </div>\n    </div>\n\n    <div style=\"background: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);\">\n        <h3 style=\"color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-top: 0;\">🏆 مؤشرات سريعة</h3>\n        <p>🥇 <strong>أعلى منتج طلباً:</strong> <span style=\"color: #3b82f6;\">{{ $json.topProduct }}</span></p>\n        <p>⏰ <strong>وقت الذروة:</strong> <span style=\"color: #f59e0b;\">{{ $json.peakHour }}</span></p>\n    </div>\n\n    <div style=\"background: #eff6ff; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px dashed #3b82f6;\">\n        <h3 style=\"color: #1e40af; margin-top: 0;\">📈 تحليل المنتجات (Top 5)</h3>\n        <p style=\"color: #1e3a8a; line-height: 1.6;\">{{ $json.top5Products }}</p>\n        \n        <h3 style=\"color: #991b1b; margin-top: 20px;\">📉 المنتجات الأقل طلباً (Bottom 5)</h3>\n        <p style=\"color: #7f1d1d; line-height: 1.6;\">{{ $json.bottom5Products }}</p>\n    </div>\n\n    <div style=\"text-align: center; color: #94a3b8; font-size: 0.8rem; margin-top: 40px;\">\n        <p>هذا التقرير تم توليده آلياً بواسطة نظام الذكاء الاصطناعي الخاص بك.</p>\n        <p>مشروع تخرج | MCI Academy 2026</p>\n    </div>\n</div>",
+        "html": "=<div dir=\"rtl\" style=\"font-family: 'Cairo', Tahoma, sans-serif; background-color: #f4f7f9; padding: 20px; border-radius: 15px;\">\n    <div style=\"text-align: center; background-color: #0f172a; padding: 20px; border-radius: 12px 12px 0 0;\">\n        <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Smart BI <span style=\"color: #3b82f6;\">System</span></h1>\n        <p style=\"color: #cbd5e1; margin-top: 5px; font-size: 14px;\">تقرير التحليل اللحظي للمبيعات</p>\n    </div>\n\n    <div style=\"background-color: #ffffff; padding: 15px; margin: 20px 0; border-right: 6px solid #f59e0b; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);\">\n        <h3 style=\"color: #0f172a; margin-top: 0;\">💡 رؤية النظام الذكي:</h3>\n        <p style=\"color: #475569; font-size: 16px; font-weight: bold; margin-bottom: 0;\">{{ $json.insight }}</p>\n    </div>\n\n    <div style=\"display: flex; gap: 10px; margin-bottom: 20px;\">\n        <div style=\"background: white; padding: 15px; border-radius: 10px; flex: 1; text-align: center; border: 1px solid #e2e8f0;\">\n            <p style=\"color: #64748b; margin: 0; font-size: 13px;\">إجمالي الإيرادات</p>\n            <h2 style=\"color: #3b82f6; margin: 5px 0;\">{{ $json.totalSales }}</h2>\n        </div>\n        <div style=\"background: white; padding: 15px; border-radius: 10px; flex: 1; text-align: center; border: 1px solid #e2e8f0;\">\n            <p style=\"color: #64748b; margin: 0; font-size: 13px;\">عدد العمليات</p>\n            <h2 style=\"color: #10b981; margin: 5px 0;\">{{ $json.ordersCount }}</h2>\n        </div>\n    </div>\n\n    <div style=\"background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\">\n        <table style=\"width: 100%; border-collapse: collapse;\">\n            <tr>\n                <td style=\"padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;\">🥇 المنتج الأكثر طلباً:</td>\n                <td style=\"padding: 10px 0; color: #0f172a; font-weight: bold; text-align: left; border-bottom: 1px solid #f1f5f9;\">{{ $json.topProduct }}</td>\n            </tr>\n            <tr>\n                <td style=\"padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;\">⏰ ساعة الذروة:</td>\n                <td style=\"padding: 10px 0; color: #f59e0b; font-weight: bold; text-align: left; border-bottom: 1px solid #f1f5f9;\">{{ $json.peakHour }}</td>\n            </tr>\n        </table>\n    </div>\n\n    <div style=\"text-align: center; margin-top: 30px; color: #94a3b8; font-size: 12px;\">\n        <p>هذا التقرير تم توليده فورياً بواسطة محرك الأتمتة الخاص بمشروع التخرج.</p>\n        <p>MCI Academy 2026 | Abdelwahab Ahmed Shandy</p>\n    </div>\n</div>",
         "options": {}
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        -16,
-        192
+        96,
+        -128
       ],
       "id": "4d48d35e-18de-4711-967f-caba80cf650c",
       "name": "Send Instant Smart Report",
@@ -140,11 +140,61 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        192,
-        208
+        48,
+        -240
       ],
       "id": "c95e44e8-313f-4965-a7f2-51523efc7437",
       "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "53b6660d-90ba-4ee9-8d8a-3941240debed",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -832,
+        0
+      ],
+      "id": "b0af2a21-1cdf-43e3-b82b-a686ec8d7781",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"error\": \"الملف المرفوع فارغ، يرجى التأكد من البيانات\"}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -464,
+        144
+      ],
+      "id": "c05a015f-6b28-4655-97a0-5bd466e1bc81",
+      "name": "Respond to Webhook"
     }
   ],
   "pinData": {},
@@ -164,7 +214,7 @@
       "main": [
         [
           {
-            "node": "Calculate Quick Metrics",
+            "node": "If",
             "type": "main",
             "index": 0
           }
@@ -197,13 +247,31 @@
       "main": [
         []
       ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Calculate Quick Metrics",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "bcee344d-485c-4d58-9275-63ebca4ec81b",
+  "versionId": "f8acb3fe-d745-466b-a432-044625cbcc9d",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "5432097ef030478e21b25f30699d819bd160e7e78ba30b06f6c0c37d85f1cf26"
