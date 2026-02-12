@@ -155,10 +155,10 @@ This project demonstrates real-world concepts such as:
 - **Abdelwahab Shandy**  
 - **Marwan Singer**  
 - **Hamed Tarek**  
-- **Doha Ñageh**   
+- **Howarah Ali Abdo**  
 - **Hadeer Abdelaziz**
 - **Abdelrahman Taher**  
-- **Howarah Ali Abdo**  
+- **Doha Ñageh**   
 
 _Graduation Project – MCI Academy 2026_
 
