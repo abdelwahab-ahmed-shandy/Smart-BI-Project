@@ -6,6 +6,10 @@ const fileError = document.getElementById('fileError');
 const uploadContent = document.getElementById('uploadContent');
 const uploadForm = document.getElementById('uploadForm');
 
+
+
+
+
 // 1. إدارة اختيار الملف والتحقق منه
 if (dropZone) dropZone.onclick = () => fileInput.click();
 if (fileInput) fileInput.onchange = () => handleFile(fileInput.files[0]);
@@ -23,10 +27,11 @@ function handleFile(file) {
     uploadContent.innerHTML = `
         <i class="bi bi-file-earmark-check display-4 text-success"></i>
         <h5 class="mt-3 text-success">تم اختيار: ${file.name}</h5>
-        <p class="text-muted small">اضغط لتغيير الملف</p>
-    `;
+        <p class="text-muted small">اضغط لتغيير الملف</p>`;
 }
 
+
+// آلية معالجة الأخطاء
 function showError(msg) {
     fileError.innerText = msg;
     fileError.style.display = 'block';
@@ -38,6 +43,10 @@ function showError(msg) {
     // إخفاء الداشبورد إذا كان ظاهراً بسبب خطأ سابق
     document.getElementById('dashboard').style.display = 'none';
 }
+
+
+
+
 
 // 2. إرسال البيانات إلى n8n (محدث ليتناسب مع نود الـ If)
 uploadForm.onsubmit = async (e) => {
@@ -86,6 +95,9 @@ uploadForm.onsubmit = async (e) => {
     }
 };
 
+
+
+
 // 3. عرض النتائج وتوليد الرسم البياني
 function showDashboard(data) {
     const dashboard = document.getElementById('dashboard');
@@ -117,6 +129,9 @@ function showDashboard(data) {
     initChart(['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'], 
               ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'].map(() => (baseValue * (0.8 + Math.random() * 0.4)).toFixed(0)));
 }
+
+
+
 
 // 4. دالة الرسم البياني
 function initChart(labels, values) {
