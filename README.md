@@ -63,6 +63,10 @@ The system captures data via a **Webhook** and forks the logic into two parallel
 ![n8n Workflow](Frontend/Assets/img/workflow_preview_placeholder.png)
 *Visualizing the data ingestion and validation gate.*
 
+### ⚙️ n8n Slow Track Logic
+![n8n Workflow](Frontend/Assets/img/Wait_photo_Afterend_drow.png)
+*Visualizing the data ingestion and validation gate.*
+
 ---
 
 ## 🗂️ Project Structure
