@@ -59,7 +59,7 @@ The system captures data via a **Webhook** and forks the logic into two parallel
 ![Dashboard Preview](Frontend/Assets/img/dashboard_preview_placeholder.png) 
 *Current UI showing 2000 transactions and $2.2M+ in revenue.*
 
-### ⚙️ n8n Automation Logic
+### ⚙️ n8n Fast Track Logic
 ![n8n Workflow](Frontend/Assets/img/workflow_preview_placeholder.png)
 *Visualizing the data ingestion and validation gate.*
 
