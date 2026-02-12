@@ -31,6 +31,9 @@ function handleFile(file) {
 }
 
 
+
+
+
 // آلية معالجة الأخطاء
 function showError(msg) {
     fileError.innerText = msg;
@@ -98,6 +101,7 @@ uploadForm.onsubmit = async (e) => {
 
 
 
+
 // 3. عرض النتائج وتوليد الرسم البياني
 function showDashboard(data) {
     const dashboard = document.getElementById('dashboard');
@@ -129,6 +133,7 @@ function showDashboard(data) {
     initChart(['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'], 
               ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'].map(() => (baseValue * (0.8 + Math.random() * 0.4)).toFixed(0)));
 }
+
 
 
 
