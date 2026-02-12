@@ -1,96 +1,78 @@
 # 📘 Smart Business Intelligence Reporting System (Smart BI Project)
 
-> **Graduation Project – MCI Academy 2026**
-> Automated, AI-powered Business Intelligence reporting system using **n8n** and **Excel**.
+<p align="center">
+  <img src="Frontend/Assets/img/e6ecb39d-3feb-4943-bced-b1204095b566.jpeg" width="150" alt="MCI Logo">
+</p>
+
+<p align="center">
+  <strong>Graduation Project – MCI Academy 2026</strong><br>
+  Automated, AI-powered Business Intelligence reporting system using <b>n8n</b> and <b>Excel</b>.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Engine-n8n-FF6C37?style=for-the-badge&logo=n8n" alt="n8n">
+  <img src="https://img.shields.io/badge/Frontend-Bootstrap_5-7952B3?style=for-the-badge&logo=bootstrap" alt="Bootstrap">
+  <img src="https://img.shields.io/badge/AI-Deep_Analysis-blue?style=for-the-badge&logo=openai" alt="AI">
+  <img src="https://img.shields.io/badge/Status-Fast_Track_Complete-success?style=for-the-badge" alt="Status">
+</p>
 
 ---
 
 ## 🧠 Project Overview
 
-The **Smart Business Intelligence Reporting System** is an automated system that transforms raw **Excel sales data** into **actionable insights and professional reports** without relying on a traditional backend.
+The **Smart Business Intelligence Reporting System** is an automated pipeline that transforms raw **Excel sales data** into **actionable insights**. It leverages an **event-driven, asynchronous architecture** to simulate the role of a **Senior Data Analyst**, processing data through two distinct paths:
 
-The system is built around an **event-driven, asynchronous architecture** using **n8n** as the core automation engine, combined with **AI-powered analysis** to simulate the role of a **Senior Data Analyst**.
-
-It processes uploaded Excel files through **two parallel paths**:
-
-* ⚡ **Fast Track** → Instant analysis & quick report
-* 🧠 **Slow Track** → Deep AI-driven analysis & final PDF report
+* ⚡ **Fast Track**: Delivers instant KPIs and dashboard updates.
+* 🧠 **Slow Track**: Conducts deep AI-driven statistical analysis and generates professional PDF reports.
 
 ---
 
 ## 🚀 Key Features
 
-* Upload **any Excel sales file** (flexible schema)
-* Instant dashboard-style results on the website
-* Automatic email delivery of reports
-* Two-level reporting system:
-
-  * Quick insights (Fast Track)
-  * Detailed AI-powered report (Slow Track)
-* No traditional backend required
-* Fully automated using **n8n workflows**
-* Designed for **small & medium businesses**
+* **Flexible Schema**: Upload any standard Excel sales file.
+* **Real-time Dashboard**: Instant visual feedback on sales trends.
+* **Security First**: Backend MIME-type validation to ensure data integrity.
+* **Automated Outreach**: Immediate email summaries sent via SMTP.
+* **No-Backend Architecture**: Powered entirely by **n8n** as a logic engine.
 
 ---
 
 ## 🏗️ System Architecture
 
 ### 🔁 Event-Driven Workflow
-
-1. User uploads an Excel file + email via the Frontend
-2. Frontend sends data to **n8n Webhook**
-3. n8n processes the file in **two parallel paths**:
+The system captures data via a **Webhook** and forks the logic into two parallel streams:
 
 #### ⚡ Fast Track (Instant Response)
+* **Data Validation**: Checks for file content and correct `spreadsheet` MIME type.
+* **KPI Engine**: Calculates Total Sales, Order Volume, and Top 5 Products.
+* **Instant Feedback**: Returns JSON data to the Frontend and sends a summary email.
 
-* Parse Excel data
-* Calculate quick KPIs:
+#### 🧠 Slow Track (Deep Analysis - In Progress)
+* **AI Analysis**: Sends aggregated data to an LLM (e.g., GPT-4o) for SWOT and trend detection.
+* **PDF Generation**: Crafts a professional report containing deep insights.
 
-  * Total Sales
-  * Orders Count
-  * Top / Bottom Products
-  * Peak Sales Hour
-* Return results immediately to the UI
-* Send a **quick summary email** to the user
+---
 
-#### 🧠 Slow Track (Deep Analysis)
+## 🖥️ Project Showcase
 
-* Perform advanced statistical analysis
-* Apply Pareto Principle (80/20)
-* Detect trends and anomalies
-* Send data to AI model (Senior Data Analyst role)
-* Generate:
+### 📊 Live Dashboard
+![Dashboard Preview](Frontend/Assets/img/dashboard_preview_placeholder.png) 
+*Current UI showing 2000 transactions and $2.2M+ in revenue.*
 
-  * Executive Summary
-  * Insights
-  * Recommendations
-* Build a **professional PDF report**
-* Send the final report via email
+### ⚙️ n8n Automation Logic
+![n8n Workflow](Frontend/Assets/img/workflow_preview_placeholder.png)
+*Visualizing the data ingestion and validation gate.*
 
 ---
 
 ## 🗂️ Project Structure
 
-```
+```bash
 Smart-BI-Project/
-│
-├── Frontend/
-│   ├── Assets/
-│   │   ├── css/
-│   │   │   └── style.css
-│   │   └── Js/
-│   │       └── main.js
-│   └── index.html
-│
-├── n8n-Workflows/
-│   └── The end of Fast Track(n8n).json
-│
-├── Samples/
-│   ├── Customer-Purchase-History.xlsx
-│   ├── Online-Store-Orders.xlsx
-│   └── Retail-Store-Transactions.xlsx
-│
-└── README.md
+├── Frontend/           # UI Components (HTML, CSS, JS)
+├── n8n-Workflows/      # Exported .json workflow files
+├── Samples/            # Test datasets for immediate evaluation
+└── README.md           # Project documentation
 ```
 
 ---
