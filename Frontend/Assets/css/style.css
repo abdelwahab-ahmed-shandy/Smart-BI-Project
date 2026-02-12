@@ -97,3 +97,34 @@ body {
 
 #loading-spinner { display: none; }
 .error-feedback { color: var(--error-color); font-size: 0.85rem; margin-top: 10px; display: none; }
+
+
+/* تنسيق لوجو الكلية في الهيدر */
+.navbar-brand img {
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+    transform: scale(1.1);
+}
+
+.border-start {
+    border-left: 2px solid #e2e8f0 !important;
+}
+
+/* تحسينات الموبايل */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 30px 0; /* تقليل المساحات الفارغة */
+    }
+    .stat-card h2 {
+        font-size: 1.5rem; /* تصغير حجم الأرقام الكبيرة لتناسب الشاشة */
+    }
+    .upload-area {
+        padding: 20px 10px;
+    }
+    .chart-container {
+        height: 250px; /* تقليل ارتفاع الرسم البياني ليناسب الشاشة الطولية */
+    }
+}
