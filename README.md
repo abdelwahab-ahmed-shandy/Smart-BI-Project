@@ -72,7 +72,7 @@ The system captures data via a **Webhook** and forks the logic into two parallel
 *Visualizing the concurrent processing and the MIME-type verification logic.*
 
 > **Initial Report Email:** The first automated touchpoint—a smart summary sent to the user's inbox within seconds.
-![Fast Track Email Format](Frontend/Assets/img/workflow_preview_placeholder.png)
+![Fast Track Email Format](Frontend/Assets/img/Fast_Email.jpg)
 *Professional HTML template featuring key metrics and immediate business insights.*
 
 ---
