@@ -1,0 +1,686 @@
+{
+  "name": "Smart Business Intelligence Reporting System",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# Smart Business Intelligence Reporting System\n\n## Graduation Project | MCI Academy 2026\n\n",
+        "width": 832,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1728,
+        -80
+      ],
+      "id": "03aacc5e-7afb-4765-a6a5-5470a8ed26c3",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Fast Track",
+        "height": 80,
+        "width": 214,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2432,
+        1200
+      ],
+      "id": "79766d82-474d-4273-a639-a24ffb558085",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "31fc8a26-7929-40cf-9b35-9a537e2c6f19",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*",
+          "binaryPropertyName": "file",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -3488,
+        528
+      ],
+      "id": "b01e2d5e-cb2e-4eaa-a34c-1a2829d9a2da",
+      "name": "Receive Sales File",
+      "webhookId": "31fc8a26-7929-40cf-9b35-9a537e2c6f19"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "={{ Object.keys($binary)[0] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -2928,
+        528
+      ],
+      "id": "7cd81568-ce67-4b64-935d-98b33cf9b521",
+      "name": "Parse Excel Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet totalRevenue = 0;\nlet productCounts = {};\nlet hourlySales = {};\nlet highValueOrders = 0; \nlet totalQty = 0;\n\nitems.forEach(item => {\n    const data = item.json;\n    \n    // 1. استخدام الحقول الموحدة من نود Edit Fields\n    const price = data.Standard_Price || 0;\n    const qty = data.Standard_Qty || 0;\n    const productName = data.Standard_Product || \"غير معروف\";\n    const orderDate = data.Std_Date;\n    \n    totalRevenue += price;\n    totalQty += qty;\n    \n    // 2. كشف الصفقات الكبيرة\n    if (price > 5000) highValueOrders++;\n\n    // 3. تجميع بيانات المنتجات\n    productCounts[productName] = (productCounts[productName] || 0) + qty;\n\n    // 4. معالجة الوقت والتاريخ\n    if (orderDate) {\n        const dateObj = isNaN(orderDate) ? new Date(orderDate) : new Date((orderDate - 25569) * 86400 * 1000);\n        if (!isNaN(dateObj.getTime())) {\n            const hour = dateObj.getHours();\n            hourlySales[hour] = (hourlySales[hour] || 0) + 1;\n        }\n    }\n});\n\n// 5. ترتيب المنتجات وتنسيق القائمة بشكل رأسي <br>\nconst sortedProducts = Object.entries(productCounts).sort((a, b) => b[1] - a[1]);\n\nconst top5List = sortedProducts.slice(0, 5).map(([name, qty]) => {\n    return `• ${name}: <b>${qty}</b> قطعة`;\n}).join('<br>'); // النزول لسطر جديد في الإيميل\n\nconst topProductName = sortedProducts.length > 0 ? sortedProducts[0][0] : \"N/A\";\nconst peakHourEntry = Object.entries(hourlySales).sort((a, b) => b[1] - a[1])[0];\n\n// 6. الاستنتاج الذكي (Insight)\nlet smartInsight = \"أداؤك مستقر اليوم.\";\nif (highValueOrders > 0) {\n    smartInsight = `انتباه: لديك ${highValueOrders} صفقات ضخمة تحتاج مراجعة دقيقة.`;\n} else if (totalQty > 100) {\n    smartInsight = `طلب مرتفع جداً على المنتج (${topProductName})! تأكد من توفر المخزون الكافي منه.`;\n}\n\n// 7. المخرجات النهائية\nreturn {\n    totalSales: totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),\n    ordersCount: items.length,\n    topProduct: topProductName,\n    top5Products: top5List,\n    peakHour: peakHourEntry ? `${peakHourEntry[0]}:00` : \"غير محدد\",\n    insight: smartInsight, \n    userEmail: $node[\"Receive Sales File\"].json.body.email \n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -800,
+        816
+      ],
+      "id": "28637aa2-972d-44c4-a675-5f0b9c1c986f",
+      "name": "Calculate Quick Metrics"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -160,
+        1232
+      ],
+      "id": "a1d6a407-d730-441a-a7bf-01c57e07fe68",
+      "name": "UI Instant Response"
+    },
+    {
+      "parameters": {
+        "fromEmail": "abdelwahabshandy@gmail.com",
+        "toEmail": "={{ $('Calculate Quick Metrics').item.json.userEmail }}",
+        "subject": "📑 التقرير السريع لمبيعاتك | Smart BI System",
+        "html": "=<div dir=\"rtl\" style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; padding: 20px;\">\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #0f172a; padding: 30px; border-radius: 15px 15px 0 0; text-align: center;\">\n        <h1 style=\"color: #ffffff; margin: 0; font-size: 28px; letter-spacing: 1px;\">Smart BI <span style=\"color: #3b82f6;\">System</span></h1>\n        <p style=\"color: #94a3b8; margin-top: 10px; font-size: 14px;\">قطاع تحليلات المبيعات اللحظية - MCI Academy</p>\n    </div>\n\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-bottom: 1px solid #e2e8f0;\">\n        <div style=\"background-color: #fff7ed; border-right: 5px solid #f59e0b; padding: 15px; border-radius: 8px;\">\n            <h3 style=\"color: #9a3412; margin: 0 0 5px 0; font-size: 16px;\">💡 تحليل المحرك الذكي:</h3>\n            <p style=\"color: #475569; font-size: 15px; margin: 0; line-height: 1.6;\">{{ $json.insight }}</p>\n        </div>\n    </div>\n\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px;\">\n        <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">\n            <tr>\n                <td width=\"48%\" style=\"background-color: #eff6ff; padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #dbeafe;\">\n                    <p style=\"color: #1e40af; margin: 0; font-size: 13px; font-weight: bold;\">إجمالي الإيرادات</p>\n                    <h2 style=\"color: #2563eb; margin: 10px 0 0 0; font-size: 22px;\">{{ $json.totalSales }}</h2>\n                </td>\n                <td width=\"4%\"></td>\n                <td width=\"48%\" style=\"background-color: #f0fdf4; padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #dcfce7;\">\n                    <p style=\"color: #166534; margin: 0; font-size: 13px; font-weight: bold;\">عدد العمليات</p>\n                    <h2 style=\"color: #16a34a; margin: 10px 0 0 0; font-size: 22px;\">{{ $json.ordersCount }}</h2>\n                </td>\n            </tr>\n        </table>\n    </div>\n\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0 20px 20px 20px; border-radius: 0 0 15px 15px;\">\n        <table width=\"100%\" style=\"border-collapse: collapse; background-color: #fcfcfc; border-radius: 10px; border: 1px solid #f1f5f9;\">\n            <tr>\n                <td style=\"padding: 15px; color: #64748b; border-bottom: 1px solid #f1f5f9; vertical-align: top;\">🥇 المنتج الأكثر طلباً</td>\n                <td style=\"padding: 15px; color: #0f172a; font-weight: bold; text-align: left; border-bottom: 1px solid #f1f5f9;\">{{ $json.topProduct }}</td>\n            </tr>\n            <tr>\n                <td style=\"padding: 15px; color: #64748b; border-bottom: 1px solid #f1f5f9; vertical-align: top;\">📊 قائمة الـ 5 الأوائل</td>\n                <td style=\"padding: 15px; color: #3b82f6; font-size: 14px; text-align: left; border-bottom: 1px solid #f1f5f9; line-height: 1.8;\">\n                    {{ $json.top5Products }}\n                </td>\n            </tr>\n            <tr>\n                <td style=\"padding: 15px; color: #64748b; vertical-align: top;\">⏰ ساعة الذروة</td>\n                <td style=\"padding: 15px; color: #f59e0b; font-weight: bold; text-align: left;\">{{ $json.peakHour }}</td>\n            </tr>\n        </table>\n\n        <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #f1f5f9;\">\n            <p style=\"color: #94a3b8; font-size: 12px; margin: 0;\">هذا التقرير تم توليده تلقائياً كجزء من مشروع التخرج</p>\n            <p style=\"color: #475569; font-size: 13px; font-weight: bold; margin: 5px 0;\"> Smart BI System Team | MCI Academy 2026</p>\n        </div>\n    </div>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        288,
+        1232
+      ],
+      "id": "4d48d35e-18de-4711-967f-caba80cf650c",
+      "name": "Send Instant Smart Report",
+      "webhookId": "916bfca0-3560-40fa-8976-9e3857dcc303",
+      "credentials": {
+        "smtp": {
+          "id": "oqskIIBj8Ex9aUYP",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# The end of Fast Track",
+        "height": 80,
+        "width": 400,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        672,
+        992
+      ],
+      "id": "c95e44e8-313f-4965-a7f2-51523efc7437",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "53b6660d-90ba-4ee9-8d8a-3941240debed",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1904,
+        816
+      ],
+      "id": "b0af2a21-1cdf-43e3-b82b-a686ec8d7781",
+      "name": "Data Validation & Security Gate"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"error\": \"الملف المرفوع فارغ، يرجى التأكد من البيانات\"}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -1440,
+        1296
+      ],
+      "id": "c05a015f-6b28-4655-97a0-5bd466e1bc81",
+      "name": "API Response Handler"
+    },
+    {
+      "parameters": {
+        "content": "## Receive Sales File (Webhook) \n**تعتبر هذه النود \"بوابة استقبال البيانات\". وظيفتها استلام ملف المبيعات (Excel/CSV) والبريد الإلكتروني من واجهة المستخدم عبر بروتوكول HTTP POST، وهي نقطة انطلاق سير العمل بالكامل.**",
+        "height": 208,
+        "width": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3584,
+        720
+      ],
+      "typeVersion": 1,
+      "id": "a726cb32-f56f-4868-b03f-d8acdb3b8018",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Parse Excel Data\n**تعمل كمحرك \"استخراج البيانات\". تقوم بتحويل الملف الثنائي (Binary) المرفوع إلى تنسيق JSON يمكن للنظام قراءته ومعالجته برمجياً. في تجربتك، نجحت هذه النود في استخراج العناصر من ملف البيانات.**",
+        "height": 192,
+        "width": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3024,
+        720
+      ],
+      "typeVersion": 1,
+      "id": "17dbc84e-7452-4afe-9eb0-161de2dcb91b",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## (If Node)\n**هي \"صمام الأمان\" للنظام. تقوم بالتحقق من شرطين أساسيين عبر بوابة منطقية (AND):\nالتأكد من أن الملف يحتوي على بيانات (أكبر من 0).**",
+        "height": 176,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1968,
+        1024
+      ],
+      "typeVersion": 1,
+      "id": "ae246424-e96d-41d8-8af2-88b98f628c25",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## (Respond to Webhook) \n**وظيفتها \"تحديث واجهة المستخدم\". تقوم بإرسال نتائج التحليل النهائية فورياً لتعرض على الداشبورد في شكل أرقام ورسوم بيانية قبل إتمام العمليات الخلفية الأخرى.**",
+        "height": 192,
+        "width": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1520,
+        1472
+      ],
+      "typeVersion": 1,
+      "id": "96def73c-aad8-4eee-8cc5-45240a194d39",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## (Code Node)\n**تمثل \"محرك التحليل اللحظي\". تستخدم لغة JavaScript لحساب المؤشرات الرئيسية (KPIs) مثل إجمالي المبيعات، المنتج الأكثر طلباً، وتوليد \"الرؤية الذكية\" (Insight) بناءً على الأرقام المستخرجة.**",
+        "height": 192,
+        "width": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -896,
+        1040
+      ],
+      "typeVersion": 1,
+      "id": "1261d440-0f0c-4e94-8f4c-4f800d9abb15",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "## Respond to Webhook\n**وظيفتها \"تحديث واجهة المستخدم\". تقوم بإرسال نتائج التحليل النهائية فورياً لتعرض على الداشبورد في شكل أرقام ورسوم بيانية قبل إتمام العمليات الخلفية الأخرى.**",
+        "height": 208,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -224,
+        1440
+      ],
+      "typeVersion": 1,
+      "id": "36437d59-77fc-4946-a691-bd208042f3fe",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "## Email \n**هي \"خدمة التقارير المؤتمتة\". تقوم بصياغة إيميل احترافي يحتوي على ملخص التحليل وإرساله تلقائياً إلى بريد المستخدم المسجل، مما يضمن وصول المعلومات لصاحب القرار فوراً.**",
+        "height": 176,
+        "width": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        208,
+        1472
+      ],
+      "typeVersion": 1,
+      "id": "a6f18f05-d2b1-4309-9d00-25cfe7ddc957",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "sum",
+              "field": "Standard_Price"
+            },
+            {
+              "aggregation": "sum",
+              "field": "Standard_Qty"
+            },
+            {
+              "aggregation": "sum",
+              "field": "Std_Cost"
+            }
+          ]
+        },
+        "fieldsToSplitBy": "Standard_Product",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        -1904,
+        224
+      ],
+      "id": "c9b4db3a-579b-47b7-9d5d-b959766f8474",
+      "name": "Summarize"
+    },
+    {
+      "parameters": {
+        "content": "## Append or update row in sheet\n**تعتبر هذه النود هي قاعدة بيانات النظام (System Database)، وهي المسؤولة عن تحويل مخرجات المعالجة اللحظية إلى سجلات دائمة.**",
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        240,
+        768
+      ],
+      "typeVersion": 1,
+      "id": "502da315-efcf-4e77-a9f7-5d64671ad8a4",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1wR_ixU9DzHgVYDvlnwsYFMA-oJ2qvJ5kqaxiT0VrL7U",
+          "mode": "list",
+          "cachedResultName": "n8n-Graduation-Project-DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wR_ixU9DzHgVYDvlnwsYFMA-oJ2qvJ5kqaxiT0VrL7U/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "الورقة1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wR_ixU9DzHgVYDvlnwsYFMA-oJ2qvJ5kqaxiT0VrL7U/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "userEmail": "={{ $json.userEmail }}",
+            "totalSales": "={{ $json.totalSales }}",
+            "ordersCount": "={{ $json.ordersCount }}",
+            "topProduct": "={{ $json.topProduct }}",
+            "insight": "={{ $json.insight }}",
+            "top5Product": "={{ $json.top5Products }}"
+          },
+          "matchingColumns": [
+            "userEmail"
+          ],
+          "schema": [
+            {
+              "id": "userEmail",
+              "displayName": "userEmail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "totalSales",
+              "displayName": "totalSales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ordersCount",
+              "displayName": "ordersCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "topProduct",
+              "displayName": "topProduct",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "insight",
+              "displayName": "insight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "top5Product",
+              "displayName": "top5Product",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        304,
+        592
+      ],
+      "id": "e6f943d9-f7ff-40c2-aa8b-8bf25a7aafa3",
+      "name": "Sync Customer Activity to DB",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PVlIuCBmjXA9ZFrB",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**تنظيف البيانات: تقوم النود بتحويل أسماء الأعمدة في ملف الإكسيل من أسماء عشوائية إلى أسماء برمجية موحدة (مثل تحويل \"إيميل العميل\" إلى userEmail).\n\nتجهيز التحليل: تختار فقط المعلومات المهمة للبيزنس (مثل السعر والمنتج) وتستبعد أي بيانات زائدة ليس لها داعٍ.**",
+        "height": 208,
+        "width": 288,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2544,
+        704
+      ],
+      "typeVersion": 1,
+      "id": "14bad4b0-612c-4fd6-84b6-de293068a87d",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "79afd86a-7103-4dff-b1b6-89f18292a7f7",
+              "name": "Standard_Product",
+              "value": "={{ $json[\"Product\"] || $json[\"Item\"] || $json[\"المنتج\"] || $json[\"الصنف\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "268d5c81-575b-454a-b57b-c46b9474163c",
+              "name": "Standard_Price",
+              "value": "={{ parseFloat($json[\"TotalPrice\"] || $json[\"Total\"] || $json[\"الإجمالي\"] || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "2a1ea48d-1e3e-4f1b-b814-a91c81cee9f8",
+              "name": "Standard_Qty",
+              "value": "={{ parseInt($json[\"Quantity\"] || $json[\"Qty\"] || $json[\"الكمية\"] || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "2d4c66a2-f195-481d-90e1-7821631b95c9",
+              "name": "Std_Date",
+              "value": "={{ $json[\"Date\"] || $json[\"OrderDate\"] || $json[\"التاريخ\"] }}",
+              "type": "number"
+            },
+            {
+              "id": "a97a36cc-a376-46da-a96b-0829a4d29311",
+              "name": "Std_Hour",
+              "value": "={{ $json[\"Time\"] || $json[\"Hour\"] || $json[\"الساعة\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "90386b34-21b9-4c21-82c7-5bf158b8f1f0",
+              "name": "Std_Location",
+              "value": "={{ $json[\"Location\"] || $json[\"City\"] || $json[\"Address\"] || $json[\"المنطقة\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "70dccb2e-bea0-49f4-97a7-d16737fc4780",
+              "name": "Std_CustomerID",
+              "value": "={{ $json[\"CustomerID\"] || $json[\"CustID\"] || $json[\"رقم_العميل\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "d38192b4-0c6c-4f1a-90ad-02566373d7bf",
+              "name": "Std_PaymentMethod",
+              "value": "={{ $json[\"PaymentMethod\"] || $json[\"PaymentType\"] || $json[\"طريقة_الدفع\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "3a98f9fc-8ef6-4b61-9cae-dc430f941849",
+              "name": "Std_UnitPrice",
+              "value": "={{ parseFloat($json[\"UnitPrice\"] || $json[\"Price\"] || $json[\"سعر_الوحدة\"] || 0) }}",
+              "type": "string"
+            },
+            {
+              "id": "d5f3dcf1-8705-4c4a-b659-419969d15db0",
+              "name": "Std_Status",
+              "value": "={{ $json[\"OrderStatus\"] || $json[\"Status\"] || $json[\"حالة_الطلب\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "1909b51a-0d03-4f2d-88c0-2bf74e764453",
+              "name": "Std_Category",
+              "value": "={{ $json[\"Category\"] || $json[\"ProductCategory\"] || $json[\"الفئة\"] || $json[\"القسم\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "1b36c840-a3ef-48e9-8788-7addaee3d899",
+              "name": "Std_Cost",
+              "value": "={{ parseFloat($json[\"Cost\"] || $json[\"UnitCost\"] || $json[\"التكلفة\"] || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "bf3e8977-c53d-4456-85ca-7760e7cea849",
+              "name": "Std_Discount",
+              "value": "={{ parseFloat($json[\"Discount\"] || $json[\"CouponAmount\"] || $json[\"الخصم\"] || 0) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2448,
+        528
+      ],
+      "id": "e938aea6-5dbf-4ac9-9772-37ea0391d83b",
+      "name": "Data Formatter"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Receive Sales File": {
+      "main": [
+        [
+          {
+            "node": "Parse Excel Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Excel Data": {
+      "main": [
+        [
+          {
+            "node": "Data Formatter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Quick Metrics": {
+      "main": [
+        [
+          {
+            "node": "UI Instant Response",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Sync Customer Activity to DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UI Instant Response": {
+      "main": [
+        [
+          {
+            "node": "Send Instant Smart Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Instant Smart Report": {
+      "main": [
+        []
+      ]
+    },
+    "Data Validation & Security Gate": {
+      "main": [
+        [
+          {
+            "node": "Calculate Quick Metrics",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "API Response Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        []
+      ]
+    },
+    "Sync Customer Activity to DB": {
+      "main": [
+        []
+      ]
+    },
+    "Data Formatter": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Data Validation & Security Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a86077d3-fd8b-46aa-acd2-b94ef42edd96",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5432097ef030478e21b25f30699d819bd160e7e78ba30b06f6c0c37d85f1cf26"
+  },
+  "id": "PCUgfusdeFOovCsu",
+  "tags": []
+}
