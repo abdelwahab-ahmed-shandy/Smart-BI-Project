@@ -61,7 +61,7 @@ The system captures data via a **Webhook** and forks the logic into two parallel
 *Clean, RTL-supported interface designed for seamless user interaction.*
 
 > **After Startup:** Real-time data visualization showing the results of processing 2,000 transactions and over $2.2M in revenue.
-![Dashboard with Results](Frontend/Assets/img/dashboard_preview_placeholder.png) 
+![Dashboard with Results](Frontend/Assets/img/afterdashboard_preview_placeholder.png) 
 *Dynamic updates of KPIs, the Top 5 products list, and the annual sales trend chart.*
 
 ---
