@@ -79,11 +79,11 @@ The system captures data via a **Webhook** and forks the logic into two parallel
 
 ### 3️⃣ Slow Track (Deep AI Analysis)
 > **Advanced AI Logic:** The complex workflow branch where an AI Agent performs deep statistical analysis and trend detection.
-![n8n Slow Track Workflow](Frontend/Assets/img/Wait_photo_Afterend_drow.png)
+![n8n Slow Track Workflow](Frontend/Assets/img/Slow_work_flow.png)
 *Orchestrating the transition from raw data to strategic intelligence using LLMs.*
 
 > **Strategic PDF Report:** The final delivery—a comprehensive, AI-generated PDF report attached to a secondary access email.
-![Slow Track Email Format](Frontend/Assets/img/workflow_preview_placeholder.png)
+![Slow Track Email Format](Frontend/Assets/img/Slow_work_flow_email.png)
 *Executive-level reporting including SWOT analysis and future sales forecasts.*
 
 ---

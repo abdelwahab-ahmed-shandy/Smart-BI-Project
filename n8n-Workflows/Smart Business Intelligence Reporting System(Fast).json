@@ -10,8 +10,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1728,
-        -80
+        -3360,
+        -160
       ],
       "id": "03aacc5e-7afb-4765-a6a5-5470a8ed26c3",
       "name": "Sticky Note"
@@ -86,8 +86,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -800,
-        816
+        -1008,
+        512
       ],
       "id": "28637aa2-972d-44c4-a675-5f0b9c1c986f",
       "name": "Calculate Quick Metrics"
@@ -99,8 +99,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -160,
-        1232
+        -560,
+        1120
       ],
       "id": "a1d6a407-d730-441a-a7bf-01c57e07fe68",
       "name": "UI Instant Response"
@@ -116,8 +116,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        288,
-        1232
+        32,
+        1120
       ],
       "id": "4d48d35e-18de-4711-967f-caba80cf650c",
       "name": "Send Instant Smart Report",
@@ -139,8 +139,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        672,
-        992
+        304,
+        832
       ],
       "id": "c95e44e8-313f-4965-a7f2-51523efc7437",
       "name": "Sticky Note2"
@@ -172,8 +172,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1904,
-        816
+        -1920,
+        528
       ],
       "id": "b0af2a21-1cdf-43e3-b82b-a686ec8d7781",
       "name": "Data Validation & Security Gate"
@@ -235,8 +235,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1968,
-        1024
+        -2000,
+        720
       ],
       "typeVersion": 1,
       "id": "ae246424-e96d-41d8-8af2-88b98f628c25",
@@ -267,8 +267,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -896,
-        1040
+        -1088,
+        688
       ],
       "typeVersion": 1,
       "id": "1261d440-0f0c-4e94-8f4c-4f800d9abb15",
@@ -282,8 +282,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -224,
-        1440
+        -624,
+        1312
       ],
       "typeVersion": 1,
       "id": "36437d59-77fc-4946-a691-bd208042f3fe",
@@ -298,8 +298,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        208,
-        1472
+        -48,
+        1360
       ],
       "typeVersion": 1,
       "id": "a6f18f05-d2b1-4309-9d00-25cfe7ddc957",
@@ -329,8 +329,8 @@
       "type": "n8n-nodes-base.summarize",
       "typeVersion": 1.1,
       "position": [
-        -1904,
-        224
+        -1232,
+        16
       ],
       "id": "c9b4db3a-579b-47b7-9d5d-b959766f8474",
       "name": "Summarize"
@@ -342,8 +342,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        240,
-        768
+        -32,
+        688
       ],
       "typeVersion": 1,
       "id": "502da315-efcf-4e77-a9f7-5d64671ad8a4",
@@ -447,8 +447,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        304,
-        592
+        32,
+        512
       ],
       "id": "e6f943d9-f7ff-40c2-aa8b-8bf25a7aafa3",
       "name": "Sync Customer Activity to DB",
@@ -569,6 +569,21 @@
       ],
       "id": "e938aea6-5dbf-4ac9-9772-37ea0391d83b",
       "name": "Data Formatter"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "أنت خبير تحليل أعمال. بناءً على بيانات المبيعات المرفقة من نود الـ Summarize، قم بكتابة تقرير استراتيجي باللغة العربية. حلل أداء الـ 7 منتجات، حدد الحصان الرابح (الأعلى مبيعات)، وقدم توصية لزيادة مبيعات المنتجات الأقل أداءً",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -992,
+        16
+      ],
+      "id": "82e18731-9c19-482c-838d-7e119892acf1",
+      "name": "AI Strategic Analyst"
     }
   ],
   "pinData": {},
@@ -634,6 +649,11 @@
             "node": "Calculate Quick Metrics",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
           }
         ],
         [
@@ -647,7 +667,13 @@
     },
     "Summarize": {
       "main": [
-        []
+        [
+          {
+            "node": "AI Strategic Analyst",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Sync Customer Activity to DB": {
@@ -658,11 +684,6 @@
     "Data Formatter": {
       "main": [
         [
-          {
-            "node": "Summarize",
-            "type": "main",
-            "index": 0
-          },
           {
             "node": "Data Validation & Security Gate",
             "type": "main",
@@ -676,7 +697,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "a86077d3-fd8b-46aa-acd2-b94ef42edd96",
+  "versionId": "ef423c82-4f06-41de-bd77-91e79a886915",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "5432097ef030478e21b25f30699d819bd160e7e78ba30b06f6c0c37d85f1cf26"
