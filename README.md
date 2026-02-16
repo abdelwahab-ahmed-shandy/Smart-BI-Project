@@ -92,10 +92,10 @@ The system captures data via a **Webhook** and forks the logic into two parallel
 
 ```bash
 Smart-BI-Project/
-├── Frontend/           # UI Components (HTML, CSS, JS)
+├── Frontend/                 # UI Components (HTML, CSS, JS)
 ├── n8n-Workflows/      # Exported .json workflow files
-├── Samples/            # Test datasets for immediate evaluation
-└── README.md           # Project documentation
+├── Samples/                   # Test datasets for immediate evaluation
+└── README.md                  # Project documentation
 ```
 
 ---
