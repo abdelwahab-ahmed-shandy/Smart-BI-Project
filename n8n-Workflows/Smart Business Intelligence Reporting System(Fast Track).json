@@ -1,35 +1,36 @@
 {
-  "name": "Smart Business Intelligence Reporting System",
+  "name": "Smart Business Intelligence Reporting System(Fast Track)",
   "nodes": [
     {
       "parameters": {
-        "content": "# Smart Business Intelligence Reporting System\n\n## Graduation Project | MCI Academy 2026\n\n",
-        "width": 832,
+        "content": "# Smart Business Intelligence Reporting System\n\n## Graduation Project | MCI Academy 2026",
+        "height": 176,
+        "width": 896,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -3360,
-        -160
+        -928,
+        96
       ],
-      "id": "03aacc5e-7afb-4765-a6a5-5470a8ed26c3",
+      "id": "7faaf26d-02ae-44cf-a652-0d1aa643b653",
       "name": "Sticky Note"
     },
     {
       "parameters": {
-        "content": "# Fast Track",
-        "height": 80,
-        "width": 214,
+        "content": "# Start Fast Track",
+        "height": 96,
+        "width": 294,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -2432,
-        1200
+        -912,
+        560
       ],
-      "id": "79766d82-474d-4273-a639-a24ffb558085",
+      "id": "ae143086-4e45-44bc-b9da-6cc1af761211",
       "name": "Sticky Note1"
     },
     {
@@ -57,10 +58,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -3488,
-        528
+        -768,
+        896
       ],
-      "id": "b01e2d5e-cb2e-4eaa-a34c-1a2829d9a2da",
+      "id": "779dcdff-3847-40a1-ad5f-c2272f58bc04",
       "name": "Receive Sales File",
       "webhookId": "31fc8a26-7929-40cf-9b35-9a537e2c6f19"
     },
@@ -73,10 +74,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        -2928,
-        528
+        -48,
+        896
       ],
-      "id": "7cd81568-ce67-4b64-935d-98b33cf9b521",
+      "id": "494d62fb-c99e-43f2-ace9-3bda817e8451",
       "name": "Parse Excel Data"
     },
     {
@@ -86,10 +87,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1008,
-        512
+        2144,
+        880
       ],
-      "id": "28637aa2-972d-44c4-a675-5f0b9c1c986f",
+      "id": "42d45b31-c424-45cd-b875-e9317fa03135",
       "name": "Calculate Quick Metrics"
     },
     {
@@ -99,10 +100,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -560,
-        1120
+        2912,
+        880
       ],
-      "id": "a1d6a407-d730-441a-a7bf-01c57e07fe68",
+      "id": "ce30b676-ff7e-46c2-924e-90fb42f52466",
       "name": "UI Instant Response"
     },
     {
@@ -116,10 +117,10 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        32,
-        1120
+        3568,
+        880
       ],
-      "id": "4d48d35e-18de-4711-967f-caba80cf650c",
+      "id": "d0f17807-2b36-4de6-9a00-14c31900547c",
       "name": "Send Instant Smart Report",
       "webhookId": "916bfca0-3560-40fa-8976-9e3857dcc303",
       "credentials": {
@@ -139,10 +140,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        304,
-        832
+        4688,
+        880
       ],
-      "id": "c95e44e8-313f-4965-a7f2-51523efc7437",
+      "id": "4c0454d0-46c8-4bb0-8d0e-656477018920",
       "name": "Sticky Note2"
     },
     {
@@ -172,10 +173,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1920,
-        528
+        1232,
+        896
       ],
-      "id": "b0af2a21-1cdf-43e3-b82b-a686ec8d7781",
+      "id": "ecd15888-eede-44ee-a50f-2cc1b5ce2576",
       "name": "Data Validation & Security Gate"
     },
     {
@@ -189,164 +190,135 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -1440,
-        1296
+        1936,
+        1632
       ],
-      "id": "c05a015f-6b28-4655-97a0-5bd466e1bc81",
+      "id": "52d8f6b5-3e01-421b-add8-fcf68e2f0589",
       "name": "API Response Handler"
     },
     {
       "parameters": {
         "content": "## Receive Sales File (Webhook) \n**تعتبر هذه النود \"بوابة استقبال البيانات\". وظيفتها استلام ملف المبيعات (Excel/CSV) والبريد الإلكتروني من واجهة المستخدم عبر بروتوكول HTTP POST، وهي نقطة انطلاق سير العمل بالكامل.**",
-        "height": 208,
-        "width": 272,
+        "height": 144,
+        "width": 416,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -3584,
-        720
+        -912,
+        1088
       ],
       "typeVersion": 1,
-      "id": "a726cb32-f56f-4868-b03f-d8acdb3b8018",
+      "id": "4d8680cd-500f-444b-80a4-9a9ba66bbb7c",
       "name": "Sticky Note3"
     },
     {
       "parameters": {
         "content": "## Parse Excel Data\n**تعمل كمحرك \"استخراج البيانات\". تقوم بتحويل الملف الثنائي (Binary) المرفوع إلى تنسيق JSON يمكن للنظام قراءته ومعالجته برمجياً. في تجربتك، نجحت هذه النود في استخراج العناصر من ملف البيانات.**",
-        "height": 192,
-        "width": 256,
+        "width": 336,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -3024,
-        720
+        -176,
+        1088
       ],
       "typeVersion": 1,
-      "id": "17dbc84e-7452-4afe-9eb0-161de2dcb91b",
+      "id": "1cf96506-216d-483d-a96b-f23ed079dc5f",
       "name": "Sticky Note4"
     },
     {
       "parameters": {
         "content": "## (If Node)\n**هي \"صمام الأمان\" للنظام. تقوم بالتحقق من شرطين أساسيين عبر بوابة منطقية (AND):\nالتأكد من أن الملف يحتوي على بيانات (أكبر من 0).**",
-        "height": 176,
+        "width": 352,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -2000,
-        720
+        1120,
+        1088
       ],
       "typeVersion": 1,
-      "id": "ae246424-e96d-41d8-8af2-88b98f628c25",
+      "id": "3fea023c-e9ae-4c40-9776-126b35e062ec",
       "name": "Sticky Note5"
     },
     {
       "parameters": {
         "content": "## (Respond to Webhook) \n**وظيفتها \"تحديث واجهة المستخدم\". تقوم بإرسال نتائج التحليل النهائية فورياً لتعرض على الداشبورد في شكل أرقام ورسوم بيانية قبل إتمام العمليات الخلفية الأخرى.**",
-        "height": 192,
-        "width": 256,
+        "height": 144,
+        "width": 384,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1520,
-        1472
+        1792,
+        1808
       ],
       "typeVersion": 1,
-      "id": "96def73c-aad8-4eee-8cc5-45240a194d39",
+      "id": "1071364d-f6e7-485d-8439-a230f2950a4a",
       "name": "Sticky Note6"
     },
     {
       "parameters": {
         "content": "## (Code Node)\n**تمثل \"محرك التحليل اللحظي\". تستخدم لغة JavaScript لحساب المؤشرات الرئيسية (KPIs) مثل إجمالي المبيعات، المنتج الأكثر طلباً، وتوليد \"الرؤية الذكية\" (Insight) بناءً على الأرقام المستخرجة.**",
-        "height": 192,
-        "width": 256,
+        "width": 320,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1088,
-        688
+        2080,
+        1056
       ],
       "typeVersion": 1,
-      "id": "1261d440-0f0c-4e94-8f4c-4f800d9abb15",
+      "id": "de86becb-e154-4182-abca-69db9c481953",
       "name": "Sticky Note7"
     },
     {
       "parameters": {
         "content": "## Respond to Webhook\n**وظيفتها \"تحديث واجهة المستخدم\". تقوم بإرسال نتائج التحليل النهائية فورياً لتعرض على الداشبورد في شكل أرقام ورسوم بيانية قبل إتمام العمليات الخلفية الأخرى.**",
-        "height": 208,
+        "height": 144,
+        "width": 352,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -624,
-        1312
+        2784,
+        1088
       ],
       "typeVersion": 1,
-      "id": "36437d59-77fc-4946-a691-bd208042f3fe",
+      "id": "f3c3e149-0dfb-4c17-bb55-08e1e1b03c4d",
       "name": "Sticky Note8"
     },
     {
       "parameters": {
         "content": "## Email \n**هي \"خدمة التقارير المؤتمتة\". تقوم بصياغة إيميل احترافي يحتوي على ملخص التحليل وإرساله تلقائياً إلى بريد المستخدم المسجل، مما يضمن وصول المعلومات لصاحب القرار فوراً.**",
-        "height": 176,
-        "width": 256,
+        "height": 144,
+        "width": 368,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -48,
-        1360
+        3440,
+        1104
       ],
       "typeVersion": 1,
-      "id": "a6f18f05-d2b1-4309-9d00-25cfe7ddc957",
+      "id": "91c92af6-d2be-450f-986b-b502511061c6",
       "name": "Sticky Note9"
     },
     {
       "parameters": {
-        "fieldsToSummarize": {
-          "values": [
-            {
-              "aggregation": "sum",
-              "field": "Standard_Price"
-            },
-            {
-              "aggregation": "sum",
-              "field": "Standard_Qty"
-            },
-            {
-              "aggregation": "sum",
-              "field": "Std_Cost"
-            }
-          ]
-        },
-        "fieldsToSplitBy": "Standard_Product",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.summarize",
-      "typeVersion": 1.1,
-      "position": [
-        -1232,
-        16
-      ],
-      "id": "c9b4db3a-579b-47b7-9d5d-b959766f8474",
-      "name": "Summarize"
-    },
-    {
-      "parameters": {
         "content": "## Append or update row in sheet\n**تعتبر هذه النود هي قاعدة بيانات النظام (System Database)، وهي المسؤولة عن تحويل مخرجات المعالجة اللحظية إلى سجلات دائمة.**",
+        "height": 112,
+        "width": 416,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -32,
-        688
+        4016,
+        1120
       ],
       "typeVersion": 1,
-      "id": "502da315-efcf-4e77-a9f7-5d64671ad8a4",
+      "id": "b4875abb-e59c-41dc-a912-27de7f48b471",
       "name": "Sticky Note10"
     },
     {
@@ -369,12 +341,12 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "userEmail": "={{ $json.userEmail }}",
-            "totalSales": "={{ $json.totalSales }}",
-            "ordersCount": "={{ $json.ordersCount }}",
-            "topProduct": "={{ $json.topProduct }}",
-            "insight": "={{ $json.insight }}",
-            "top5Product": "={{ $json.top5Products }}"
+            "userEmail": "={{ $('Calculate Quick Metrics').item.json.userEmail }}",
+            "totalSales": "={{ $('Calculate Quick Metrics').item.json.totalSales }}",
+            "ordersCount": "={{ $('Calculate Quick Metrics').item.json.ordersCount }}",
+            "topProduct": "={{ $('Calculate Quick Metrics').item.json.topProduct }}",
+            "insight": "={{ $('Calculate Quick Metrics').item.json.insight }}",
+            "top5Product": "={{ $('Calculate Quick Metrics').item.json.top5Products }}"
           },
           "matchingColumns": [
             "userEmail"
@@ -447,10 +419,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        32,
-        512
+        4096,
+        880
       ],
-      "id": "e6f943d9-f7ff-40c2-aa8b-8bf25a7aafa3",
+      "id": "bc51436b-4ac1-4f3e-8659-b96ae168f085",
       "name": "Sync Customer Activity to DB",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -462,17 +434,17 @@
     {
       "parameters": {
         "content": "## Edit Fields\n**تنظيف البيانات: تقوم النود بتحويل أسماء الأعمدة في ملف الإكسيل من أسماء عشوائية إلى أسماء برمجية موحدة (مثل تحويل \"إيميل العميل\" إلى userEmail).\n\nتجهيز التحليل: تختار فقط المعلومات المهمة للبيزنس (مثل السعر والمنتج) وتستبعد أي بيانات زائدة ليس لها داعٍ.**",
-        "height": 208,
-        "width": 288,
+        "height": 224,
+        "width": 352,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -2544,
-        704
+        512,
+        1072
       ],
       "typeVersion": 1,
-      "id": "14bad4b0-612c-4fd6-84b6-de293068a87d",
+      "id": "fe3aeddb-c547-4c03-97e6-f5d28238dfef",
       "name": "Sticky Note11"
     },
     {
@@ -564,26 +536,39 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2448,
-        528
+        608,
+        896
       ],
-      "id": "e938aea6-5dbf-4ac9-9772-37ea0391d83b",
+      "id": "aec5b548-c3dc-475a-ad33-e209f8a513b6",
       "name": "Data Formatter"
     },
     {
       "parameters": {
-        "promptType": "define",
-        "text": "أنت خبير تحليل أعمال. بناءً على بيانات المبيعات المرفقة من نود الـ Summarize، قم بكتابة تقرير استراتيجي باللغة العربية. حلل أداء الـ 7 منتجات، حدد الحصان الرابح (الأعلى مبيعات)، وقدم توصية لزيادة مبيعات المنتجات الأقل أداءً",
+        "method": "POST",
+        "url": "http://localhost:5678/webhook-test/9d8c36fe-01ec-4dc9-b9eb-4731be25c0d8",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "email",
+              "value": "={{ $('Receive Sales File').first().json.body.email }}"
+            },
+            {
+              "name": "data",
+              "value": "={{ $('Parse Excel Data').all().map(item => item.json) }}"
+            }
+          ]
+        },
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
       "position": [
-        -992,
-        16
+        4480,
+        880
       ],
-      "id": "82e18731-9c19-482c-838d-7e119892acf1",
-      "name": "AI Strategic Analyst"
+      "id": "500f3114-8d96-495a-8e6c-f34424b03572",
+      "name": "HTTP Request"
     }
   ],
   "pinData": {},
@@ -617,11 +602,6 @@
             "node": "UI Instant Response",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Sync Customer Activity to DB",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -637,21 +617,11 @@
         ]
       ]
     },
-    "Send Instant Smart Report": {
-      "main": [
-        []
-      ]
-    },
     "Data Validation & Security Gate": {
       "main": [
         [
           {
             "node": "Calculate Quick Metrics",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Summarize",
             "type": "main",
             "index": 0
           }
@@ -665,11 +635,11 @@
         ]
       ]
     },
-    "Summarize": {
+    "Data Formatter": {
       "main": [
         [
           {
-            "node": "AI Strategic Analyst",
+            "node": "Data Validation & Security Gate",
             "type": "main",
             "index": 0
           }
@@ -678,14 +648,20 @@
     },
     "Sync Customer Activity to DB": {
       "main": [
-        []
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Data Formatter": {
+    "Send Instant Smart Report": {
       "main": [
         [
           {
-            "node": "Data Validation & Security Gate",
+            "node": "Sync Customer Activity to DB",
             "type": "main",
             "index": 0
           }
@@ -697,11 +673,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "ef423c82-4f06-41de-bd77-91e79a886915",
+  "versionId": "81d2ca97-e0a6-4dfa-ac78-cafd75381bc5",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "5432097ef030478e21b25f30699d819bd160e7e78ba30b06f6c0c37d85f1cf26"
   },
-  "id": "PCUgfusdeFOovCsu",
+  "id": "64lY0qOehXbtJg1c",
   "tags": []
 }
