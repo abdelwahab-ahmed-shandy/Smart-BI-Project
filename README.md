@@ -1,4 +1,4 @@
-# 📘 Smart Business Intelligence Reporting System (Smart BI Project)
+# Smart Business Intelligence Reporting System (Smart BI Project)
 
 <p align="center">
   <img src="Frontend/Assets/img/e6ecb39d-3feb-4943-bced-b1204095b566.jpeg" width="150" alt="MCI Logo">
@@ -58,33 +58,33 @@ The system captures data via a **Webhook** and forks the logic into two parallel
 ### 1️⃣ User Interface (Frontend)
 > **Before Operation:** The initial state of the dashboard, featuring the secure upload zone and email input field.
 ![Initial Dashboard](Frontend/Assets/img/dashboard_preview_placeholder.png) 
-*Clean, RTL-supported interface designed for seamless user interaction.*
+   *Clean, RTL-supported interface designed for seamless user interaction.*
 
 > **After Startup:** Real-time data visualization showing the results of processing 2,000 transactions and over $2.2M in revenue.
 ![Dashboard with Results](Frontend/Assets/img/afterdashboard_preview_placeholder.png) 
-*Dynamic updates of KPIs, the Top 5 products list, and the annual sales trend chart.*
+   *Dynamic updates of KPIs, the Top 5 products list, and the annual sales trend chart.*
 
 ---
 
 ### 2️⃣ Fast Track (Instant Analytics)
 > **Automation Logic:** The primary n8n workflow that handles data ingestion, Excel parsing, and the security validation gate.
 ![n8n Fast Track Workflow](Frontend/Assets/img/workflow_preview_placeholder.png)
-*Visualizing the concurrent processing and the MIME-type verification logic.*
+   *Visualizing the concurrent processing and the MIME-type verification logic.*
 
 > **Initial Report Email:** The first automated touchpoint—a smart summary sent to the user's inbox within seconds.
 ![Fast Track Email Format](Frontend/Assets/img/Fast_Email.jpg)
-*Professional HTML template featuring key metrics and immediate business insights.*
+   *Professional HTML template featuring key metrics and immediate business insights.*
 
 ---
 
 ### 3️⃣ Slow Track (Deep AI Analysis)
 > **Advanced AI Logic:** The complex workflow branch where an AI Agent performs deep statistical analysis and trend detection.
 ![n8n Slow Track Workflow](Frontend/Assets/img/Slow_work_flow.png)
-*Orchestrating the transition from raw data to strategic intelligence using LLMs.*
+   *Orchestrating the transition from raw data to strategic intelligence using LLMs.*
 
 > **Strategic PDF Report:** The final delivery—a comprehensive, AI-generated PDF report attached to a secondary access email.
 ![Slow Track Email Format](Frontend/Assets/img/Slow_work_flow_email.png)
-*Executive-level reporting including SWOT analysis and future sales forecasts.*
+   *Executive-level reporting including SWOT analysis and future sales forecasts.*
 
 ---
 
