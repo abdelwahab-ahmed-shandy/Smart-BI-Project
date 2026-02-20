@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="Assets/css/style.css">    
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1055/1055644.png" type="image/png">       
 </head>
+
 <body>
 
 <nav class="navbar sticky-top">
@@ -38,7 +40,9 @@
             <div class="row justify-content-center">
                 <div class="col-md-7">
                     <div class="card upload-card shadow-lg p-4">
+
                         <form id="uploadForm">
+                            
                             <div class="mb-4 text-start">
                                 <label class="form-label fw-bold">البريد الإلكتروني</label>
                                 <div class="input-group">
@@ -55,6 +59,7 @@
                                 </div>
                                 <input type="file" id="fileInput" hidden accept=".xlsx, .xls, .csv">
                             </div>
+                            
                             <div id="fileError" class="error-feedback mb-3"></div>
 
                             <button type="submit" class="btn btn-primary w-100 mb-2" id="submitBtn">
@@ -62,6 +67,7 @@
                                 <div class="spinner-border spinner-border-sm" id="loading-spinner" role="status"></div>
                             </button>
                         </form>
+
                     </div>
                 </div>
             </div>
