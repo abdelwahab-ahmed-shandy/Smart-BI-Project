@@ -171,13 +171,13 @@ This project demonstrates real-world concepts such as:
 
 ## 👥 Project Team
 
-- **Abdelwahab Shandy**  
-- **Marwan Singer**  
 - **Hamed Tarek**  
 - **Howarah Ali Abdo**  
-- **Hadeer Abdelaziz**
-- **Abdelrahman Taher**  
 - **Sanaa Ahmed Mohamed**  
+- **Abdelrahman Taher**  
+- **Marwan Singer**  
+- **Hadeer Abdelaziz**
+- **Abdelwahab Shandy**  
 
 _Graduation Project – MCI Academy 2026_
 
