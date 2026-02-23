@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart BI System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css\style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light bg-transparent px-md-5 py-3">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center">
+                <img src="IMG/logo mci.png" alt="MCI-Logo" height="45" width="50" class="me-2">
+            </div>
+            <span class="text-muted small fw-bold">Smart BI System </span>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div id="uploadSection" class="main-wrapper">
+            <div class="text-center mb-5">
+                <h1 class="fw-bold display-5">حلل بيانات مبيعاتك <span class="text-primary">بلمسة ذكية</span></h1>
+                <p class="text-secondary fs-5">ارفع ملف الـ Excel واترك الباقي لمحرك الأتمتة والذكاء الاصطناعي</p>
+            </div>
+
+            <div class="card shadow-lg border-0 upload-card p-4 mx-auto w-100">
+                <form id="uploadForm">
+                    <div class="mb-4">
+                        <label class="form-label d-block text-end fw-bold mb-2">البريد الإلكتروني</label>
+                        <div class="input-group flex-row-reverse">
+                            <span class="input-group-text bg-light ">
+                                <i class="bi bi-envelope text-muted"></i>
+                            </span>
+                            <input type="email" id="email" class="form-control text-end bg-light"
+                                placeholder="هنا سيرسل تقرير PDF" required>
+                        </div>
+                    </div>
+
+                    <div class="drop-zone mb-4" id="dropZone">
+                        <div id="dropZoneContent">
+                            <i class="bi bi-cloud-arrow-up display-2 text-primary"></i>
+                            <h5 class="fw-bold mt-3">اسحب وأفلت ملف الـ Excel هنا</h5>
+                            <p class="text-muted small">أو اضغط لاختيار الملف من جهازك</p>
+                        </div>
+                        <input type="file" id="excelFile" hidden accept=".xlsx, .xls, .csv">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-custom w-100 py-3 fw-bold shadow-sm" id="submitBtn">
+                        بدء التحليل الذكي
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="resultDashboard" class="d-none animate-fade-in">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill">
+                    <i class="bi bi-robot me-1"></i> مدعوم بالذكاء الاصطناعي
+                </span>
+                <h2 class="fw-bold m-0">نتائج التحليل الفوري</h2>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="card stat-card border-0 shadow-sm border-orange p-3">
+                        <div class="card-body text-center">
+                            <p class="text-muted small mb-1">عدد العمليات</p>
+                            <h2 class="fw-bold text-warning" id="val-orders">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card border-0 shadow-sm border-green p-3">
+                        <div class="card-body text-center">
+                            <p class="text-muted small mb-1">المنتج الأكثر طلباً</p>
+                            <h2 class="fw-bold text-success" id="val-top-product">-</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card border-0 shadow-sm border-blue p-3">
+                        <div class="card-body text-center">
+                            <p class="text-muted small mb-1">إجمالي المبيعات</p>
+                            <h3 class="fw-bold text-primary" id="val-total-sales">$0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h6 class="fw-bold mb-4 text-end text-primary border-bottom pb-2">الأكثر طلباً (Top 5)</h6>
+                        <ul id="val-top-list" class="list-group list-group-flush text-end">
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h6 class="fw-bold mb-4 text-end">تحليل اتجاه المبيعات</h6>
+                        <div style="height: 300px;">
+                            <canvas id="mainChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <button class="btn btn-outline-secondary rounded-pill px-4" onclick="location.reload()">تحليل ملف
+                    جديد</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="JS\script.js"></script>
+</body>
+
+</html>
