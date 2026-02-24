@@ -1,0 +1,168 @@
+:root {
+    --primary-blue: #4a90e2;
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --text-dark: #2c3e50;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    /* خلفية زرقاء هادئة ومتدرجة */
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* الهيدر الشفاف الثابت */
+header {
+    width: 100%;
+    padding: 15px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+.mci-logo {
+    font-weight: 900;
+    color: #e67e22;
+    font-size: 1.4rem;
+}
+
+/* حاوية المحتوى */
+.container {
+    margin-top: 160px; /* لإعطاء مساحة للهيدر */
+    width: 100%;
+    max-width: 750px;
+    padding: 20px;
+}
+
+/* النصوص الموضحة */
+.hero-section {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.hero-section h1 {
+    font-size: 2.4rem;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.hero-section h1 span {
+    color: var(--primary-blue);
+}
+
+.hero-section p {
+    color: #546e7a;
+    font-size: 1.1rem;
+}
+
+/* البطاقة الشفافة */
+.analysis-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.7);
+    outline: none;
+    font-size: 1rem;
+}
+
+/* منطقة السحب */
+.drop-zone {
+    width: 100%;
+    height: 180px;
+    border: 2px dashed var(--glass-border);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.03);
+    margin-bottom: 30px;
+}
+
+.drop-zone:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-blue);
+}
+
+.cloud-icon {
+    font-size: 45px;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+}
+
+.drop-zone p {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.drop-zone span {
+    font-size: 0.85rem;
+    color: #78909c;
+    margin-top: 5px;
+}
+
+/* الزر */
+.btn-analyze {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+.btn-analyze:hover {
+    filter: brightness(1.05);
+}
