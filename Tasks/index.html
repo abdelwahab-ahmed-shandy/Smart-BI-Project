@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة إكسيلو - لرفع البيانات</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">إكسيلو ⚡</div>
+        <div class="nav-links">
+            <a href="#" class="login-btn">تسجيل الدخول</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="upload-card">
+            <div class="icon-header">📊</div>
+            <h2>أهلاً بك</h2>
+            <p>قم برفع ملفك الآن وسنتولى نحن معالجته</p>
+            
+            <form id="uploadForm">
+                <div class="input-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="userEmail" placeholder="name@example.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>ملف الإكسيل الخاص بك</label>
+                    <div class="file-drop-area">
+                        <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" required>
+                        <span class="file-msg">اسحب الملف هنا أو اضغط للاختيار</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">بدء الرفع</button>
+            </form>
+            <div id="statusMessage"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>  
