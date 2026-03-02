@@ -117,7 +117,6 @@ The `Samples/` folder contains example Excel files for testing:
 
 * `Customer-Purchase-History.xlsx`
 * `Online-Store-Orders.xlsx`
-* `Retail-Store-Transactions.xlsx`
 
 You can use these files to test the system without creating your own dataset.
 
