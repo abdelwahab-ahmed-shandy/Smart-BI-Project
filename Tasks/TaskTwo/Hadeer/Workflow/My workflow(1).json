@@ -4,7 +4,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "2f39d4ac-85da-49ef-8d96-614368b80ba5",
+        "path": "8706e0b3-a8af-405f-8183-ef19f84eab03",
         "options": {
           "allowedOrigins": "*",
           "binaryPropertyName": "file",
@@ -21,12 +21,12 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        128,
-        176
+        -1424,
+        -16
       ],
-      "id": "456ce6e1-2534-47bd-ae25-3d2001324dc1",
+      "id": "da32211d-3542-4cfb-aaba-f5a1ce215bf6",
       "name": "Webhook",
-      "webhookId": "2f39d4ac-85da-49ef-8d96-614368b80ba5"
+      "webhookId": "8706e0b3-a8af-405f-8183-ef19f84eab03"
     },
     {
       "parameters": {
@@ -37,10 +37,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        336,
-        176
+        -976,
+        -16
       ],
-      "id": "cf29f266-f14d-45be-bf70-727727433641",
+      "id": "30274df8-985f-47be-bf0d-51827f3689fc",
       "name": "Extract from File"
     }
   ],
@@ -60,12 +60,14 @@
   },
   "active": false,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
   },
-  "versionId": "0585141b-9d45-4953-b7f4-7eeaff449a22",
+  "versionId": "ca8b5be4-0fb3-4764-ab05-d76bfa529f6b",
   "meta": {
-    "instanceId": "d24290936cec55ea2c6832a7a807a4f14cff997486995bdc7024b19c8694c9e7"
+    "instanceId": "814a9158429870b33e7169b8242687c0880d7878c98774c45746f560f9916730"
   },
-  "id": "srhR2Kg9xYVDSFA7",
+  "id": "QgG3rwMW48MKlZp1",
   "tags": []
 }

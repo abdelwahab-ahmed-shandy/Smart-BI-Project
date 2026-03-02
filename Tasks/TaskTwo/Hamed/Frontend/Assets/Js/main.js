@@ -74,7 +74,7 @@ uploadForm.onsubmit = async (e) => {
 
     try {
         // تأكد من استخدام URL الـ Webhook الصحيح (Production أو Test)
-        const response = await fetch('http://localhost:5678/webhook-test/31fc8a26-7929-40cf-9b35-9a537e2c6f19', { 
+        const response = await fetch('http://localhost:5678/webhook-test/ad624591-7964-4d15-b004-84c661ee7527', { 
             method: 'POST',
             body: formData
         });
