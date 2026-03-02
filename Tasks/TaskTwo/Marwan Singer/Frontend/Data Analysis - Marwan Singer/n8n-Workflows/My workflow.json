@@ -21,26 +21,26 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        0,
-        0
+        128,
+        176
       ],
-      "id": "760e7b4e-6899-431d-8207-489813cbbbdd",
+      "id": "456ce6e1-2534-47bd-ae25-3d2001324dc1",
       "name": "Webhook",
       "webhookId": "2f39d4ac-85da-49ef-8d96-614368b80ba5"
     },
     {
       "parameters": {
         "operation": "xlsx",
-        "binaryPropertyName": "{{ Object.keys($binary)[0] }}",
+        "binaryPropertyName": "={{ Object.keys($binary)[0] }}",
         "options": {}
       },
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        208,
-        0
+        336,
+        176
       ],
-      "id": "b7dadcac-0209-4299-bf2e-94b186c30fd3",
+      "id": "cf29f266-f14d-45be-bf70-727727433641",
       "name": "Extract from File"
     }
   ],
@@ -60,14 +60,12 @@
   },
   "active": false,
   "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
+    "executionOrder": "v1"
   },
-  "versionId": "324a2242-a0a2-4845-bfc4-fe2e08d5ee4d",
+  "versionId": "0585141b-9d45-4953-b7f4-7eeaff449a22",
   "meta": {
-    "instanceId": "31524db1ae0fb7c502d7f907fa6d6f92180d9e3781e36c5120c44b2b2e1a3b5a"
+    "instanceId": "d24290936cec55ea2c6832a7a807a4f14cff997486995bdc7024b19c8694c9e7"
   },
-  "id": "24xsN1DTFRcjXjxS",
+  "id": "srhR2Kg9xYVDSFA7",
   "tags": []
 }
