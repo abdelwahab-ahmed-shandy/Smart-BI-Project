@@ -74,7 +74,7 @@ uploadForm.onsubmit = async (e) => {
 
     try {
         // تأكد من استخدام URL الـ Webhook الصحيح (Production أو Test)
-        const response = await fetch('https://shaamss.app.n8n.cloud/webhook-test/2ed76aaf-7952-4dc3-b312-0ab5054b4e62', { 
+        const response = await fetch('http://localhost:5678/webhook-test/2ed76aaf-7952-4dc3-b312-0ab5054b4e62', { 
             method: 'POST',
             body: formData
         });
