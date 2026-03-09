@@ -1,0 +1,62 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ad624591-7964-4d15-b004-84c661ee7527",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        352,
+        -208
+      ],
+      "id": "d085c530-eecb-4771-8c32-96648c2c3dfc",
+      "name": "Webhook",
+      "webhookId": "ad624591-7964-4d15-b004-84c661ee7527"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "={{ Object.keys($binary)[0] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "90a64467-5d62-46e2-ae3f-f3f3c0cba3ec",
+      "name": "Extract from File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "169c8005-50ca-41f0-8788-43fc15033d1c",
+  "meta": {
+    "instanceId": "3935f992dabb03780b6a844bef2708ef6c8585b552b18ab1933818ee6b57ba97"
+  },
+  "id": "-4D4bwYKJpHcgWduO-ht5",
+  "tags": []
+}
