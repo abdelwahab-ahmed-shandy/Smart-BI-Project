@@ -1,5 +1,5 @@
 {
-  "name": "My workflow 2",
+  "name": "Smart Business Intelligence Reporting System(Fast Track)",
   "nodes": [
     {
       "parameters": {
@@ -84,10 +84,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1808,
-        208
+        -112,
+        96
       ],
-      "id": "c11d6817-b6fe-4e64-bd14-a81d3d1d807e",
+      "id": "29edb6fa-f00f-4944-8969-66fc89d0aadc",
       "name": "Edit Fields"
     },
     {
@@ -117,23 +117,23 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2112,
-        208
+        192,
+        96
       ],
-      "id": "2d029a53-c14b-475a-9ac8-6b5241e7c9a5",
+      "id": "5612abd0-0e85-4a44-80c1-5f3a94b11e06",
       "name": "If"
     },
     {
       "parameters": {
-        "jsCode": "const items = $input.all();\nlet totalRevenue = 0;\nlet productCounts = {};\nlet hourlySales = {};\nlet highValueOrders = 0; \nlet totalQty = 0;\n\nitems.forEach(item => {\n    const data = item.json;\n    \n    // 1. استخدام الحقول الموحدة من نود Edit Fields\n    const price = data.Standard_Price || 0;\n    const qty = data.Standard_Qty || 0;\n    const productName = data.Standard_Product || \"غير معروف\";\n    const orderDate = data.Std_Date;\n    \n    totalRevenue += price;\n    totalQty += qty;\n    \n    // 2. كشف الصفقات الكبيرة\n    if (price > 5000) highValueOrders++;\n\n    // 3. تجميع بيانات المنتجات\n    productCounts[productName] = (productCounts[productName] || 0) + qty;\n\n    // 4. معالجة الوقت والتاريخ\n    if (orderDate) {\n        const dateObj = isNaN(orderDate) ? new Date(orderDate) : new Date((orderDate - 25569) * 86400 * 1000);\n        if (!isNaN(dateObj.getTime())) {\n            const hour = dateObj.getHours();\n            hourlySales[hour] = (hourlySales[hour] || 0) + 1;\n        }\n    }\n});\n\n// 5. ترتيب المنتجات وتنسيق القائمة بشكل رأسي <br>\nconst sortedProducts = Object.entries(productCounts).sort((a, b) => b[1] - a[1]);\n\nconst top5List = sortedProducts.slice(0, 5).map(([name, qty]) => {\n    return `• ${name}: <b>${qty}</b> قطعة`;\n}).join('<br>'); // النزول لسطر جديد في الإيميل\n\nconst topProductName = sortedProducts.length > 0 ? sortedProducts[0][0] : \"N/A\";\nconst peakHourEntry = Object.entries(hourlySales).sort((a, b) => b[1] - a[1])[0];\n\n// 6. الاستنتاج الذكي (Insight)\nlet smartInsight = \"أداؤك مستقر اليوم.\";\nif (highValueOrders > 0) {\n    smartInsight = `انتباه: لديك ${highValueOrders} صفقات ضخمة تحتاج مراجعة دقيقة.`;\n} else if (totalQty > 100) {\n    smartInsight = `طلب مرتفع جداً على المنتج (${topProductName})! تأكد من توفر المخزون الكافي منه.`;\n}\n\n// 7. المخرجات النهائية\nreturn {\n    totalSales: totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),\n    ordersCount: items.length,\n    topProduct: topProductName,\n    top5Products: top5List,\n    peakHour: peakHourEntry ? `${peakHourEntry[0]}:00` : \"غير محدد\",\n    insight: smartInsight, \n    userEmail: $node[\"Receive Sales File\"].json.body.email \n};"
+        "jsCode": "const items = $input.all();\nlet totalRevenue = 0;\nlet productCounts = {};\nlet hourlySales = {};\nlet highValueOrders = 0; \nlet totalQty = 0;\n\nitems.forEach(item => {\n    const data = item.json;\n    \n    // 1. استخدام الحقول الموحدة من نود Edit Fields\n    const price = data.Standard_Price || 0;\n    const qty = data.Standard_Qty || 0;\n    const productName = data.Standard_Product || \"غير معروف\";\n    const orderDate = data.Std_Date;\n    \n    totalRevenue += price;\n    totalQty += qty;\n    \n    // 2. كشف الصفقات الكبيرة\n    if (price > 5000) highValueOrders++;\n\n    // 3. تجميع بيانات المنتجات\n    productCounts[productName] = (productCounts[productName] || 0) + qty;\n\n    // 4. معالجة الوقت والتاريخ\n    if (orderDate) {\n        const dateObj = isNaN(orderDate) ? new Date(orderDate) : new Date((orderDate - 25569) * 86400 * 1000);\n        if (!isNaN(dateObj.getTime())) {\n            const hour = dateObj.getHours();\n            hourlySales[hour] = (hourlySales[hour] || 0) + 1;\n        }\n    }\n});\n\n// 5. ترتيب المنتجات وتنسيق القائمة بشكل رأسي <br>\nconst sortedProducts = Object.entries(productCounts).sort((a, b) => b[1] - a[1]);\n\nconst top5List = sortedProducts.slice(0, 5).map(([name, qty]) => {\n    return `• ${name}: <b>${qty}</b> قطعة`;\n}).join('<br>'); // النزول لسطر جديد في الإيميل\n\nconst topProductName = sortedProducts.length > 0 ? sortedProducts[0][0] : \"N/A\";\nconst peakHourEntry = Object.entries(hourlySales).sort((a, b) => b[1] - a[1])[0];\n\n// 6. الاستنتاج الذكي (Insight)\nlet smartInsight = \"أداؤك مستقر اليوم.\";\nif (highValueOrders > 0) {\n    smartInsight = `انتباه: لديك ${highValueOrders} صفقات ضخمة تحتاج مراجعة دقيقة.`;\n} else if (totalQty > 100) {\n    smartInsight = `طلب مرتفع جداً على المنتج (${topProductName})! تأكد من توفر المخزون الكافي منه.`;\n}\n\n// 7. المخرجات النهائية\nreturn {\n    totalSales: totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),\n    ordersCount: items.length,\n    topProduct: topProductName,\n    top5Products: top5List,\n    peakHour: peakHourEntry ? `${peakHourEntry[0]}:00` : \"غير محدد\",\n    insight: smartInsight, \n    userEmail: $node[\"Webhook1\"].json.body.email \n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2400,
-        192
+        480,
+        80
       ],
-      "id": "fc2a21c5-32eb-4d3b-88ca-67219a922de8",
+      "id": "423dc7fd-b667-4dd7-a0bc-1dd6cf1a5058",
       "name": "Code in JavaScript"
     },
     {
@@ -145,10 +145,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2384,
-        400
+        464,
+        288
       ],
-      "id": "2009e3b2-38d8-4244-88b3-dc81bda6f0d0",
+      "id": "6f108864-7c38-465f-8ca2-a6f7c1c96d87",
       "name": "Respond to Webhook"
     },
     {
@@ -158,16 +158,17 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2752,
-        192
+        832,
+        80
       ],
-      "id": "b7b3fa16-a049-422b-a445-37697a511b00",
+      "id": "48a5f677-eb3d-4afc-8246-5d53c94708cd",
       "name": "Respond to Webhook1"
     },
     {
       "parameters": {
         "httpMethod": "POST",
         "path": "2ed76aaf-7952-4dc3-b312-0ab5054b4e62",
+        "responseMode": "responseNode",
         "options": {
           "allowedOrigins": "*",
           "binaryPropertyName": "File ",
@@ -188,10 +189,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        1328,
-        208
+        -720,
+        96
       ],
-      "id": "bfd14801-a3e6-4562-b3c5-001aba078ec9",
+      "id": "93d43e8d-f711-4f3e-aec9-bc31dff0920a",
       "name": "Webhook1",
       "webhookId": "2ed76aaf-7952-4dc3-b312-0ab5054b4e62"
     },
@@ -204,10 +205,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        1584,
-        208
+        -336,
+        96
       ],
-      "id": "8f2dde6f-214c-4911-bc7e-2bd9a94e916a",
+      "id": "01c371de-af08-4de0-a3b0-a3ff421f0088",
       "name": "Extract from File1"
     }
   ],
@@ -282,10 +283,11 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "55055e17-f1f7-4c81-89bd-8a6887bbc9ef",
+  "versionId": "c8ad3e09-e29e-44c7-ae9b-3d4eda2a7b5c",
   "meta": {
-    "instanceId": "0f263a444a4b0853968a8c2ae5d0c6685ffd5fc87a996c05561e1b2c3065f1ee"
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3935f992dabb03780b6a844bef2708ef6c8585b552b18ab1933818ee6b57ba97"
   },
-  "id": "E7ScpIoWhzFnq6WNOJkg7",
+  "id": "Mdu6Q0_8HmqmKaXtKdzE-",
   "tags": []
 }
