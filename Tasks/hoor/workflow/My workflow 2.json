@@ -1,0 +1,85 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2ed76aaf-7952-4dc3-b312-0ab5054b4e62",
+        "options": {
+          "allowedOrigins": "*",
+          "binaryPropertyName": "File "
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -32,
+        -224
+      ],
+      "id": "9399d70b-e38a-4219-9f62-34a51e34e53c",
+      "name": "Webhook",
+      "webhookId": "2ed76aaf-7952-4dc3-b312-0ab5054b4e62"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "={{ Object.keys($binary)[0]\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -16,
+        -64
+      ],
+      "id": "5bbf9163-e85c-4e9c-ac0a-4758aa1c0321",
+      "name": "Extract from File"
+    }
+  ],
+  "pinData": {
+    "Extract from File": [
+      {
+        "json": {
+          "name": "First item",
+          "code": 1
+        }
+      },
+      {
+        "json": {
+          "name": "Second item",
+          "code": 2
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "3f0c27de-e89c-4ac4-aa90-c924f57e2720",
+  "meta": {
+    "instanceId": "8c3083ed9cfc1e71214f5cca240b84f4842fc7df4a5d4f7034dc23b7df148495"
+  },
+  "id": "1joLiUYc1mlpo7Zc",
+  "tags": []
+}
