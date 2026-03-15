@@ -1,0 +1,500 @@
+{
+  "name": "graduation",
+  "nodes": [
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"error\": \"الملف المرفوع فارغ، يرجى التأكد من البيانات\"}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1296,
+        464
+      ],
+      "id": "b3e87d04-2594-4fc9-91e1-0a78c49bbb23",
+      "name": "API Response Handler"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/12huXFErkPziq5XhaxSFDuNB4-bwSzNyE3dS4fIxNInU/edit?gid=1186646075#gid=1186646075",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1186646075,
+          "mode": "list",
+          "cachedResultName": "الورقة1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12huXFErkPziq5XhaxSFDuNB4-bwSzNyE3dS4fIxNInU/edit#gid=1186646075"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "userEmail": "={{ $('Calculate Quick Metrics').item.json.userEmail }}",
+            "totalSales": "={{ $('Calculate Quick Metrics').item.json.totalSales }}",
+            "ordersCount": "={{ $('Calculate Quick Metrics').item.json.ordersCount }}",
+            "topProduct": "={{ $('Calculate Quick Metrics').item.json.topProduct }}",
+            "insight": "={{ $('Calculate Quick Metrics').item.json.insight }}",
+            "top5Product": "={{ $('Calculate Quick Metrics').item.json.top5Products }}"
+          },
+          "matchingColumns": [
+            "userEmail"
+          ],
+          "schema": [
+            {
+              "id": "userEmail",
+              "displayName": "userEmail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "totalSales",
+              "displayName": "totalSales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ordersCount",
+              "displayName": "ordersCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "topProduct",
+              "displayName": "topProduct",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "insight",
+              "displayName": "insight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "top5Product",
+              "displayName": "top5Product",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2208,
+        144
+      ],
+      "id": "18e184eb-7ed1-410e-813c-431e13c5a733",
+      "name": "Sync Customer Activity to DB",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "FOvk5uZmCxfD9g30",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:5678/webhook/31fc8a26-7929-40cf-9b35-9a537e2c6f19",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=email",
+              "value": "={{ $('Receive Sales File').item.json.body.email }}"
+            },
+            {
+              "name": "data",
+              "value": "={{ $('Parse Excel Data').all().map(item => item.json) }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2496,
+        144
+      ],
+      "id": "fb3367c3-27ab-4bf4-b796-11b99a9d4230",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "31fc8a26-7929-40cf-9b35-9a537e2c6f19",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*",
+          "binaryPropertyName": "file",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        160
+      ],
+      "id": "8c3c0a0c-1801-4141-aa95-d154b4892526",
+      "name": "Receive Sales File",
+      "webhookId": "31fc8a26-7929-40cf-9b35-9a537e2c6f19"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "={{ Object.keys($binary)[0] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        448,
+        160
+      ],
+      "id": "c2f5a29f-9572-4951-aaad-33b9e73e72ab",
+      "name": "Parse Excel Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet totalRevenue = 0;\nlet productCounts = {};\nlet hourlySales = {};\nlet highValueOrders = 0; \nlet totalQty = 0;\n\nitems.forEach(item => {\n    const data = item.json;\n    \n    // 1. استخدام الحقول الموحدة من نود Edit Fields\n    const price = data.Standard_Price || 0;\n    const qty = data.Standard_Qty || 0;\n    const productName = data.Standard_Product || \"غير معروف\";\n    const orderDate = data.Std_Date;\n    \n    totalRevenue += price;\n    totalQty += qty;\n    \n    // 2. كشف الصفقات الكبيرة\n    if (price > 5000) highValueOrders++;\n\n    // 3. تجميع بيانات المنتجات\n    productCounts[productName] = (productCounts[productName] || 0) + qty;\n\n    // 4. معالجة الوقت والتاريخ\n    if (orderDate) {\n        const dateObj = isNaN(orderDate) ? new Date(orderDate) : new Date((orderDate - 25569) * 86400 * 1000);\n        if (!isNaN(dateObj.getTime())) {\n            const hour = dateObj.getHours();\n            hourlySales[hour] = (hourlySales[hour] || 0) + 1;\n        }\n    }\n});\n\n// 5. ترتيب المنتجات وتنسيق القائمة بشكل رأسي <br>\nconst sortedProducts = Object.entries(productCounts).sort((a, b) => b[1] - a[1]);\n\nconst top5List = sortedProducts.slice(0, 5).map(([name, qty]) => {\n    return `• ${name}: <b>${qty}</b> قطعة`;\n}).join('<br>'); // النزول لسطر جديد في الإيميل\n\nconst topProductName = sortedProducts.length > 0 ? sortedProducts[0][0] : \"N/A\";\nconst peakHourEntry = Object.entries(hourlySales).sort((a, b) => b[1] - a[1])[0];\n\n// 6. الاستنتاج الذكي (Insight)\nlet smartInsight = \"أداؤك مستقر اليوم.\";\nif (highValueOrders > 0) {\n    smartInsight = `انتباه: لديك ${highValueOrders} صفقات ضخمة تحتاج مراجعة دقيقة.`;\n} else if (totalQty > 100) {\n    smartInsight = `طلب مرتفع جداً على المنتج (${topProductName})! تأكد من توفر المخزون الكافي منه.`;\n}\n\n// 7. المخرجات النهائية\nreturn {\n    totalSales: totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),\n    ordersCount: items.length,\n    topProduct: topProductName,\n    top5Products: top5List,\n    peakHour: peakHourEntry ? `${peakHourEntry[0]}:00` : \"غير محدد\",\n    insight: smartInsight, \n    userEmail: $node[\"Receive Sales File\"].json.body.email \n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        144
+      ],
+      "id": "8054fd01-d648-4517-9886-cd159b5d5ed7",
+      "name": "Calculate Quick Metrics"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1648,
+        144
+      ],
+      "id": "2795aae1-cf89-4aa4-a47f-830d8fb6d1e1",
+      "name": "UI Instant Response"
+    },
+    {
+      "parameters": {
+        "fromEmail": "marwansinger13579@gmail.com",
+        "toEmail": "={{ $('Calculate Quick Metrics').item.json.userEmail }}",
+        "subject": "المحلل الذكى",
+        "html": "=<div dir=\"rtl\" style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; padding: 20px;\">\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 30px; border-radius: 15px 15px 0 0; text-align: center;\">\n        <h1 style=\"color: #ffffff; margin: 0; font-size: 28px; letter-spacing: 1px;\">Data <span style=\"color: #3bf65d;\"> Analysis</span></h1>\n        <p style=\"color: #94a3b8; margin-top: 10px; font-size: 14px;\"> تحليلات المبيعات اللحظية</p>\n    </div>\n\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-bottom: 1px solid #e2e8f0;\">\n        <div style=\"background-color: #fff7ed; border-right: 5px solid #0bf5b3; padding: 15px; border-radius: 8px;\">\n            <h3 style=\"color: #ffffff; margin: 0 0 5px 0; font-size: 16px;\">المحلل الذكي:</h3>\n            <p style=\"color: #ffffff; font-size: 15px; margin: 0; line-height: 1.6;\">{{ $json.insight }}</p>\n        </div>\n    </div>\n\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px;\">\n        <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">\n            <tr>\n                <td width=\"48%\" style=\"background-color: #eff6ff; padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #dbeafe;\">\n                    <p style=\"color: #166534; margin: 0; font-size: 13px; font-weight: bold;\">إجمالي الإيرادات</p>\n                    <h2 style=\"color: #16a34a; margin: 10px 0 0 0; font-size: 22px;\">{{ $json.totalSales }}</h2>\n                </td>\n                <td width=\"4%\"></td>\n                <td width=\"48%\" style=\"background-color: #f0fdf4; padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #dcfce7;\">\n                    <p style=\"color: #166534; margin: 0; font-size: 13px; font-weight: bold;\">عدد العمليات</p>\n                    <h2 style=\"color: #16a34a; margin: 10px 0 0 0; font-size: 22px;\">{{ $json.ordersCount }}</h2>\n                </td>\n            </tr>\n        </table>\n    </div>\n\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0 20px 20px 20px; border-radius: 0 0 15px 15px;\">\n        <table width=\"100%\" style=\"border-collapse: collapse; background-color: #fcfcfc; border-radius: 10px; border: 1px solid #f1f5f9;\">\n            <tr>\n                <td style=\"padding: 15px; color: #64748b; border-bottom: 1px solid #f1f5f9; vertical-align: top;\"> المنتج الأكثر طلباً</td>\n                <td style=\"padding: 15px; color: #0f172a; font-weight: bold; text-align: left; border-bottom: 1px solid #f1f5f9;\">{{ $json.topProduct }}</td>\n            </tr>\n            <tr>\n                <td style=\"padding: 15px; color: #64748b; border-bottom: 1px solid #f1f5f9; vertical-align: top;\">📊 قائمة أعلى 5 منتجات</td>\n                <td style=\"padding: 15px; color: #44f63b; font-size: 14px; text-align: left; border-bottom: 1px solid #f1f5f9; line-height: 1.8;\">\n                    {{ $json.top5Products }}\n                </td>\n            </tr>\n        </table>\n    </div>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1920,
+        144
+      ],
+      "id": "78d2f137-7e42-4fd7-9eb5-d8488b78f8ba",
+      "name": "Send Instant Smart Report",
+      "webhookId": "916bfca0-3560-40fa-8976-9e3857dcc303",
+      "credentials": {
+        "smtp": {
+          "id": "nBl0sxHcJJvmiSrY",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "53b6660d-90ba-4ee9-8d8a-3941240debed",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        976,
+        160
+      ],
+      "id": "3d63239f-1152-4bd7-a554-3d61f2d41d79",
+      "name": "Data Validation & Security Gate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "79afd86a-7103-4dff-b1b6-89f18292a7f7",
+              "name": "Standard_Product",
+              "value": "={{ $json[\"Product\"] || $json[\"Item\"] || $json[\"المنتج\"] || $json[\"الصنف\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "268d5c81-575b-454a-b57b-c46b9474163c",
+              "name": "Standard_Price",
+              "value": "={{ parseFloat($json[\"TotalPrice\"] || $json[\"Total\"] || $json[\"الإجمالي\"] || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "2a1ea48d-1e3e-4f1b-b814-a91c81cee9f8",
+              "name": "Standard_Qty",
+              "value": "={{ parseInt($json[\"Quantity\"] || $json[\"Qty\"] || $json[\"الكمية\"] || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "2d4c66a2-f195-481d-90e1-7821631b95c9",
+              "name": "Std_Date",
+              "value": "={{ $json[\"Date\"] || $json[\"OrderDate\"] || $json[\"التاريخ\"] }}",
+              "type": "number"
+            },
+            {
+              "id": "a97a36cc-a376-46da-a96b-0829a4d29311",
+              "name": "Std_Hour",
+              "value": "={{ $json[\"Time\"] || $json[\"Hour\"] || $json[\"الساعة\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "90386b34-21b9-4c21-82c7-5bf158b8f1f0",
+              "name": "Std_Location",
+              "value": "={{ $json[\"Location\"] || $json[\"City\"] || $json[\"Address\"] || $json[\"المنطقة\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "70dccb2e-bea0-49f4-97a7-d16737fc4780",
+              "name": "Std_CustomerID",
+              "value": "={{ $json[\"CustomerID\"] || $json[\"CustID\"] || $json[\"رقم_العميل\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "d38192b4-0c6c-4f1a-90ad-02566373d7bf",
+              "name": "Std_PaymentMethod",
+              "value": "={{ $json[\"PaymentMethod\"] || $json[\"PaymentType\"] || $json[\"طريقة_الدفع\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "3a98f9fc-8ef6-4b61-9cae-dc430f941849",
+              "name": "Std_UnitPrice",
+              "value": "={{ parseFloat($json[\"UnitPrice\"] || $json[\"Price\"] || $json[\"سعر_الوحدة\"] || 0) }}",
+              "type": "string"
+            },
+            {
+              "id": "d5f3dcf1-8705-4c4a-b659-419969d15db0",
+              "name": "Std_Status",
+              "value": "={{ $json[\"OrderStatus\"] || $json[\"Status\"] || $json[\"حالة_الطلب\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "1909b51a-0d03-4f2d-88c0-2bf74e764453",
+              "name": "Std_Category",
+              "value": "={{ $json[\"Category\"] || $json[\"ProductCategory\"] || $json[\"الفئة\"] || $json[\"القسم\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "1b36c840-a3ef-48e9-8788-7addaee3d899",
+              "name": "Std_Cost",
+              "value": "={{ parseFloat($json[\"Cost\"] || $json[\"UnitCost\"] || $json[\"التكلفة\"] || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "bf3e8977-c53d-4456-85ca-7760e7cea849",
+              "name": "Std_Discount",
+              "value": "={{ parseFloat($json[\"Discount\"] || $json[\"CouponAmount\"] || $json[\"الخصم\"] || 0) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        160
+      ],
+      "id": "a8a84dd9-5f27-4dfe-99ee-01531656d108",
+      "name": "Data Formatter"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Sync Customer Activity to DB": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Receive Sales File": {
+      "main": [
+        [
+          {
+            "node": "Parse Excel Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Excel Data": {
+      "main": [
+        [
+          {
+            "node": "Data Formatter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Quick Metrics": {
+      "main": [
+        [
+          {
+            "node": "UI Instant Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UI Instant Response": {
+      "main": [
+        [
+          {
+            "node": "Send Instant Smart Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Validation & Security Gate": {
+      "main": [
+        [
+          {
+            "node": "Calculate Quick Metrics",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "API Response Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Formatter": {
+      "main": [
+        [
+          {
+            "node": "Data Validation & Security Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Instant Smart Report": {
+      "main": [
+        [
+          {
+            "node": "Sync Customer Activity to DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "ac47b1fd-1463-42c5-99cd-45f0fbe51019",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "09b3cf77e495ffd8426ecd872923b1036e1861e4ffd1f7022450141217854cc8"
+  },
+  "id": "206nQs7eusjtHG6G",
+  "tags": []
+}
