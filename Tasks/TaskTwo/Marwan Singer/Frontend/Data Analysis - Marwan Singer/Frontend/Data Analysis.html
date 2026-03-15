@@ -33,7 +33,9 @@
         .accent-gradient {
             background: linear-gradient(135deg, #48f37e 0%, #17db41 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            color: transparent;
         }
         .btn-primary {
             background: linear-gradient(135deg, #02c747 0%, #46e55e 100%);
@@ -126,8 +128,7 @@
 
     <script>
         let chartInstance = null;
-        const WEBHOOK_URL = 'http://localhost:5678/webhook-test/2f39d4ac-85da-49ef-8d96-614368b80ba5';
-0
+        const WEBHOOK_URL = 'http://localhost:5678/webhook-test/31fc8a26-7929-40cf-9b35-9a537e2c6f19';
         const fileIn = document.getElementById('fileIn');
         const dropZone = document.getElementById('dropZone');
         const mainForm = document.getElementById('mainForm');
