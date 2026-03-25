@@ -1,5 +1,5 @@
 {
-  "name": "Smart Business Intelligence Reporting System(ٍSlow Track)",
+  "name": "Smart Business Intelligence Reporting System (Slow Track)",
   "nodes": [
     {
       "parameters": {
@@ -10,10 +10,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -3920,
-        -784
+        16,
+        144
       ],
-      "id": "03aacc5e-7afb-4765-a6a5-5470a8ed26c3",
+      "id": "ca416088-7891-4277-8be4-f29b2176decd",
       "name": "Sticky Note"
     },
     {
@@ -36,10 +36,10 @@
       "type": "n8n-nodes-base.summarize",
       "typeVersion": 1.1,
       "position": [
-        -2912,
-        -32
+        784,
+        656
       ],
-      "id": "a9d2f7d3-e365-4796-8278-30d8c8919e53",
+      "id": "df206e0c-a386-4053-a029-f639372e7a2a",
       "name": "Summarize1"
     },
     {
@@ -53,33 +53,13 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        -2320,
-        -32
+        1232,
+        656
       ],
-      "id": "c0ef1691-f85e-46e4-8642-c96678ec0c0d",
+      "id": "a3cf8ce5-a607-427f-813c-50098e73d863",
       "name": "AI Agent4",
       "retryOnFail": true,
       "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-2.0-flash",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        -1760,
-        320
-      ],
-      "id": "2312e994-401a-4582-909a-54ae7d0ea06c",
-      "name": "Google Gemini Chat Model1",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "eoojGsf4bB1uiDXQ",
-          "name": "New"
-        }
-      }
     },
     {
       "parameters": {
@@ -109,10 +89,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1952,
-        -32
+        1568,
+        656
       ],
-      "id": "d3b6c2c0-17c8-4f8d-8cac-4ea9c09fd646",
+      "id": "2c2cb068-a3df-4ac7-97a0-3abe7dfb5e4e",
       "name": "If4"
     },
     {
@@ -126,10 +106,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        -1312,
-        384
+        2304,
+        912
       ],
-      "id": "4a2ab3ce-d1a0-4b60-9080-2c8d8eb5746e",
+      "id": "df8b2016-f807-494e-8fbe-b6e0d0283e30",
       "name": "AI Agent5",
       "retryOnFail": true,
       "onError": "continueRegularOutput"
@@ -142,14 +122,14 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
       "typeVersion": 1,
       "position": [
-        -1312,
-        560
+        2304,
+        1088
       ],
-      "id": "f7031eb8-6080-42db-9050-5478b74041c9",
+      "id": "1604987b-7b12-4d51-bdb2-44d163ff31cd",
       "name": "Groq Chat Model1",
       "credentials": {
         "groqApi": {
-          "id": "VW9ZDTXRR1JmCk42",
+          "id": "ASq4LK8rZtJ9PqVg",
           "name": "Groq account"
         }
       }
@@ -182,10 +162,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -960,
-        384
+        2656,
+        912
       ],
-      "id": "c8bafe57-3057-4db9-a1b7-a43fd0664c52",
+      "id": "b98b1a05-c877-46a0-bac2-be321043f833",
       "name": "If5"
     },
     {
@@ -199,10 +179,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        -784,
-        608
+        2832,
+        1040
       ],
-      "id": "3e8f7545-c230-4a5e-8755-a5385dbaec4d",
+      "id": "f08cf1aa-a851-479c-9d94-aba1d94c8c4b",
       "name": "AI Agent6",
       "retryOnFail": true,
       "onError": "continueRegularOutput"
@@ -221,14 +201,14 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        -784,
-        784
+        2832,
+        1216
       ],
-      "id": "a4bfabda-ff76-41cb-86de-a9db9738a5b5",
+      "id": "2de8654d-a059-4b36-8035-0b7c4d849d41",
       "name": "OpenAI Chat Model1",
       "credentials": {
         "openAiApi": {
-          "id": "1e2pFIBX6deqYcun",
+          "id": "ah3WsYgcF3i5FtZf",
           "name": "OpenAi account"
         }
       }
@@ -261,99 +241,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -448,
-        608
+        3168,
+        1040
       ],
-      "id": "6d478c3d-3ebe-4089-a2ac-4f5bfcbc37f7",
+      "id": "d1fcfed3-63d9-46eb-8bfd-9450ad1206fc",
       "name": "If6"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=إليك التقرير المجمع للتحليل (المنتج | الحالة | المصدر | الإيرادات | الكمية):\n{{ $('Code in JavaScript').item.json.report_data }}",
-        "options": {
-          "systemMessage": "أنت خبير استراتيجي في تحليل بيانات الأعمال (Senior BI Consultant).\n\nمهمتك:\nقم بتحليل بيانات المبيعات المرفقة أياً كان حجمها. استخرج الأنماط، اكتشف مواطن الخلل، وحدد الفرص الضائعة.\n\nتعليمات المخرجات:\n\nردك يجب أن يكون JSON Object فقط لضمان التكامل البرمجي.\n\nقم بصياغة المحتوى داخل الـ JSON بأسلوب تحليلي حر (Narrative Analysis) بناءً على ما تراه في البيانات فعلياً، وليس مجرد سرد للأرقام.\n\nاستخدم المفاتيح التالية (باللغة العربية):\nsummary, top_products, marketing_insights, risks, recommendations.\n\nتنبيه: لا تلتزم بجمل ثابتة، بل اجعل كل تحليل فريداً بناءً على الداتا المستلمة."
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3,
-      "position": [
-        -176,
-        720
-      ],
-      "id": "80cba0e2-a448-4e86-8dcf-247de48b82f0",
-      "name": "AI Agent7",
-      "retryOnFail": true,
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "model": "deepseek-reasoner",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
-      "typeVersion": 1,
-      "position": [
-        -176,
-        1008
-      ],
-      "id": "75c98f71-80a9-4edb-9019-f8fc75825da7",
-      "name": "DeepSeek Chat Model1",
-      "credentials": {
-        "deepSeekApi": {
-          "id": "nc554MeGtrLJifJx",
-          "name": "DeepSeek account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={\n  \"emailBody\": (function() {\n    // 1. تنظيف الداتا وتحويلها لـ Object\n    const rawOutput = $json.final_report_text[0].output;\n    const cleanJson = rawOutput.replace(/```json|```/g, '').trim();\n    const data = JSON.parse(cleanJson);\n\n    // 2. تصميم شكل الصفحة (HTML)\n    return `\n    <div dir=\"rtl\" style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; background-color: #f4f7f6; color: #333;\">\n      <div style=\"max-width: 700px; margin: auto; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; border-top: 8px solid #1e40af;\">\n        \n        <div style=\"padding: 20px; text-align: center; background-color: #f8fafc;\">\n          <h1 style=\"color: #1e40af; margin: 0; font-size: 24px;\">📊 التقرير الاستراتيجي الذكي</h1>\n          <p style=\"color: #64748b; font-size: 14px; margin-top: 5px;\">مشروع تخرج MCI Academy | 2026</p>\n        </div>\n\n        <div style=\"padding: 30px;\">\n          <div style=\"margin-bottom: 25px;\">\n            <h3 style=\"color: #1e40af; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;\">📝 الملخص التنفيذي</h3>\n            <p style=\"line-height: 1.8; color: #475569;\">${data.summary}</p>\n          </div>\n\n          <div style=\"display: flex; gap: 20px; margin-bottom: 25px;\">\n            <div style=\"flex: 1; background: #eff6ff; padding: 15px; border-radius: 10px;\">\n              <h4 style=\"margin: 0 0 10px 0; color: #1e40af;\">🏆 أفضل المنتجات</h4>\n              <p style=\"font-size: 14px; margin: 0;\">${data.top_products}</p>\n            </div>\n            <div style=\"flex: 1; background: #f0fdf4; padding: 15px; border-radius: 10px;\">\n              <h4 style=\"margin: 0 0 10px 0; color: #166534;\">📢 رؤى التسويق</h4>\n              <p style=\"font-size: 14px; margin: 0;\">${data.marketing_insights}</p>\n            </div>\n          </div>\n\n          <div style=\"padding: 15px; background-color: #fef2f2; border-right: 4px solid #dc2626; border-radius: 5px; margin-bottom: 25px;\">\n            <h4 style=\"margin: 0 0 5px 0; color: #991b1b;\">⚠️ تنبيه بالمخاطر</h4>\n            <p style=\"margin: 0; font-size: 14px; color: #b91c1c;\">${data.risks}</p>\n          </div>\n\n          <div style=\"padding: 20px; background-color: #1e40af; color: white; border-radius: 10px;\">\n            <h4 style=\"margin: 0 0 10px 0;\">💡 توصيات استراتيجية</h4>\n            <p style=\"margin: 0; font-size: 15px; line-height: 1.6;\">${data.recommendations}</p>\n          </div>\n        </div>\n\n        <div style=\"padding: 15px; text-align: center; background: #f8fafc; font-size: 12px; color: #94a3b8; border-top: 1px solid #e2e8f0;\">\n          تم توليد هذا التقرير آلياً بواسطة نظام Smart BI Reporting System\n        </div>\n      </div>\n    </div>\n    `;\n  })()\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        608,
-        -32
-      ],
-      "id": "e105b013-663f-42ef-b812-b7821627e60c",
-      "name": "Edit Fields1"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "a9e84f39-8272-4f54-b3f5-f85ebbec9148",
-              "leftValue": "={{ $json.output }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        176,
-        720
-      ],
-      "id": "50239344-45ce-4eec-ae41-da6d7b0a0023",
-      "name": "If7"
     },
     {
       "parameters": {
@@ -364,35 +256,11 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        272,
-        -32
+        3984,
+        624
       ],
-      "id": "55b3f21d-9b5f-4009-8beb-ac9e271b4913",
+      "id": "d415e9f7-d87a-4750-a7d4-efa47418da95",
       "name": "Aggregate1"
-    },
-    {
-      "parameters": {
-        "fromEmail": "abdelwahabshandy@gmail.com",
-        "toEmail": "={{ $node[\"Webhook(Slow Track)\"].json.body.email }}",
-        "subject": "📑 التقرير الاستراتيجي الشامل لمبيعاتك | Smart BI System",
-        "html": "={{ $node[\"Edit Fields1\"].json.html_report }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [
-        1056,
-        -32
-      ],
-      "id": "446c696c-cd30-4995-86de-37672a1a6f68",
-      "name": "Send Instant Smart Report2",
-      "webhookId": "916bfca0-3560-40fa-8976-9e3857dcc303",
-      "credentials": {
-        "smtp": {
-          "id": "oqskIIBj8Ex9aUYP",
-          "name": "SMTP account"
-        }
-      }
     },
     {
       "parameters": {
@@ -403,10 +271,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -3856,
-        -32
+        32,
+        656
       ],
-      "id": "76ef48cf-5b90-4692-b063-0451824c3e8a",
+      "id": "8c9457cb-c40b-4194-957c-0e8f8b0d5fed",
       "name": "Webhook(Slow Track)",
       "webhookId": "9d8c36fe-01ec-4dc9-b9eb-4731be25c0d8"
     },
@@ -419,10 +287,10 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        -3536,
-        -32
+        272,
+        656
       ],
-      "id": "8232995e-eec3-460b-88c8-e9cc2af24929",
+      "id": "a75851ee-06cc-45fa-9d44-772b1f1e28d8",
       "name": "Split Out"
     },
     {
@@ -484,10 +352,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3216,
-        -32
+        544,
+        656
       ],
-      "id": "70ea2854-a17b-486c-83b8-446501eb8faa",
+      "id": "baf5718a-3a0c-4c32-b0b9-1112aafdaa40",
       "name": "Edit Fields"
     },
     {
@@ -497,10 +365,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -2656,
-        -32
+        992,
+        656
       ],
-      "id": "a5b6009e-fa10-462d-b804-5074941caa5d",
+      "id": "6e4419b6-4512-4591-9789-0c33dcc5fbc4",
       "name": "Code in JavaScript"
     },
     {
@@ -512,30 +380,11 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        -720,
-        1264
+        2144,
+        1472
       ],
-      "id": "a6a1ac5b-c717-47cd-a69e-bafea4aa7186",
+      "id": "0bd052e9-3bf8-4604-b768-ddb15c84b269",
       "name": "Simple Memory"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=إليك التقرير المجمع للتحليل (المنتج | الحالة | المصدر | الإيرادات | الكمية):\n{{ $('Code in JavaScript').item.json.report_data }}",
-        "options": {
-          "systemMessage": "أنت خبير استراتيجي في تحليل بيانات الأعمال (Senior BI Consultant).\n\nمهمتك:\nقم بتحليل بيانات المبيعات المرفقة أياً كان حجمها. استخرج الأنماط، اكتشف مواطن الخلل، وحدد الفرص الضائعة.\n\nتعليمات المخرجات:\n\nردك يجب أن يكون JSON Object فقط لضمان التكامل البرمجي.\n\nقم بصياغة المحتوى داخل الـ JSON بأسلوب تحليلي حر (Narrative Analysis) بناءً على ما تراه في البيانات فعلياً، وليس مجرد سرد للأرقام.\n\nاستخدم المفاتيح التالية (باللغة العربية):\nsummary, top_products, marketing_insights, risks, recommendations.\n\nتنبيه: لا تلتزم بجمل ثابتة، بل اجعل كل تحليل فريداً بناءً على الداتا المستلمة."
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3,
-      "position": [
-        -1760,
-        160
-      ],
-      "id": "a9b5a25d-ed9b-4f66-a290-bab0f754115e",
-      "name": "AI Agent",
-      "retryOnFail": true,
-      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -565,10 +414,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1456,
-        160
+        2128,
+        784
       ],
-      "id": "d7cf2194-1e5e-423a-ad55-8abd145abb85",
+      "id": "aa3da819-71bb-47bf-af05-7e9378c6e7f2",
       "name": "If"
     },
     {
@@ -584,14 +433,14 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
       "typeVersion": 1.3,
       "position": [
-        -2320,
-        176
+        1232,
+        848
       ],
-      "id": "5f6bbcc4-f63a-4ba2-b486-8f23cc3c7f2d",
+      "id": "305cb0bf-9750-4ecc-a0ef-557bbcf8b75b",
       "name": "Anthropic Chat Model",
       "credentials": {
         "anthropicApi": {
-          "id": "ZCm4nvMHlawhIvz7",
+          "id": "g1epCCGGSpgtLnQ6",
           "name": "Anthropic account"
         }
       }
@@ -605,11 +454,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -3872,
-        -304
+        16,
+        352
       ],
       "typeVersion": 1,
-      "id": "2ac8e2b7-ba18-43d4-a643-26a637a570da",
+      "id": "ce947cad-6ab8-4734-9e14-34683ece8f2d",
       "name": "Sticky Note1"
     },
     {
@@ -621,12 +470,75 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1232,
-        -32
+        3968,
+        448
       ],
       "typeVersion": 1,
-      "id": "a1b6a2e7-e510-469f-9ee1-0d19fe08cabd",
+      "id": "ac40ac19-f6ff-45d4-9fd4-949a1623a1c7",
       "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "fromEmail": "abdelwahabshandy@gmail.com",
+        "toEmail": "={{ $node[\"Webhook(Slow Track)\"].json.body.email }}",
+        "subject": "📑 التقرير الاستراتيجي الشامل لمبيعاتك | Smart BI System",
+        "html": "={{ (function() {\n  // 1. الوصول للنص داخل المصفوفة الناتجة من Aggregate1\n  const rawOutput = $json.final_report_text[0].output;\n  \n  // 2. تنظيف النص وتحويله لـ Object\n  const cleanJson = rawOutput.replace(/```json|```/g, '').trim();\n  const data = JSON.parse(cleanJson);\n\n  // 3. بناء قالب الإيميل\n  return `\n  <div dir=\"rtl\" style=\"font-family: sans-serif; line-height: 1.6; color: #333; padding: 20px; background: #f4f7f6;\">\n    <div style=\"max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; border-top: 8px solid #1e40af;\">\n      <h2 style=\"color: #1e40af; text-align: center;\">📊 التقرير الاستراتيجي الشامل</h2>\n      \n      <p><strong>📝 الملخص التنفيذي:</strong><br>${data.summary}</p>\n\n      <h4 style=\"color: #1e40af; border-bottom: 1px solid #eee;\">🏆 تحليل المنتجات:</h4>\n      <p>${data.top_products.overview}</p>\n\n      <h4 style=\"color: #dc2626; border-bottom: 1px solid #eee;\">⚠️ المخاطر المرصودة:</h4>\n      <ul>\n        ${data.risks.map(r => `<li><strong>${r.risk}:</strong> ${r.details}</li>`).join('')}\n      </ul>\n\n      <div style=\"background: #1e40af; color: white; padding: 15px; border-radius: 8px;\">\n        <h4 style=\"margin-top: 0;\">💡 التوصيات المقترحة:</h4>\n        ${data.recommendations.map(rec => `• <strong>${rec.recommendation}:</strong> ${rec.action}`).join('<br><br>')}\n      </div>\n\n      <p style=\"text-align: center; font-size: 11px; color: #999; margin-top: 20px;\">تم التوليد آلياً بواسطة Smart BI System</p>\n    </div>\n  </div>\n  `;\n})() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        4208,
+        624
+      ],
+      "id": "32725523-6689-4607-a905-15fbd01d03bd",
+      "name": "Send Instant Smart Report",
+      "webhookId": "916bfca0-3560-40fa-8976-9e3857dcc303",
+      "credentials": {
+        "smtp": {
+          "id": "cqYTdVe0cgd5qwlG",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1808,
+        928
+      ],
+      "id": "9e3cbf28-bace-4b98-aeb1-b720ea68e335",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "VmLDGhI14828rvzn",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=إليك التقرير المجمع للتحليل (المنتج | الحالة | المصدر | الإيرادات | الكمية):\n{{ $('Code in JavaScript').item.json.report_data }}",
+        "options": {
+          "systemMessage": "أنت خبير استراتيجي في تحليل بيانات الأعمال (Senior BI Consultant).\n\nمهمتك:\nقم بتحليل بيانات المبيعات المرفقة أياً كان حجمها. استخرج الأنماط، اكتشف مواطن الخلل، وحدد الفرص الضائعة.\n\nتعليمات المخرجات:\n\nردك يجب أن يكون JSON Object فقط لضمان التكامل البرمجي.\n\nقم بصياغة المحتوى داخل الـ JSON بأسلوب تحليلي حر (Narrative Analysis) بناءً على ما تراه في البيانات فعلياً، وليس مجرد سرد للأرقام.\n\nاستخدم المفاتيح التالية (باللغة العربية):\nsummary, top_products, marketing_insights, risks, recommendations.\n\nتنبيه: لا تلتزم بجمل ثابتة، بل اجعل كل تحليل فريداً بناءً على الداتا المستلمة."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        1808,
+        752
+      ],
+      "id": "fc58ee7a-c986-48ea-9573-119b49ac579d",
+      "name": "AI Agent",
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
     }
   ],
   "pinData": {
@@ -47132,6 +47044,13 @@
           "item": 0
         }
       }
+    ],
+    "AI Agent": [
+      {
+        "json": {
+          "output": "```json\n{\n  \"summary\": \"يُظهر تحليل بيانات المبيعات تركيزًا كبيرًا على منتجات 'Monitor' و 'Phone' و 'Tablet' و 'Chair' و 'Printer' و 'Laptop' و 'Desk'. تشكل هذه المنتجات غالبية الإيرادات والكميات المباعة. لوحظت نسب مرتفعة من المبيعات الملغاة والمُرجعة، مما يستدعي تحقيقًا أعمق لفهم الأسباب الجذرية.  تُعد قنوات التسويق مثل Instagram و Facebook و Google مصادر رئيسية للمبيعات، ولكن يجب تقييم فعاليتها بشكل مستمر.  هناك تباين ملحوظ في أداء المنتجات بناءً على حالة الطلب (مشحون، مُسلم، قيد الانتظار، مُلغى، مُرجع) وعلى قنوات التسويق المستخدمة.\",\n  \"top_products\": {\n    \"overview\": \"تُظهر البيانات أن منتجات 'Monitor' و 'Chair' و 'Laptop' و 'Tablet' هي الأكثر إنتاجًا للإيرادات بشكل عام. ومع ذلك، فإن الكميات المباعة لا تتوافق دائمًا مع الإيرادات، مما يشير إلى اختلافات في متوسط سعر البيع.\",\n    \"product_performance\": [\n      {\n        \"product\": \"Monitor\",\n        \"revenue_contribution\": \"يُعتبر من بين الأعلى إيرادًا، خاصة في حالات الطلب 'Shipped' و 'Delivered'، ولكن يواجه تحديات كبيرة في حالات 'Returned' و 'Cancelled' مع Facebook و Referral.\",\n        \"volume_insights\": \"كميات مرتفعة في حالات 'Delivered' و 'Shipped'، لكن هناك كميات كبيرة أيضاً في حالات الإلغاء والإرجاع.\"\n      },\n      {\n        \"product\": \"Phone\",\n        \"revenue_contribution\": \"يُظهر إيرادات قوية، خاصة في حالات 'Delivered' و 'Shipped'.  يُلاحظ ارتفاع الإيرادات في حالات 'Returned' من Email، مما قد يكون مؤشرًا لمنتج عالي الجودة مع معدل إرجاع مرتفع لأسباب معينة.\",\n        \"volume_insights\": \"كميات متفاوتة عبر حالات الطلب، مع ذروة في 'Pending' و 'Returned' عبر Instagram و Email على التوالي.\"\n      },\n      {\n        \"product\": \"Tablet\",\n        \"revenue_contribution\": \"يُحقق إيرادات كبيرة، خاصة في حالات 'Shipped' و 'Delivered'.  يشهد ارتفاعًا كبيرًا في الإيرادات عند الإرجاع من Instagram، مما يستدعي التحقيق.\",\n        \"volume_insights\": \"كميات مرتفعة في حالات 'Shipped' و 'Returned'، خاصة من Instagram و Google.\"\n      },\n      {\n        \"product\": \"Chair\",\n        \"revenue_contribution\": \"يُظهر إيرادات إجمالية عالية، ولكنه يعاني من نسب مرتفعة جدًا في حالات 'Pending' و 'Cancelled' عبر Email و Instagram و Facebook، مما يشير إلى مشاكل محتملة في إدارة المخزون أو تقديم الطلبات.\",\n        \"volume_insights\": \"كميات مرتفعة بشكل ملحوظ في حالات 'Pending' و 'Cancelled' عبر قنوات متعددة.\"\n      },\n      {\n        \"product\": \"Laptop\",\n        \"revenue_contribution\": \"يُحقق إيرادات جيدة، ولكنه يواجه معدل إلغاء مرتفع من Email.  يُلاحظ إيرادات منخفضة جدًا في حالة Shipped من Email (57.1$).\",\n        \"volume_insights\": \"كميات كبيرة في حالات 'Returned' و 'Cancelled' و 'Delivered'، مع ذروة في 'Pending' من Instagram.\"\n      }\n    ]\n  },\n  \"marketing_insights\": {\n    \"overview\": \"تشكل منصات التواصل الاجتماعي (Instagram و Facebook) وقنوات البحث (Google) والمصادر المباشرة (Referral و Email) مصادر رئيسية للمبيعات.  يجب تحليل كفاءة كل قناة بناءً على الإيرادات المحققة مقابل الكمية المباعة، وكذلك معدلات الإلغاء والإرجاع.\",\n    \"channel_performance\": [\n      {\n        \"channel\": \"Instagram\",\n        \"observations\": \"مصدر قوي للإيرادات والكميات، خاصة في حالات 'Delivered' (Monitor و Laptop) و 'Shipped' (Tablet) و 'Returned' (Tablet).  ولكن، يظهر معدل إرجاع مرتفع نسبيًا لـ Monitor.  يُعد من بين أعلى القنوات في كميات 'Pending' لـ Chair و Laptop.\"\n      },\n      {\n        \"channel\": \"Facebook\",\n        \"observations\": \"يُقدم إيرادات وكميات جيدة، خاصة في حالات 'Shipped' و 'Delivered'.  يُلاحظ أعلى معدل إرجاع لكميات كبيرة لمنتج Monitor، وكذلك أعلى معدل إلغاء لـ Monitor.  يُشكل نسبة إرجاع مرتفعة لـ Chair.\"\n      },\n      {\n        \"channel\": \"Google\",\n        \"observations\": \"مصدر موثوق للإيرادات، خاصة في حالات 'Delivered' و 'Shipped'.  يُلاحظ معدل إرجاع مرتفع لكميات كبيرة لمنتج Monitor، ومعدل إلغاء مرتفع لـ Tablet.  يُظهر أعلى إيرادات وكميات في حالة 'Pending' لـ Monitor.\"\n      },\n      {\n        \"channel\": \"Email\",\n        \"observations\": \"يُقدم إيرادات إجمالية جيدة، ولكنه يواجه تحديات كبيرة مع معدلات الإلغاء المرتفعة لمنتجات Monitor و Laptop و Chair و Printer.  يُسجل أعلى إيرادات وكميات في حالة 'Returned' لمنتج Phone، مما يستدعي البحث.\",\n        \"volume_insights\": \"كميات مرتفعة بشكل كبير في حالات الإلغاء لبعض المنتجات.\"\n      },\n      {\n        \"channel\": \"Referral\",\n        \"observations\": \"يُساهم بشكل كبير في الإيرادات، خاصة في حالات 'Shipped' و 'Delivered'.  يُسجل معدلات إرجاع وإلغاء مرتفعة لبعض المنتجات (Monitor, Chair, Printer).  يُلاحظ أعلى إيرادات وكميات في حالة 'Shipped' لـ Tablet.\"\n      }\n    ]\n  },\n  \"risks\": [\n    {\n      \"risk\": \"معدلات مرتفعة من الطلبات المُلغاة والمُرجعة\",\n      \"details\": \"تُظهر البيانات نسبًا مقلقة من الطلبات الملغاة والمُرجعة عبر جميع المنتجات وقنوات التسويق، مما يؤدي إلى خسارة الإيرادات وتكاليف تشغيل إضافية.  التركيز على Facebook و Email و Referral يبدو أنه يواجه أعلى معدلات إلغاء وإرجاع لبعض المنتجات.\"\n    },\n    {\n      \"risk\": \"التفاوت في أداء المنتج حسب حالة الطلب\",\n      \"details\": \"بعض المنتجات مثل 'Monitor' و 'Chair' تواجه تحديات كبيرة في حالات 'Returned' و 'Cancelled'، بينما تُظهر أداءً جيدًا في حالات 'Shipped' و 'Delivered'.  هذا التباين يستدعي فهم الأسباب الكامنة وراء هذه التقلبات.\"\n    },\n    {\n      \"risk\": \"عدم كفاءة بعض قنوات التسويق\",\n      \"details\": \"على الرغم من مساهمة قنوات مثل Instagram و Facebook و Google، إلا أن معدلات الإرجاع والإلغاء المرتفعة المرتبطة ببعض الحملات أو المنتجات عبر هذه القنوات تشير إلى الحاجة لتحسين الاستهداف أو جودة العروض.\"\n    },\n    {\n      \"risk\": \"انخفاض الإيرادات في حالات معينة\",\n      \"details\": \"سجلت بعض المنتجات، مثل Laptop من Email في حالة Shipped، إيرادات منخفضة جدًا (57.1$)، مما يستدعي التحقيق لتحديد ما إذا كان هذا خطأ في البيانات أو مشكلة حقيقية في التسعير أو العرض.\"\n    },\n    {\n      \"risk\": \"مشاكل محتملة في إدارة المخزون أو تقديم الطلبات\",\n      \"details\": \"الكميات المرتفعة في حالات 'Pending' و 'Cancelled' لبعض المنتجات (مثل Chair) قد تشير إلى مشاكل في توفر المخزون، أو أخطاء في عملية تقديم الطلب، أو مشاكل في معالجة الدفع.\"\n    }\n  ],\n  \"recommendations\": [\n    {\n      \"recommendation\": \"تحليل معمق لأسباب الإلغاء والإرجاع\",\n      \"action\": \"قم بإجراء تحقيق شامل لتحديد الأسباب الجذرية للطلبات الملغاة والمُرجعة.  قد يشمل ذلك: مراجعة جودة المنتج، تقييم عمليات الشحن والتسليم، تحليل دقة أوصاف المنتج، وتقييم تجربة العملاء.  ركز بشكل خاص على المنتجات والقنوات التي تسجل أعلى المعدلات.\"\n    },\n    {\n      \"recommendation\": \"تحسين استهداف الحملات التسويقية\",\n      \"action\": \"بناءً على تحليل أداء كل قناة، قم بتحسين الحملات التسويقية.  اختبر رسائل مختلفة، شرائح جمهور مستهدفة، وعروض ترويجية.  قم بتقييم العائد على الاستثمار (ROI) لكل قناة بشكل دقيق.\"\n    },\n    {\n      \"recommendation\": \"مراجعة وتسعير المنتجات\",\n      \"action\": \"حلل متوسط سعر البيع لكل منتج عبر القنوات المختلفة.  تأكد من أن التسعير تنافسي ومربح.  تحقق من الحالات التي سجلت إيرادات منخفضة بشكل غير عادي.\"\n    },\n    {\n      \"recommendation\": \"تحسين عمليات إدارة المخزون وسير العمل\",\n      \"action\": \"إذا كانت هناك مؤشرات على مشاكل في المخزون أو تقديم الطلبات (مثل كميات عالية في 'Pending' أو 'Cancelled')، قم بمراجعة وتحسين أنظمة إدارة المخزون وعمليات معالجة الطلبات لتقليل التأخير والأخطاء.\"\n    },\n    {\n      \"recommendation\": \"استكشاف منتجات ذات أداء إيجابي في حالات معينة\",\n      \"action\": \"ابحث عن الأسباب التي تجعل بعض المنتجات، مثل Phone عبر Email عند الإرجاع، تحقق إيرادات مرتفعة.  هل هناك فرص لتوسيع هذه الإستراتيجيات أو فهم سلوك العملاء؟\"\n    },\n    {\n      \"recommendation\": \"تطوير برامج ولاء العملاء\",\n      \"action\": \"لتقليل الإلغاءات والإرجاعات، يمكن التفكير في برامج ولاء العملاء، وخدمة عملاء استباقية، وسياسات إرجاع واضحة ومُحسّنة.\"\n    }\n  ]\n}\n```"
+        }
+      }
     ]
   },
   "connections": {
@@ -47152,17 +47071,6 @@
           {
             "node": "If4",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Gemini Chat Model1": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -47257,64 +47165,14 @@
             "index": 0
           }
         ],
-        [
-          {
-            "node": "AI Agent7",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent7": {
-      "main": [
-        [
-          {
-            "node": "If7",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "DeepSeek Chat Model1": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent7",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
-          {
-            "node": "Send Instant Smart Report2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If7": {
-      "main": [
-        [
-          {
-            "node": "Aggregate1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Aggregate1": {
       "main": [
         [
           {
-            "node": "Edit Fields1",
+            "node": "Send Instant Smart Report",
             "type": "main",
             "index": 0
           }
@@ -47384,24 +47242,8 @@
             "index": 0
           },
           {
-            "node": "AI Agent7",
-            "type": "ai_memory",
-            "index": 0
-          },
-          {
             "node": "AI Agent",
             "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
             "index": 0
           }
         ]
@@ -47435,17 +47277,39 @@
           }
         ]
       ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "e7a90b34-0cb1-4412-8448-3e69a7fdc7f1",
+  "versionId": "570f2afa-3c65-4e8e-8b8e-fe85edea0abf",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "5432097ef030478e21b25f30699d819bd160e7e78ba30b06f6c0c37d85f1cf26"
+    "instanceId": "d24290936cec55ea2c6832a7a807a4f14cff997486995bdc7024b19c8694c9e7"
   },
-  "id": "PCUgfusdeFOovCsu",
+  "id": "wbUdsxm3HkFfHWb1",
   "tags": []
 }
