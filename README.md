@@ -82,10 +82,15 @@ The system captures data via a **Webhook** and forks the logic into two parallel
 ![n8n Slow Track Workflow](Frontend/Assets/img/Slow_work_flow.png)
    *Orchestrating the transition from raw data to strategic intelligence using LLMs.*
 
-<div align="center">
-  <img src="Frontend/Assets/img/Slow_work_flow_email.png" alt="Strategic PDF Report" width="450">
-  <p><i>Executive-level reporting including SWOT analysis and future sales forecasts.</i></p>
-</div>
+<details>
+<summary><b>📧 View Sample Strategic Report Email</b></summary>
+
+> **Strategic Report:** The final delivery—a comprehensive, AI-generated PDF report attached to a secondary access email.
+
+![Slow Track Email Format](Frontend/Assets/img/Slow_work_flow_email.png)
+
+*Executive-level reporting including SWOT analysis and future sales forecasts.*
+</details>
 
 
 ---
