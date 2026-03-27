@@ -99,7 +99,53 @@ The core logic resides in **n8n**, where incoming Webhooks trigger parallel exec
 </details>
 
 ---
+---
 
+## 🎯 System Logic & User Journey
+
+The system is designed to provide a seamless transition from raw data ingestion to deep strategic intelligence, following a structured **Event-Driven** approach.
+
+### 1️⃣ Operational Workflow
+1.  **Data Ingestion**: User uploads an Excel/CSV sales file via the secure dashboard.
+2.  **Fast Track (Synchronous)**: The system validates the file and immediately pushes KPIs and charts to the UI.
+3.  **Initial Alert**: A "Quick Glance" confirmation email is dispatched via SMTP.
+4.  **Slow Track (Asynchronous)**: The AI Agent initiates a deep-dive analysis in the background.
+5.  **Strategic Delivery**: A final, comprehensive AI-generated report is sent directly to the user's inbox.
+
+---
+
+### 2️⃣ Architecture & Logic Diagrams
+> Visualizing the interaction between the User, n8n Orchestrator, AI Agent, and Mail Servers.
+
+#### **A. Use Case Diagram**
+*High-level view of system boundaries and actor interactions.*
+<div align="center">
+  <img src="Frontend/Assets/img/Use_case.png" width="90%" alt="Use Case Diagram">
+</div>
+
+#### **B. Sequence Diagram (Execution Flow)**
+*Detailed execution timeline showing the Synchronous vs. Asynchronous processing paths.*
+<div align="center">
+  <img src="Frontend/Assets/img/Full_use_case.png" width="90%" alt="Full Sequence Diagram">
+</div>
+
+---
+
+### 💡 Technical Deep-Dive (For Examiners)
+
+* **Synchronous Response (Fast Track):** Handles immediate `POST Requests` for a real-time UI experience, ensuring the user gets instant feedback on their data.
+* **Asynchronous Processing (Slow Track):** Offloads heavy AI computations and trend analysis to background workers in **n8n**, preventing browser timeouts and ensuring system stability.
+* **Actor System:** * **User:** The Data Provider.
+    * **n8n Engine:** The Core Orchestrator.
+    * **AI Agent:** The Strategic Analyst (GPT-4o).
+    * **SMTP Server:** The Communication Gateway.
+
+> [!NOTE]
+> While the diagrams mention PDF generation, the current production version delivers the **Strategic Report** as a rich, dynamic **Email** for faster accessibility and mobile-friendly viewing.
+
+---
+
+---
 ## 🗂️ Project Structure
 
 ```bash
@@ -122,57 +168,6 @@ Smart-BI-Project/
 * **Excel (XLSX)** – Input data format
 * **AI / LLMs** – Intelligent data interpretation
 * **SMTP** – Automated email delivery
-
----
-
-## 📊 Sample Data
-
-The `Samples/` folder contains example Excel files for testing:
-
-* `Customer-Purchase-History.xlsx`
-* `Online-Store-Orders.xlsx`
-
-You can use these files to test the system without creating your own dataset.
-
----
-
-## ⚙️ Running the Project (Localhost)
-
-### 1️⃣ Frontend
-
-* Open `Frontend/index.html` in your browser
-* Upload an Excel file and enter your email
-
-### 2️⃣ n8n
-
-* Run n8n locally (Docker or CLI)
-* Import the workflow from:
-
-  ```
-  n8n-Workflows/The end of Fast Track(n8n).json
-  ```
-* Activate the workflow
-
----
-
-## 🎓 Academic Value
-
-This project demonstrates real-world concepts such as:
-
-* Event-Driven Architecture
-* Asynchronous Processing
-* Automation Systems
-* AI Integration in Business Intelligence
-* Low-Code / No-Code Development
-
----
-
-## 🎯 Use Case Scenario
-
-1. User uploads Excel sales file
-2. Instant insights appear on the website
-3. Quick report is sent via email
-4. Final AI-powered report arrives later
 
 ---
 
