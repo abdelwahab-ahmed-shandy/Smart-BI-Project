@@ -130,22 +130,6 @@ The system is designed to provide a seamless transition from raw data ingestion 
 </div>
 
 ---
-
-### 💡 Technical Deep-Dive (For Examiners)
-
-* **Synchronous Response (Fast Track):** Handles immediate `POST Requests` for a real-time UI experience, ensuring the user gets instant feedback on their data.
-* **Asynchronous Processing (Slow Track):** Offloads heavy AI computations and trend analysis to background workers in **n8n**, preventing browser timeouts and ensuring system stability.
-* **Actor System:** * **User:** The Data Provider.
-    * **n8n Engine:** The Core Orchestrator.
-    * **AI Agent:** The Strategic Analyst (GPT-4o).
-    * **SMTP Server:** The Communication Gateway.
-
-> [!NOTE]
-> While the diagrams mention PDF generation, the current production version delivers the **Strategic Report** as a rich, dynamic **Email** for faster accessibility and mobile-friendly viewing.
-
----
-
----
 ## 🗂️ Project Structure
 
 ```bash
@@ -171,12 +155,6 @@ Smart-BI-Project/
 
 ---
 
-## 🏁 Core Idea
-
-> **Transform raw Excel sales files into intelligent, automated, and actionable business reports using n8n and AI.**
-
----
-
 ## 👥 Project Team
 
 - **Hamed Tarek**  
@@ -191,13 +169,9 @@ _Graduation Project – MCI Academy 2026_
 
 ---
 
-## 📌 Future Enhancements
+## 🏁 Core Idea
 
-* Cloud deployment
-* Interactive dashboards
-* Role-based access
-* Multi-file analysis
-* Real-time data sources
+> **Transform raw Excel sales files into intelligent, automated, and actionable business reports using n8n and AI.**
 
 ---
 
