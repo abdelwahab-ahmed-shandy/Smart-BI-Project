@@ -111,7 +111,7 @@ Smart-BI-Project/
 ├── Presentation/       # Project pitch decks and academic documentation
 ├── Tasks/              # Development roadmap and sprint management
 └── README.md           # Documentation
-
+```
 ---
 
 ## 🧩 Technologies Used
