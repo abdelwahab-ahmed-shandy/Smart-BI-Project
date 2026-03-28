@@ -128,3 +128,22 @@ body {
         height: 250px; /* تقليل ارتفاع الرسم البياني ليناسب الشاشة الطولية */
     }
 }
+
+/* تنسيق قسم إرشادات الأعمدة */
+#columnGuidance .badge {
+    font-weight: 500;
+    padding: 6px 10px;
+}
+
+.btn-link {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+}
+
+.btn-link:hover {
+    color: var(--primary-color);
+}
+
+.stat-card p {
+    transition: all 0.3s ease-in-out;
+}
