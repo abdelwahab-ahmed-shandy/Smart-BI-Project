@@ -57,12 +57,22 @@ The core logic resides in **n8n**, where incoming Webhooks trigger parallel exec
 ## 🖥️ Project Showcase
 
 ### 1️⃣ Intelligent Dashboard
+> **Light Mode**
+> **Operation Workflow:** From an empty state to a data-rich environment.
+
+| Initial State | Processed Results |
+| :---: | :---: |
+| ![Initial](Frontend/Assets/img/Lightdashboard_preview_placeholder.png) | ![Results](Frontend/Assets/img/afterdashboard_preview_placeholderLight.png) |
+| *Secure upload zone & RTL support* | *Real-time KPIs & Sales Trend Analysis* |
+
+> **Dark Mode**
 > **Operation Workflow:** From an empty state to a data-rich environment.
 
 | Initial State | Processed Results |
 | :---: | :---: |
 | ![Initial](Frontend/Assets/img/dashboard_preview_placeholder.png) | ![Results](Frontend/Assets/img/afterdashboard_preview_placeholder.png) |
 | *Secure upload zone & RTL support* | *Real-time KPIs & Sales Trend Analysis* |
+
 
 ---
 
