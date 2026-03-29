@@ -1,4 +1,35 @@
 // ============================================
+// Simple Auth System using Local Storage
+// ============================================
+
+// التحقق من تسجيل الدخول
+function checkAuth() {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        window.location.href = "auth.html";
+        return false;
+    }
+    return JSON.parse(currentUser);
+}
+
+// عرض معلومات المستخدم
+function displayUserInfo() {
+    const currentUser = checkAuth();
+    if (currentUser) {
+        const userEmailSpan = document.getElementById('userEmail');
+        if (userEmailSpan) {
+            userEmailSpan.innerText = currentUser.email;
+        }
+    }
+}
+
+// تسجيل الخروج
+function logout() {
+    localStorage.removeItem('currentUser');
+    window.location.href = "auth.html";
+}
+
+// ============================================
 // Smart BI - Main JavaScript File
 // ============================================
 
@@ -460,10 +491,27 @@ if (themeToggle) {
 }
 
 // ============================================
-// DOM Ready Events
+// DOM Ready Events (with Auth Check)
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    // التحقق من تسجيل الدخول أولاً
+    const user = checkAuth();
+    if (!user) return;
+    
+    // عرض معلومات المستخدم
+    displayUserInfo();
+    
+    // إعداد زر تسجيل الخروج
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.onclick = (e) => {
+            e.preventDefault();
+            logout();
+        };
+    }
+    
+    // باقي الأحداث
     const emailInput = document.getElementById('email');
     if (emailInput) {
         emailInput.addEventListener('focus', () => {

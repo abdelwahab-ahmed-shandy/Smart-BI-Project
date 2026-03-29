@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دخول النظام | Smart BI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="Assets/css/style.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1055/1055644.png" type="image/png">
+</head>
+<body class="auth-page">
+
+<!-- زر تبديل الوضع -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1000;">
+    <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="bi bi-moon-stars-fill"></i>
+    </button>
+</div>
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100 py-5">
+    <div class="auth-card">
+        <div class="text-center mb-4">
+            <div class="auth-logo-wrapper">
+                <img src="Assets/img/e6ecb39d-3feb-4943-bced-b1204095b566.jpeg" alt="MCI Logo" height="70">
+            </div>
+            <h3 class="fw-bold mt-3 auth-title" id="authTitle">تسجيل الدخول</h3>
+            <p class="text-muted small" id="authSubtitle">مرحباً بك في نظام Smart BI</p>
+        </div>
+
+        <form id="authForm">
+            <div class="mb-3 text-start">
+                <label class="form-label fw-semibold small">
+                    <i class="bi bi-envelope-fill text-primary me-1"></i>
+                    البريد الإلكتروني
+                </label>
+                <input type="email" id="authEmail" class="form-control form-control-lg" required placeholder="name@example.com">
+            </div>
+            <div class="mb-4 text-start">
+                <label class="form-label fw-semibold small">
+                    <i class="bi bi-lock-fill text-primary me-1"></i>
+                    كلمة المرور
+                </label>
+                <input type="password" id="authPassword" class="form-control form-control-lg" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" id="authBtn">
+                <span id="btnText">دخول</span>
+                <div class="spinner-border spinner-border-sm ms-2" id="loadingSpinner" style="display: none;" role="status"></div>
+            </button>
+        </form>
+
+        <div class="text-center">
+            <a href="#" id="toggleAuth" class="text-decoration-none toggle-auth-link">
+                <i class="bi bi-person-plus-fill me-1"></i>
+                <span>ليس لديك حساب؟ إنشاء حساب جديد</span>
+            </a>
+        </div>
+        
+        <!-- مستخدم تجريبي -->
+        <div class="mt-4 pt-3 text-center border-top">
+            <p class="text-muted small mb-2">👨‍💻 حساب تجريبي للاختبار:</p>
+            <div class="d-flex justify-content-center gap-3">
+                <button type="button" class="btn btn-outline-primary btn-sm" id="demoUserBtn">
+                    <i class="bi bi-person-circle me-1"></i>demo@smartbi.com / 123456
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle?.querySelector('i');
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (themeIcon) {
+            themeIcon.classList.remove('bi-moon-stars-fill');
+            themeIcon.classList.add('bi-sun-fill');
+        }
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        if (themeIcon) {
+            themeIcon.classList.remove('bi-sun-fill');
+            themeIcon.classList.add('bi-moon-stars-fill');
+        }
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            if (themeIcon) {
+                if (newTheme === 'dark') {
+                    themeIcon.classList.remove('bi-moon-stars-fill');
+                    themeIcon.classList.add('bi-sun-fill');
+                } else {
+                    themeIcon.classList.remove('bi-sun-fill');
+                    themeIcon.classList.add('bi-moon-stars-fill');
+                }
+            }
+        });
+    }
+
+    // ============================================
+    // Simple Auth System using Local Storage
+    // ============================================
+    
+    const authForm = document.getElementById('authForm');
+    const authTitle = document.getElementById('authTitle');
+    const authSubtitle = document.getElementById('authSubtitle');
+    const authBtn = document.getElementById('authBtn');
+    const btnText = document.getElementById('btnText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const toggleAuth = document.getElementById('toggleAuth');
+    let isLoginMode = true;
+    
+    // المستخدم التجريبي
+    const DEMO_USER = {
+        email: "demo@smartbi.com",
+        password: "123456",
+        name: "مستخدم تجريبي"
+    };
+    
+    // تسجيل الدخول التلقائي للمستخدم التجريبي
+    const demoUserBtn = document.getElementById('demoUserBtn');
+    if (demoUserBtn) {
+        demoUserBtn.onclick = () => {
+            document.getElementById('authEmail').value = DEMO_USER.email;
+            document.getElementById('authPassword').value = DEMO_USER.password;
+            // تنفيذ تسجيل الدخول تلقائياً
+            setTimeout(() => {
+                authForm.dispatchEvent(new Event('submit'));
+            }, 100);
+        };
+    }
+    
+    // تهيئة localStorage للمستخدمين
+    function initUsers() {
+        if (!localStorage.getItem('users')) {
+            const users = [DEMO_USER];
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+    }
+    
+    initUsers();
+    
+    // دالة تسجيل الدخول
+    function login(email, password) {
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const user = users.find(u => u.email === email && u.password === password);
+        
+        if (user) {
+            localStorage.setItem('currentUser', JSON.stringify({
+                email: user.email,
+                name: user.name || user.email.split('@')[0],
+                loginTime: new Date().toISOString()
+            }));
+            return { success: true };
+        }
+        return { success: false, error: "البريد الإلكتروني أو كلمة المرور غير صحيحة" };
+    }
+    
+    // دالة إنشاء حساب جديد
+    function register(email, password) {
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        
+        // التحقق من وجود المستخدم
+        if (users.find(u => u.email === email)) {
+            return { success: false, error: "البريد الإلكتروني مستخدم بالفعل" };
+        }
+        
+        // التحقق من قوة كلمة المرور
+        if (password.length < 6) {
+            return { success: false, error: "كلمة المرور يجب أن تكون 6 أحرف على الأقل" };
+        }
+        
+        // إضافة المستخدم الجديد
+        const newUser = {
+            email: email,
+            password: password,
+            name: email.split('@')[0],
+            createdAt: new Date().toISOString()
+        };
+        
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        
+        // تسجيل الدخول تلقائياً
+        localStorage.setItem('currentUser', JSON.stringify({
+            email: newUser.email,
+            name: newUser.name,
+            loginTime: new Date().toISOString()
+        }));
+        
+        return { success: true };
+    }
+    
+    // تبديل وضع تسجيل الدخول / إنشاء حساب
+    toggleAuth.onclick = (e) => {
+        e.preventDefault();
+        isLoginMode = !isLoginMode;
+        
+        if (isLoginMode) {
+            authTitle.innerText = "تسجيل الدخول";
+            authSubtitle.innerText = "مرحباً بعودتك! سجل دخولك للمتابعة";
+            authBtn.innerHTML = '<span id="btnText">دخول</span><div class="spinner-border spinner-border-sm ms-2" id="loadingSpinner" style="display: none;"></div>';
+            toggleAuth.innerHTML = '<i class="bi bi-person-plus-fill me-1"></i><span>ليس لديك حساب؟ إنشاء حساب جديد</span>';
+        } else {
+            authTitle.innerText = "إنشاء حساب جديد";
+            authSubtitle.innerText = "انضم إلينا وابدأ تحليل بياناتك";
+            authBtn.innerHTML = '<span id="btnText">تسجيل</span><div class="spinner-border spinner-border-sm ms-2" id="loadingSpinner" style="display: none;"></div>';
+            toggleAuth.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i><span>لديك حساب بالفعل؟ سجل دخولك</span>';
+        }
+    };
+    
+    // معالجة إرسال النموذج
+    authForm.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('authEmail').value.trim();
+        const password = document.getElementById('authPassword').value;
+        const submitBtn = document.getElementById('authBtn');
+        const spinner = document.getElementById('loadingSpinner');
+        const btnTextSpan = document.getElementById('btnText');
+        
+        if (!email || !password) {
+            alert("⚠️ الرجاء إدخال البريد الإلكتروني وكلمة المرور");
+            return;
+        }
+        
+        submitBtn.disabled = true;
+        spinner.style.display = 'inline-block';
+        btnTextSpan.innerText = isLoginMode ? "جاري الدخول..." : "جاري التسجيل...";
+        
+        // محاكاة تأخير الشبكة
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        let result;
+        if (isLoginMode) {
+            result = login(email, password);
+        } else {
+            result = register(email, password);
+        }
+        
+        if (result.success) {
+            // تحويل فوري بدون أي رسائل
+            window.location.href = "index.html";
+        } else {
+            alert("⚠️ " + result.error);
+            submitBtn.disabled = false;
+            spinner.style.display = 'none';
+            btnTextSpan.innerText = isLoginMode ? "دخول" : "تسجيل";
+        }
+    };
+</script>
+</body>
+</html>

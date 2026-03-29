@@ -25,6 +25,10 @@
             </div>
         </a>
         <div class="ms-auto d-flex align-items-center gap-3">
+            <span class="user-email small d-none d-md-inline" id="userEmail"></span>
+            <button class="logout-btn" id="logoutBtn" aria-label="Logout">
+                <i class="bi bi-box-arrow-right"></i>
+            </button>
             <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">
                 <i class="bi bi-moon-stars-fill"></i>
             </button>
@@ -78,82 +82,82 @@
                             <input type="file" id="fileInput" hidden accept=".xlsx, .xls, .csv">
                         </div>
 
-<div class="mt-2 mb-4 text-start">
-    <a class="text-decoration-none small text-primary fw-semibold" data-bs-toggle="collapse" href="#columnHelp" role="button">
-        <i class="bi bi-info-circle-fill me-1"></i> ما هي أسماء الأعمدة المطلوبة؟
-    </a>
-    <div class="collapse mt-3" id="columnHelp">
-        <div class="card card-body bg-soft-blue border-0 p-4 rounded-3">
-            <p class="mb-3 fw-semibold text-primary mb-3">📊 يفضل استخدام هذه العناوين لضمان دقة التحليل:</p>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="guidance-item">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <i class="bi bi-tag-fill text-info"></i>
-                            <span class="fw-semibold small text-info">معرفات الطلبات</span>
+                        <div class="mt-2 mb-4 text-start">
+                            <a class="text-decoration-none small text-primary fw-semibold" data-bs-toggle="collapse" href="#columnHelp" role="button">
+                                <i class="bi bi-info-circle-fill me-1"></i> ما هي أسماء الأعمدة المطلوبة؟
+                            </a>
+                            <div class="collapse mt-3" id="columnHelp">
+                                <div class="card card-body bg-soft-blue border-0 p-4 rounded-3">
+                                    <p class="mb-3 fw-semibold text-primary mb-3">📊 يفضل استخدام هذه العناوين لضمان دقة التحليل:</p>
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <div class="guidance-item">
+                                                <div class="d-flex align-items-center gap-2 mb-2">
+                                                    <i class="bi bi-tag-fill text-info"></i>
+                                                    <span class="fw-semibold small text-info">معرفات الطلبات</span>
+                                                </div>
+                                                <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">OrderID / CustID</code>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="guidance-item">
+                                                <div class="d-flex align-items-center gap-2 mb-2">
+                                                    <i class="bi bi-box-seam-fill text-success"></i>
+                                                    <span class="fw-semibold small text-success">المنتجات</span>
+                                                </div>
+                                                <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">Product / Category</code>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="guidance-item">
+                                                <div class="d-flex align-items-center gap-2 mb-2">
+                                                    <i class="bi bi-calendar-date-fill text-warning"></i>
+                                                    <span class="fw-semibold small text-warning">التواريخ</span>
+                                                </div>
+                                                <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">Date / PurchaseDate</code>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="guidance-item">
+                                                <div class="d-flex align-items-center gap-2 mb-2">
+                                                    <i class="bi bi-calculator-fill text-danger"></i>
+                                                    <span class="fw-semibold small text-danger">الكميات والأسعار</span>
+                                                </div>
+                                                <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">Qty / UnitPrice</code>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="guidance-item">
+                                                <div class="d-flex align-items-center gap-2 mb-2">
+                                                    <i class="bi bi-clock-fill text-secondary"></i>
+                                                    <span class="fw-semibold small text-secondary">الوقت (اختياري)</span>
+                                                </div>
+                                                <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">Time / Hour</code>
+                                                <span class="badge bg-warning text-dark mt-1 small">⭐ اختياري</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="guidance-item">
+                                                <div class="d-flex align-items-center gap-2 mb-2">
+                                                    <i class="bi bi-currency-dollar-fill text-primary"></i>
+                                                    <span class="fw-semibold small text-primary">الإجمالي والحالة</span>
+                                                </div>
+                                                <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">TotalPrice / Status</code>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="alert alert-info border-0 bg-soft-info p-3 rounded-3">
+                                        <div class="d-flex align-items-start gap-2">
+                                            <i class="bi bi-lightbulb-fill text-warning fs-5 mt-1"></i>
+                                            <p class="mb-0 small fw-semibold" style="color: #0c5460;">
+                                                💡 ملاحظة: يمكنك دمج الوقت مع التاريخ أو فصلهما.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">OrderID / CustID</code>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="guidance-item">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <i class="bi bi-box-seam-fill text-success"></i>
-                            <span class="fw-semibold small text-success">المنتجات</span>
-                        </div>
-                        <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">Product / Category</code>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="guidance-item">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <i class="bi bi-calendar-date-fill text-warning"></i>
-                            <span class="fw-semibold small text-warning">التواريخ</span>
-                        </div>
-                        <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">Date / PurchaseDate</code>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="guidance-item">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <i class="bi bi-calculator-fill text-danger"></i>
-                            <span class="fw-semibold small text-danger">الكميات والأسعار</span>
-                        </div>
-                        <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">Qty / UnitPrice</code>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="guidance-item">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <i class="bi bi-clock-fill text-secondary"></i>
-                            <span class="fw-semibold small text-secondary">الوقت (اختياري)</span>
-                        </div>
-                        <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">Time / Hour</code>
-                        <span class="badge bg-warning text-dark mt-1 small">⭐ اختياري</span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="guidance-item">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <i class="bi bi-currency-dollar-fill text-primary"></i>
-                            <span class="fw-semibold small text-primary">الإجمالي والحالة</span>
-                        </div>
-                        <code class="d-block p-2 rounded-2 bg-light text-dark" style="font-size: 0.85rem;">TotalPrice / Status</code>
-                    </div>
-                </div>
-            </div>
-            <hr class="my-4">
-            <div class="alert alert-info border-0 bg-soft-info p-3 rounded-3">
-                <div class="d-flex align-items-start gap-2">
-                    <i class="bi bi-lightbulb-fill text-warning fs-5 mt-1"></i>
-                    <p class="mb-0 small fw-semibold" style="color: #0c5460;">
-                         ملاحظة: يمكنك دمج الوقت مع التاريخ أو فصلهما.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
                         
                         <div id="fileError" class="error-feedback mb-3"></div>
 
@@ -265,6 +269,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="Assets/Js/main.js"></script>    
+<script type="module" src="Assets/Js/main.js"></script>    
 </body>
 </html>
