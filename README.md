@@ -1,103 +1,157 @@
-# Smart Business Intelligence Reporting System (Smart BI Project)
+# 📊 Smart Business Intelligence Reporting System (Smart BI Project)
 
 <p align="center">
-  <img src="Frontend/Assets/img/e6ecb39d-3feb-4943-bced-b1204095b566.jpeg" width="150" alt="MCI Logo">
+  <img src="Frontend/Assets/img/e6ecb39d-3feb-4943-bced-b1204095b566.jpeg" width="120" alt="MCI Logo">
 </p>
 
 <p align="center">
   <strong>Graduation Project – MCI Academy 2026</strong><br>
-  Automated, AI-powered Business Intelligence reporting system using <b>n8n</b> and <b>Excel</b>.
+  An Automated, AI-powered Business Intelligence pipeline using <b>n8n</b>, <b>LLMs</b>, and <b>Excel</b>.
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Engine-n8n-FF6C37?style=for-the-badge&logo=n8n" alt="n8n">
   <img src="https://img.shields.io/badge/Frontend-Bootstrap_5-7952B3?style=for-the-badge&logo=bootstrap" alt="Bootstrap">
   <img src="https://img.shields.io/badge/AI-Deep_Analysis-blue?style=for-the-badge&logo=openai" alt="AI">
-  <img src="https://img.shields.io/badge/Status-Fast_Track_Complete-success?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/Architecture-Event--Driven-success?style=for-the-badge" alt="Status">
 </p>
 
 ---
 
 ## 🧠 Project Overview
 
-The **Smart Business Intelligence Reporting System** is an automated pipeline that transforms raw **Excel sales data** into **actionable insights**. It leverages an **event-driven, asynchronous architecture** to simulate the role of a **Senior Data Analyst**, processing data through two distinct paths:
+The **Smart BI Reporting System** is an automated ecosystem designed to bridge the gap between raw data and executive decision-making. It transforms standard **Excel sales data** into high-level strategic insights through an **event-driven architecture**, simulating a professional data analyst's workflow.
 
-* ⚡ **Fast Track**: Delivers instant KPIs and dashboard updates.
-* 🧠 **Slow Track**: Conducts deep AI-driven statistical analysis and generates professional PDF reports.
+The system features a dual-path processing engine:
+* ⚡ **Fast Track**: Instant KPI extraction and real-time dashboard visualization.
+* 🧠 **Slow Track**: Comprehensive AI-driven strategic analysis delivered directly to the executive's inbox.
 
 ---
 
 ## 🚀 Key Features
 
-* **Flexible Schema**: Upload any standard Excel sales file.
-* **Real-time Dashboard**: Instant visual feedback on sales trends.
-* **Security First**: Backend MIME-type validation to ensure data integrity.
-* **Automated Outreach**: Immediate email summaries sent via SMTP.
-* **No-Backend Architecture**: Powered entirely by **n8n** as a logic engine.
+* **Agnostic Data Ingestion**: Upload any standard Excel sales file; the system adapts to the schema.
+* **Dynamic Dashboard**: Real-time visual feedback using Chart.js/Bootstrap.
+* **Security Gate**: Backend MIME-type validation to prevent malicious file uploads.
+* **AI Strategic Reporting**: Full business analysis (SWOT, Trends, Forecasts) generated via LLMs.
+* **Direct Outreach**: Automated multi-stage email delivery via SMTP.
 
 ---
 
 ## 🏗️ System Architecture
 
-### 🔁 Event-Driven Workflow
-The system captures data via a **Webhook** and forks the logic into two parallel streams:
+### 🔁 Workflow Orchestration
+The core logic resides in **n8n**, where incoming Webhooks trigger parallel execution streams:
 
-#### ⚡ Fast Track (Instant Response)
-* **Data Validation**: Checks for file content and correct `spreadsheet` MIME type.
-* **KPI Engine**: Calculates Total Sales, Order Volume, and Top 5 Products.
-* **Instant Feedback**: Returns JSON data to the Frontend and sends a summary email.
+#### 1. Fast Track (Latency: < 2s)
+* **Validation**: Strict MIME-type checking for data integrity.
+* **Aggregation**: Real-time calculation of Total Revenue, Order Volume, and Top Products.
+* **Delivery**: Updates the frontend via JSON and sends a "Quick Glance" email.
 
-#### 🧠 Slow Track (Deep Analysis - In Progress)
-* **AI Analysis**: Sends aggregated data to an LLM (e.g., GPT-4o) for SWOT and trend detection.
-* **PDF Generation**: Crafts a professional report containing deep insights.
+#### 2. Slow Track (Executive Intelligence)
+* **Contextual Analysis**: Data is batch-processed and sent to an AI Agent (GPT-4o/Claude) for qualitative insights.
+* **Strategic Email Delivery**: Instead of static files, the AI crafts a professional, structured email report containing SWOT analysis and actionable business recommendations.
 
 ---
 
 ## 🖥️ Project Showcase
 
-### 1️⃣ User Interface (Frontend)
-> **Before Operation:** The initial state of the dashboard, featuring the secure upload zone and email input field.
-![Initial Dashboard](Frontend/Assets/img/dashboard_preview_placeholder.png) 
-   *Clean, RTL-supported interface designed for seamless user interaction.*
+### 1️⃣ Intelligent Dashboard
+> **Light Mode**
+> **Operation Workflow:** From an empty state to a data-rich environment.
 
-> **After Startup:** Real-time data visualization showing the results of processing 2,000 transactions and over $2.2M in revenue.
-![Dashboard with Results](Frontend/Assets/img/afterdashboard_preview_placeholder.png) 
-   *Dynamic updates of KPIs, the Top 5 products list, and the annual sales trend chart.*
+| Initial State | Processed Results |
+| :---: | :---: |
+| ![Initial](Frontend/Assets/img/Lightdashboard_preview_placeholder.png) | ![Results](Frontend/Assets/img/afterdashboard_preview_placeholderLight.png) |
+| *Secure upload zone & RTL support* | *Real-time KPIs & Sales Trend Analysis* |
 
----
+> **Dark Mode**
+> **Operation Workflow:** From an empty state to a data-rich environment.
 
-### 2️⃣ Fast Track (Instant Analytics)
-> **Automation Logic:** The primary n8n workflow that handles data ingestion, Excel parsing, and the security validation gate.
-![n8n Fast Track Workflow](Frontend/Assets/img/workflow_preview_placeholder.png)
-   *Visualizing the concurrent processing and the MIME-type verification logic.*
+| Initial State | Processed Results |
+| :---: | :---: |
+| ![Initial](Frontend/Assets/img/dashboard_preview_placeholder.png) | ![Results](Frontend/Assets/img/afterdashboard_preview_placeholder.png) |
+| *Secure upload zone & RTL support* | *Real-time KPIs & Sales Trend Analysis* |
 
-> **Initial Report Email:** The first automated touchpoint—a smart summary sent to the user's inbox within seconds.
-![Fast Track Email Format](Frontend/Assets/img/Fast_Email.jpg)
-   *Professional HTML template featuring key metrics and immediate business insights.*
 
 ---
 
-### 3️⃣ Slow Track (Deep AI Analysis)
-> **Advanced AI Logic:** The complex workflow branch where an AI Agent performs deep statistical analysis and trend detection.
-![n8n Slow Track Workflow](Frontend/Assets/img/Slow_work_flow.png)
-   *Orchestrating the transition from raw data to strategic intelligence using LLMs.*
+### 2️⃣ Fast Track Logic & Outreach
+> **The Automation Backbone:** Visualizing the n8n logic and the immediate user feedback.
 
-> **Strategic PDF Report:** The final delivery—a comprehensive, AI-generated PDF report attached to a secondary access email.
-![Slow Track Email Format](Frontend/Assets/img/Slow_work_flow_email.png)
-   *Executive-level reporting including SWOT analysis and future sales forecasts.*
+<div align="center">
+  <img src="Frontend/Assets/img/workflow_preview_placeholder.png" width="80%" alt="n8n Logic">
+  <p><i>n8n workflow handling ingestion and security validation.</i></p>
+</div>
+
+> **Instant Insight Email:**
+<div align="center">
+  <img src="Frontend/Assets/img/Fast_Email.jpg" width="400" alt="Fast Track Email">
+  <p><i>Automated HTML summary sent within seconds of upload.</i></p>
+</div>
 
 ---
 
+### 3️⃣ Slow Track (Strategic AI Analysis)
+> **Advanced Intelligence:** The transition from raw numbers to executive-level strategy delivered via email.
+
+<div align="center">
+  <img src="Frontend/Assets/img/Slow_work_flow.png" width="80%" alt="Slow Track Logic">
+</div>
+
+<details>
+<summary><b>📧 Click to View Sample Strategic AI Email Report (Detailed)</b></summary>
+<br>
+<div align="center">
+  <img src="Frontend/Assets/img/Slow_work_flow_email.png" width="450" alt="Strategic Report Email">
+  <p><i>The final AI-generated strategic report, sent as a high-level executive email.</i></p>
+</div>
+</details>
+
+---
+---
+
+## 🎯 System Logic & User Journey
+
+The system is designed to provide a seamless transition from raw data ingestion to deep strategic intelligence, following a structured **Event-Driven** approach.
+
+### 1️⃣ Operational Workflow
+1.  **Data Ingestion**: User uploads an Excel/CSV sales file via the secure dashboard.
+2.  **Fast Track (Synchronous)**: The system validates the file and immediately pushes KPIs and charts to the UI.
+3.  **Initial Alert**: A "Quick Glance" confirmation email is dispatched via SMTP.
+4.  **Slow Track (Asynchronous)**: The AI Agent initiates a deep-dive analysis in the background.
+5.  **Strategic Delivery**: A final, comprehensive AI-generated report is sent directly to the user's inbox.
+
+---
+
+### 2️⃣ Architecture & Logic Diagrams
+> Visualizing the interaction between the User, n8n Orchestrator, AI Agent, and Mail Servers.
+
+#### **A. Use Case Diagram**
+*High-level view of system boundaries and actor interactions.*
+<div align="center">
+  <img src="Frontend/Assets/img/Use_case.png" width="90%" alt="Use Case Diagram">
+</div>
+
+#### **B. Sequence Diagram (Execution Flow)**
+*Detailed execution timeline showing the Synchronous vs. Asynchronous processing paths.*
+<div align="center">
+  <img src="Frontend/Assets/img/Full_use_case.png" width="90%" alt="Full Sequence Diagram">
+</div>
+
+---
 ## 🗂️ Project Structure
 
 ```bash
 Smart-BI-Project/
-├── Frontend/                 # UI Components (HTML, CSS, JS)
-├── n8n-Workflows/      # Exported .json workflow files
-├── Samples/                   # Test datasets for immediate evaluation
-└── README.md                  # Project documentation
+├── Frontend/           # UI Components (HTML, CSS, Vanilla JS)
+├── n8n-Workflows/      # Production-ready .json workflow exports
+├── Samples/            # Standardized Excel datasets for testing
+├── Manual Analysis/    # Comparison benchmarks and manual data audits
+├── Presentation/       # Project pitch decks and academic documentation
+├── Tasks/              # Development roadmap and sprint management
+└── README.md           # Documentation
 ```
-
 ---
 
 ## 🧩 Technologies Used
@@ -108,63 +162,6 @@ Smart-BI-Project/
 * **Excel (XLSX)** – Input data format
 * **AI / LLMs** – Intelligent data interpretation
 * **SMTP** – Automated email delivery
-
----
-
-## 📊 Sample Data
-
-The `Samples/` folder contains example Excel files for testing:
-
-* `Customer-Purchase-History.xlsx`
-* `Online-Store-Orders.xlsx`
-
-You can use these files to test the system without creating your own dataset.
-
----
-
-## ⚙️ Running the Project (Localhost)
-
-### 1️⃣ Frontend
-
-* Open `Frontend/index.html` in your browser
-* Upload an Excel file and enter your email
-
-### 2️⃣ n8n
-
-* Run n8n locally (Docker or CLI)
-* Import the workflow from:
-
-  ```
-  n8n-Workflows/The end of Fast Track(n8n).json
-  ```
-* Activate the workflow
-
----
-
-## 🎓 Academic Value
-
-This project demonstrates real-world concepts such as:
-
-* Event-Driven Architecture
-* Asynchronous Processing
-* Automation Systems
-* AI Integration in Business Intelligence
-* Low-Code / No-Code Development
-
----
-
-## 🎯 Use Case Scenario
-
-1. User uploads Excel sales file
-2. Instant insights appear on the website
-3. Quick report is sent via email
-4. Final AI-powered PDF report arrives later
-
----
-
-## 🏁 Core Idea
-
-> **Transform raw Excel sales files into intelligent, automated, and actionable business reports using n8n and AI.**
 
 ---
 
@@ -182,13 +179,9 @@ _Graduation Project – MCI Academy 2026_
 
 ---
 
-## 📌 Future Enhancements
+## 🏁 Core Idea
 
-* Cloud deployment
-* Interactive dashboards
-* Role-based access
-* Multi-file analysis
-* Real-time data sources
+> **Transform raw Excel sales files into intelligent, automated, and actionable business reports using n8n and AI.**
 
 ---
 
