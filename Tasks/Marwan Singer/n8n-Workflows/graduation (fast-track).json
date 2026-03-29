@@ -1,5 +1,5 @@
 {
-  "name": "graduation",
+  "name": "graduation (fast-track)",
   "nodes": [
     {
       "parameters": {
@@ -12,10 +12,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        1296,
-        464
+        928,
+        448
       ],
-      "id": "b3e87d04-2594-4fc9-91e1-0a78c49bbb23",
+      "id": "045649e1-ec8d-424e-981c-62055c6e4794",
       "name": "API Response Handler"
     },
     {
@@ -23,113 +23,29 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/12huXFErkPziq5XhaxSFDuNB4-bwSzNyE3dS4fIxNInU/edit?gid=1186646075#gid=1186646075",
+          "value": "",
           "mode": "url"
         },
         "sheetName": {
           "__rl": true,
-          "value": 1186646075,
+          "value": "",
           "mode": "list",
-          "cachedResultName": "الورقة1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12huXFErkPziq5XhaxSFDuNB4-bwSzNyE3dS4fIxNInU/edit#gid=1186646075"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "userEmail": "={{ $('Calculate Quick Metrics').item.json.userEmail }}",
-            "totalSales": "={{ $('Calculate Quick Metrics').item.json.totalSales }}",
-            "ordersCount": "={{ $('Calculate Quick Metrics').item.json.ordersCount }}",
-            "topProduct": "={{ $('Calculate Quick Metrics').item.json.topProduct }}",
-            "insight": "={{ $('Calculate Quick Metrics').item.json.insight }}",
-            "top5Product": "={{ $('Calculate Quick Metrics').item.json.top5Products }}"
-          },
-          "matchingColumns": [
-            "userEmail"
-          ],
-          "schema": [
-            {
-              "id": "userEmail",
-              "displayName": "userEmail",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "totalSales",
-              "displayName": "totalSales",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "ordersCount",
-              "displayName": "ordersCount",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "topProduct",
-              "displayName": "topProduct",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "insight",
-              "displayName": "insight",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "top5Product",
-              "displayName": "top5Product",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
+          "cachedResultName": "",
+          "cachedResultUrl": ""
+        }
       },
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        2208,
-        144
+        1568,
+        160
       ],
-      "id": "18e184eb-7ed1-410e-813c-431e13c5a733",
-      "name": "Sync Customer Activity to DB",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "FOvk5uZmCxfD9g30",
-          "name": "Google Sheets account"
-        }
-      }
+      "id": "e6ff9421-902c-4aa6-92e1-ff4fe2b1ffb2",
+      "name": "Sync Customer Activity to DB"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "http://localhost:5678/webhook/31fc8a26-7929-40cf-9b35-9a537e2c6f19",
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
@@ -154,10 +70,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2496,
-        144
+        1776,
+        160
       ],
-      "id": "fb3367c3-27ab-4bf4-b796-11b99a9d4230",
+      "id": "e361b91f-26ed-4a43-a558-a3d106455c79",
       "name": "HTTP Request"
     },
     {
@@ -185,10 +101,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        160,
+        16,
         160
       ],
-      "id": "8c3c0a0c-1801-4141-aa95-d154b4892526",
+      "id": "b5c905b2-d8f0-46df-8a90-a08fd945f991",
       "name": "Receive Sales File",
       "webhookId": "31fc8a26-7929-40cf-9b35-9a537e2c6f19"
     },
@@ -201,10 +117,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        448,
+        240,
         160
       ],
-      "id": "c2f5a29f-9572-4951-aaad-33b9e73e72ab",
+      "id": "27c39bfb-54cd-4043-967f-905acfb24acd",
       "name": "Parse Excel Data"
     },
     {
@@ -214,10 +130,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1344,
-        144
+        912,
+        160
       ],
-      "id": "8054fd01-d648-4517-9886-cd159b5d5ed7",
+      "id": "1625e02b-9813-47e5-b982-226bf402e8ad",
       "name": "Calculate Quick Metrics"
     },
     {
@@ -227,10 +143,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        1648,
-        144
+        1136,
+        160
       ],
-      "id": "2795aae1-cf89-4aa4-a47f-830d8fb6d1e1",
+      "id": "5ca2e0b3-d9c6-4356-86e6-fedb2641628e",
       "name": "UI Instant Response"
     },
     {
@@ -238,24 +154,18 @@
         "fromEmail": "marwansinger13579@gmail.com",
         "toEmail": "={{ $('Calculate Quick Metrics').item.json.userEmail }}",
         "subject": "المحلل الذكى",
-        "html": "=<div dir=\"rtl\" style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; padding: 20px;\">\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 30px; border-radius: 15px 15px 0 0; text-align: center;\">\n        <h1 style=\"color: #ffffff; margin: 0; font-size: 28px; letter-spacing: 1px;\">Data <span style=\"color: #3bf65d;\"> Analysis</span></h1>\n        <p style=\"color: #94a3b8; margin-top: 10px; font-size: 14px;\"> تحليلات المبيعات اللحظية</p>\n    </div>\n\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-bottom: 1px solid #e2e8f0;\">\n        <div style=\"background-color: #fff7ed; border-right: 5px solid #0bf5b3; padding: 15px; border-radius: 8px;\">\n            <h3 style=\"color: #ffffff; margin: 0 0 5px 0; font-size: 16px;\">المحلل الذكي:</h3>\n            <p style=\"color: #ffffff; font-size: 15px; margin: 0; line-height: 1.6;\">{{ $json.insight }}</p>\n        </div>\n    </div>\n\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px;\">\n        <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">\n            <tr>\n                <td width=\"48%\" style=\"background-color: #eff6ff; padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #dbeafe;\">\n                    <p style=\"color: #166534; margin: 0; font-size: 13px; font-weight: bold;\">إجمالي الإيرادات</p>\n                    <h2 style=\"color: #16a34a; margin: 10px 0 0 0; font-size: 22px;\">{{ $json.totalSales }}</h2>\n                </td>\n                <td width=\"4%\"></td>\n                <td width=\"48%\" style=\"background-color: #f0fdf4; padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #dcfce7;\">\n                    <p style=\"color: #166534; margin: 0; font-size: 13px; font-weight: bold;\">عدد العمليات</p>\n                    <h2 style=\"color: #16a34a; margin: 10px 0 0 0; font-size: 22px;\">{{ $json.ordersCount }}</h2>\n                </td>\n            </tr>\n        </table>\n    </div>\n\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0 20px 20px 20px; border-radius: 0 0 15px 15px;\">\n        <table width=\"100%\" style=\"border-collapse: collapse; background-color: #fcfcfc; border-radius: 10px; border: 1px solid #f1f5f9;\">\n            <tr>\n                <td style=\"padding: 15px; color: #64748b; border-bottom: 1px solid #f1f5f9; vertical-align: top;\"> المنتج الأكثر طلباً</td>\n                <td style=\"padding: 15px; color: #0f172a; font-weight: bold; text-align: left; border-bottom: 1px solid #f1f5f9;\">{{ $json.topProduct }}</td>\n            </tr>\n            <tr>\n                <td style=\"padding: 15px; color: #64748b; border-bottom: 1px solid #f1f5f9; vertical-align: top;\">📊 قائمة أعلى 5 منتجات</td>\n                <td style=\"padding: 15px; color: #44f63b; font-size: 14px; text-align: left; border-bottom: 1px solid #f1f5f9; line-height: 1.8;\">\n                    {{ $json.top5Products }}\n                </td>\n            </tr>\n        </table>\n    </div>\n</div>",
+        "html": "=<div dir=\"rtl\" style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7fa; padding: 40px 15px; color: #334155;\">\n    \n    <div style=\"max-width: 550px; margin: 0 auto; background-color: #ffffff; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);\">\n        \n        <div style=\"background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 35px 20px; text-align: center;\">\n            <div style=\"display: inline-block; padding: 8px 16px; background: rgba(59, 246, 93, 0.1); border-radius: 100px; margin-bottom: 15px;\">\n                <span style=\"color: #3bf65d; font-size: 12px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;\">Real-time Report</span>\n            </div>\n            <h1 style=\"color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;\">Data <span style=\"color: #3bf65d;\">Analysis</span></h1>\n            <p style=\"color: #94a3b8; margin-top: 10px; font-size: 14px;\">ملخص أداء المبيعات والمنتجات</p>\n        </div>\n\n        <div style=\"padding: 25px;\">\n            <div style=\"background: #f8fafc; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0; position: relative; overflow: hidden;\">\n                <div style=\"position: absolute; top: 0; right: 0; height: 100%; width: 4px; background: #3bf65d;\"></div>\n                <h3 style=\"color: #1e293b; margin: 0 0 10px 0; font-size: 15px; display: flex; align-items: center;\">\n                    <span style=\"font-size: 18px; margin-left: 8px;\">✨</span> تحليل الذكاء الاصطناعي\n                </h3>\n                <p style=\"color: #475569; font-size: 14px; margin: 0; line-height: 1.8; font-style: italic;\">\n                    \"{{ $json.insight }}\"\n                </p>\n            </div>\n\n            <div style=\"margin-top: 25px;\">\n                <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">\n                    <tr>\n                        <td width=\"48%\" style=\"background: #ffffff; padding: 20px; border-radius: 20px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center;\">\n                            <span style=\"display: block; color: #64748b; font-size: 12px; font-weight: 600; margin-bottom: 8px;\">إجمالي الإيرادات</span>\n                            <span style=\"display: block; color: #0f172a; font-size: 24px; font-weight: 800;\">{{ $json.totalSales }}</span>\n                            <span style=\"display: inline-block; width: 30px; height: 3px; background: #3bf65d; border-radius: 10px; margin-top: 10px;\"></span>\n                        </td>\n                        <td width=\"4%\"></td>\n                        <td width=\"48%\" style=\"background: #ffffff; padding: 20px; border-radius: 20px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center;\">\n                            <span style=\"display: block; color: #64748b; font-size: 12px; font-weight: 600; margin-bottom: 8px;\">عدد العمليات</span>\n                            <span style=\"display: block; color: #0f172a; font-size: 24px; font-weight: 800;\">{{ $json.ordersCount }}</span>\n                            <span style=\"display: inline-block; width: 30px; height: 3px; background: #3b82f6; border-radius: 10px; margin-top: 10px;\"></span>\n                        </td>\n                    </tr>\n                </table>\n            </div>\n\n            <div style=\"margin-top: 30px; background: #ffffff; border-radius: 20px; border: 1px solid #f1f5f9; padding: 20px;\">\n                <div style=\"padding-bottom: 15px; border-bottom: 1px solid #f1f5f9; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;\">\n                    <span style=\"color: #1e293b; font-weight: 700; font-size: 15px;\">🏆 المنتج الأكثر طلباً</span>\n                    <span style=\"color: #3bf65d; font-weight: bold; font-size: 14px;\">{{ $json.topProduct }}</span>\n                </div>\n                \n                <div style=\"padding: 10px 0;\">\n                    <p style=\"color: #64748b; font-size: 13px; margin: 0 0 12px 0; font-weight: 600;\">📊 قائمة أعلى 5 منتجات:</p>\n                    <div style=\"background: #fcfcfc; border-radius: 12px; padding: 15px; border: 1px dashed #cbd5e1; color: #334155; font-size: 14px; line-height: 2; text-align: left;\">\n                        {{ $json.top5Products }}\n                    </div>\n                </div>\n            </div>\n\n            <div style=\"text-align: center; margin-top: 30px; border-top: 1px solid #f1f5f9; padding-top: 20px;\">\n                <p style=\"color: #94a3b8; font-size: 11px; margin: 0;\">نظام التحليل الذكي  • {{ new Date().toLocaleDateString() }}</p>\n            </div>\n        </div>\n    </div>\n</div>",
         "options": {}
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        1920,
-        144
+        1376,
+        160
       ],
-      "id": "78d2f137-7e42-4fd7-9eb5-d8488b78f8ba",
+      "id": "b1cda6ab-e0f5-44fb-8197-e59cb34fce4d",
       "name": "Send Instant Smart Report",
-      "webhookId": "916bfca0-3560-40fa-8976-9e3857dcc303",
-      "credentials": {
-        "smtp": {
-          "id": "nBl0sxHcJJvmiSrY",
-          "name": "SMTP account"
-        }
-      }
+      "webhookId": "916bfca0-3560-40fa-8976-9e3857dcc303"
     },
     {
       "parameters": {
@@ -284,10 +194,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        976,
+        656,
         160
       ],
-      "id": "3d63239f-1152-4bd7-a554-3d61f2d41d79",
+      "id": "655ab7a1-709a-42f7-9ab1-780a6030afac",
       "name": "Data Validation & Security Gate"
     },
     {
@@ -379,10 +289,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        720,
+        448,
         160
       ],
-      "id": "a8a84dd9-5f27-4dfe-99ee-01531656d108",
+      "id": "54cede43-b84c-4f66-ab4e-a1faac3b467a",
       "name": "Data Formatter"
     }
   ],
@@ -490,7 +400,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "ac47b1fd-1463-42c5-99cd-45f0fbe51019",
+  "versionId": "28be0f48-5f7b-4b27-b237-9dbdd320e557",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "09b3cf77e495ffd8426ecd872923b1036e1861e4ffd1f7022450141217854cc8"
