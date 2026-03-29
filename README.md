@@ -15,7 +15,7 @@
   <img src="https://img.shields.io/badge/AI-Deep_Analysis-blue?style=for-the-badge&logo=openai" alt="AI">
   <img src="https://img.shields.io/badge/Architecture-Event--Driven-success?style=for-the-badge" alt="Status">
 </p>
-
+ 
 ---
 
 ## 🧠 Project Overview
@@ -183,6 +183,7 @@ _Graduation Project – MCI Academy 2026_
 
 > **Transform raw Excel sales files into intelligent, automated, and actionable business reports using n8n and AI.**
 
+---
 ---
 
 ⭐ If you like this project, feel free to star the repository!
