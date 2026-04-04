@@ -70,24 +70,11 @@
 </div>
 
 <script>
-    // Dark Mode Toggle
+    // 1. نظام الـ Dark Mode (شغال زي ما هو)
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle?.querySelector('i');
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        if (themeIcon) {
-            themeIcon.classList.remove('bi-moon-stars-fill');
-            themeIcon.classList.add('bi-sun-fill');
-        }
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        if (themeIcon) {
-            themeIcon.classList.remove('bi-sun-fill');
-            themeIcon.classList.add('bi-moon-stars-fill');
-        }
-    }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
 
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
@@ -96,21 +83,12 @@
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             if (themeIcon) {
-                if (newTheme === 'dark') {
-                    themeIcon.classList.remove('bi-moon-stars-fill');
-                    themeIcon.classList.add('bi-sun-fill');
-                } else {
-                    themeIcon.classList.remove('bi-sun-fill');
-                    themeIcon.classList.add('bi-moon-stars-fill');
-                }
+                themeIcon.className = newTheme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
             }
         });
     }
 
-    // ============================================
-    // Simple Auth System using Local Storage
-    // ============================================
-    
+    // 2. إعدادات التبديل بين (دخول / تسجيل)
     const authForm = document.getElementById('authForm');
     const authTitle = document.getElementById('authTitle');
     const authSubtitle = document.getElementById('authSubtitle');
@@ -118,145 +96,89 @@
     const btnText = document.getElementById('btnText');
     const loadingSpinner = document.getElementById('loadingSpinner');
     const toggleAuth = document.getElementById('toggleAuth');
-    let isLoginMode = true;
-    
-    // المستخدم التجريبي
-    const DEMO_USER = {
-        email: "demo@smartbi.com",
-        password: "123456",
-        name: "مستخدم تجريبي"
-    };
-    
-    // تسجيل الدخول التلقائي للمستخدم التجريبي
-    const demoUserBtn = document.getElementById('demoUserBtn');
-    if (demoUserBtn) {
-        demoUserBtn.onclick = () => {
-            document.getElementById('authEmail').value = DEMO_USER.email;
-            document.getElementById('authPassword').value = DEMO_USER.password;
-            // تنفيذ تسجيل الدخول تلقائياً
-            setTimeout(() => {
-                authForm.dispatchEvent(new Event('submit'));
-            }, 100);
-        };
-    }
-    
-    // تهيئة localStorage للمستخدمين
-    function initUsers() {
-        if (!localStorage.getItem('users')) {
-            const users = [DEMO_USER];
-            localStorage.setItem('users', JSON.stringify(users));
-        }
-    }
-    
-    initUsers();
-    
-    // دالة تسجيل الدخول
-    function login(email, password) {
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const user = users.find(u => u.email === email && u.password === password);
-        
-        if (user) {
-            localStorage.setItem('currentUser', JSON.stringify({
-                email: user.email,
-                name: user.name || user.email.split('@')[0],
-                loginTime: new Date().toISOString()
-            }));
-            return { success: true };
-        }
-        return { success: false, error: "البريد الإلكتروني أو كلمة المرور غير صحيحة" };
-    }
-    
-    // دالة إنشاء حساب جديد
-    function register(email, password) {
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        
-        // التحقق من وجود المستخدم
-        if (users.find(u => u.email === email)) {
-            return { success: false, error: "البريد الإلكتروني مستخدم بالفعل" };
-        }
-        
-        // التحقق من قوة كلمة المرور
-        if (password.length < 6) {
-            return { success: false, error: "كلمة المرور يجب أن تكون 6 أحرف على الأقل" };
-        }
-        
-        // إضافة المستخدم الجديد
-        const newUser = {
-            email: email,
-            password: password,
-            name: email.split('@')[0],
-            createdAt: new Date().toISOString()
-        };
-        
-        users.push(newUser);
-        localStorage.setItem('users', JSON.stringify(users));
-        
-        // تسجيل الدخول تلقائياً
-        localStorage.setItem('currentUser', JSON.stringify({
-            email: newUser.email,
-            name: newUser.name,
-            loginTime: new Date().toISOString()
-        }));
-        
-        return { success: true };
-    }
-    
-    // تبديل وضع تسجيل الدخول / إنشاء حساب
+    let isLoginMode = true; // الحالة الافتراضية: دخول
+
+    // وظيفة زرار التبديل (مهمة جداً لفتح إنشاء حساب)
     toggleAuth.onclick = (e) => {
         e.preventDefault();
-        isLoginMode = !isLoginMode;
+        isLoginMode = !isLoginMode; // اقلب الحالة
         
         if (isLoginMode) {
             authTitle.innerText = "تسجيل الدخول";
             authSubtitle.innerText = "مرحباً بعودتك! سجل دخولك للمتابعة";
-            authBtn.innerHTML = '<span id="btnText">دخول</span><div class="spinner-border spinner-border-sm ms-2" id="loadingSpinner" style="display: none;"></div>';
+            btnText.innerText = "دخول";
             toggleAuth.innerHTML = '<i class="bi bi-person-plus-fill me-1"></i><span>ليس لديك حساب؟ إنشاء حساب جديد</span>';
         } else {
             authTitle.innerText = "إنشاء حساب جديد";
             authSubtitle.innerText = "انضم إلينا وابدأ تحليل بياناتك";
-            authBtn.innerHTML = '<span id="btnText">تسجيل</span><div class="spinner-border spinner-border-sm ms-2" id="loadingSpinner" style="display: none;"></div>';
+            btnText.innerText = "تسجيل";
             toggleAuth.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i><span>لديك حساب بالفعل؟ سجل دخولك</span>';
         }
     };
+
+    // 3. الربط الفعلي مع سيرفر بايثون (Flask)
+authForm.onsubmit = async (e) => {
+    e.preventDefault();
     
-    // معالجة إرسال النموذج
-    authForm.onsubmit = async (e) => {
-        e.preventDefault();
+    // 1. جلب البيانات وتجهيز الواجهة
+    const email = document.getElementById('authEmail').value.trim();
+    const password = document.getElementById('authPassword').value;
+    const submitBtn = document.getElementById('authBtn');
+    const btnText = document.getElementById('btnText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+
+    submitBtn.disabled = true;
+    loadingSpinner.style.display = 'inline-block';
+    btnText.innerText = "جاري الدخول...";
+
+    const endpoint = isLoginMode ? '/login' : '/register';
+
+    try {
+        const response = await fetch(`http://127.0.0.1:5000${endpoint}`, {            
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email, password: password })
+        });
+
+        // 2. التحقق من النجاح (200 أو 201)
+        if (response.ok) {
+            localStorage.setItem('currentUser', JSON.stringify({ email: email }));
+            window.location.href = "index.html"; // أو اسم صفحة الـ Dashboard بتاعتك
         
-        const email = document.getElementById('authEmail').value.trim();
-        const password = document.getElementById('authPassword').value;
-        const submitBtn = document.getElementById('authBtn');
-        const spinner = document.getElementById('loadingSpinner');
-        const btnTextSpan = document.getElementById('btnText');
-        
-        if (!email || !password) {
-            alert("⚠️ الرجاء إدخال البريد الإلكتروني وكلمة المرور");
-            return;
-        }
-        
-        submitBtn.disabled = true;
-        spinner.style.display = 'inline-block';
-        btnTextSpan.innerText = isLoginMode ? "جاري الدخول..." : "جاري التسجيل...";
-        
-        // محاكاة تأخير الشبكة
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        let result;
-        if (isLoginMode) {
-            result = login(email, password);
+            
+            // احتياطي لو المتصفح رفض replace
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 100);
+            
         } else {
-            result = register(email, password);
+            // 3. معالجة الخطأ لو بايثون رد بكود غير 200
+            const errorData = await response.json().catch(() => ({})); 
+            alert("⚠️ " + (errorData.message || "بيانات الدخول غير صحيحة"));
+            resetUI(isLoginMode ? "دخول" : "تسجيل");
         }
-        
-        if (result.success) {
-            // تحويل فوري بدون أي رسائل
-            window.location.href = "index.html";
-        } else {
-            alert("⚠️ " + result.error);
-            submitBtn.disabled = false;
-            spinner.style.display = 'none';
-            btnTextSpan.innerText = isLoginMode ? "دخول" : "تسجيل";
-        }
+    } catch (error) {
+        console.error("Connection Error:", error);
+        alert("⚠️ تعذر الوصول للسيرفر، تأكد من تشغيل app.py");
+        resetUI(isLoginMode ? "دخول" : "تسجيل");
+    }
+};
+
+function resetUI(text) {
+    const authBtn = document.getElementById('authBtn');
+    const btnText = document.getElementById('btnText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    authBtn.disabled = false;
+    loadingSpinner.style.display = 'none';
+    btnText.innerText = text;
+}
+
+    // زر الحساب التجريبي
+    document.getElementById('demoUserBtn').onclick = () => {
+        document.getElementById('authEmail').value = "demo@smartbi.com";
+        document.getElementById('authPassword').value = "123456";
     };
 </script>
 
