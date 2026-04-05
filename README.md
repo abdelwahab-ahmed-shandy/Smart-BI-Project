@@ -20,11 +20,14 @@
 
 ## 🧠 Project Overview
 
-The **Smart BI Reporting System** is an automated ecosystem designed to bridge the gap between raw data and executive decision-making. It transforms standard **Excel sales data** into high-level strategic insights through an **event-driven architecture**, simulating a professional data analyst's workflow.
+The Smart BI Reporting System is an intelligent ecosystem designed to bridge the gap between raw data and executive decision-making. It transforms standard Excel sales data into high-level strategic insights through a professional data analyst's workflow.
 
-The system features a dual-path processing engine:
-* ⚡ **Fast Track**: Instant KPI extraction and real-time dashboard visualization.
-* 🧠 **Slow Track**: Comprehensive AI-driven strategic analysis delivered directly to the executive's inbox.
+🔄 The Intelligent Pipeline:
+- 🔐 Secure Auth: Multi-user system with encrypted passwords (Bcrypt).
+
+- ⚡ Fast Track: Instant KPI extraction (Total Sales, Top Products) and real-time Chart.js visualization.
+
+- 🧠 Slow Track: Strategic AI-driven analysis (SWOT, Trends) delivered via automated n8n workflows.
 
 ---
 
@@ -152,53 +155,56 @@ The system is designed to provide a seamless transition from raw data ingestion 
 
 ```bash
 Smart-BI-Project/
-├── Frontend/           # UI Components (HTML, CSS, Vanilla JS)
-├── Backend/            # BackEnd Python & PostgreSQL
-├── n8n-Workflows/      # Production-ready .json workflow exports
-├── Samples/            # Standardized Excel datasets for testing
-├── Manual Analysis/    # Comparison benchmarks and manual data audits
-├── Presentation/       # Project pitch decks and academic documentation
-├── Tasks/              # Development roadmap and sprint management
-└── README.md           # Documentation
+├── Backend/            # Flask API & SQLite Engine
+│   ├── SmartBi.py      # Core Backend Logic
+│   └── DataBase/       # SQL Schemas & database.db
+├── Frontend/           # UI Components (HTML, CSS, JS)
+│   ├── auth.html       # Secure Entry Point
+│   └── index.html      # Analytics Dashboard
+├── n8n-Workflows/      # Automation .json exports
+├── Samples/            # Standardized Excel datasets
+└── Manual Analysis/    # Benchmarks (Jupyter Notebooks)
 ```
 ---
 
 ## 🧩 Technologies Used
 
-* **n8n** – Automation & Backend Engine
-* **JavaScript** – Data processing & logic
-* **HTML / CSS** – Frontend UI
-* **Excel (XLSX)** – Input data format
-* **AI / LLMs** – Intelligent data interpretation
-* **SMTP** – Automated email delivery
+* Backend: Python 3.10, Flask, Flask-CORS.
+
+* Security: Hashed passwords using bcrypt (Salted).
+
+* Database: SQLite (Relational, File-based for high-speed local processing).
+
+* Frontend: Bootstrap 5 (RTL Support), Chart.js, Vanilla JavaScript.
+
+* Automation: n8n (Webhook-driven reporting).
 
 ---
 
 ## 👥 Project Team
 
-**Abdelwahab Shandy – Team Lead & Automation Architect
+**Abdelwahab Shandy – Team Lead & Automation Architect**
 
-Hadeer Abdelaziz – Business Intelligence  & QA
+**Hadeer Abdelaziz – Business Intelligence  & QA**
 
-Hamed Tarek – Backend & Database Developer
+**Hamed Tarek – Backend & Database Developer**
 
-Howarah Ali Abdo – Data Analyst (Jupyter & BI)
+**Howarah Ali Abdo – Data Analyst (Jupyter & BI)**
 
-Marwan Singer – Frontend Developer & UI/UX
+**Marwan Singer – Frontend Developer & UI/UX**
 
-Sanaa Ahmed Mohamed – Graphic Designer 
+**Sanaa Ahmed Mohamed – Graphic Designer** 
 
-Abdelrahman Taher – Technical Writer & Presentation**
-
-_Graduation Project – MCI Academy 2026_
+**Abdelrahman Taher – Writer & Presentation**
 
 ---
 
 ## 🏁 Core Idea
 
-> **Transform raw Excel sales files into intelligent, automated, and actionable business reports using n8n and AI.**
+> **Turning data into a competitive advantage by automating the bridge between Excel and AI.**
 
 ---
----
 
-⭐ If you like this project, feel free to star the repository!
+⭐ If you find this project useful, please consider giving it a star!
+
+_Graduation Project – MCI Academy 2026_
