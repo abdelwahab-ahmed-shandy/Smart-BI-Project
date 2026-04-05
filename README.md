@@ -1,7 +1,7 @@
 # 📊 Smart Business Intelligence Reporting System (Smart BI Project)
 
 <p align="center">
-  <img src="Frontend/Assets/img/e6ecb39d-3feb-4943-bced-b1204095b566.jpeg" width="120" alt="MCI Logo">
+  <img src="Frontend/Assets/img/logomci.jpeg" width="120" alt="MCI Logo">
 </p>
 
 <p align="center">
@@ -104,7 +104,6 @@ The core logic resides in **n8n**, where incoming Webhooks trigger parallel exec
 <br>
 <div align="center">
   <img src="Frontend/Assets/img/Slow_work_flow_email.png" width="450" alt="Strategic Report Email 1">
-  <p><i>The final AI-generated strategic report, sent as a high-level executive email.</i></p>
 </div>
 
 <div align="center">
@@ -113,6 +112,7 @@ The core logic resides in **n8n**, where incoming Webhooks trigger parallel exec
 
 <div align="center">
   <img src="Frontend/Assets/img/Slow_work_flow_email3.png" width="450" alt="Strategic Report Email 3">
+    <p><i>The final AI-generated strategic report, sent as a high-level executive email.</i></p>
 </div>
 </details>
 
@@ -153,6 +153,7 @@ The system is designed to provide a seamless transition from raw data ingestion 
 ```bash
 Smart-BI-Project/
 ├── Frontend/           # UI Components (HTML, CSS, Vanilla JS)
+├── Backend/            # BackEnd Python & PostgreSQL
 ├── n8n-Workflows/      # Production-ready .json workflow exports
 ├── Samples/            # Standardized Excel datasets for testing
 ├── Manual Analysis/    # Comparison benchmarks and manual data audits
@@ -175,13 +176,19 @@ Smart-BI-Project/
 
 ## 👥 Project Team
 
-- **Hamed Tarek**  
-- **Howarah Ali Abdo**  
-- **Sanaa Ahmed Mohamed**  
-- **Abdelrahman Taher**  
-- **Marwan Singer**  
-- **Hadeer Abdelaziz**
-- **Abdelwahab Shandy**  
+**Abdelwahab Shandy – Team Lead & Automation Architect
+
+Hadeer Abdelaziz – Business Intelligence  & QA
+
+Hamed Tarek – Backend & Database Developer
+
+Howarah Ali Abdo – Data Analyst (Jupyter & BI)
+
+Marwan Singer – Frontend Developer & UI/UX
+
+Sanaa Ahmed Mohamed – Graphic Designer 
+
+Abdelrahman Taher – Technical Writer & Presentation**
 
 _Graduation Project – MCI Academy 2026_
 
