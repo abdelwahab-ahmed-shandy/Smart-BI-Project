@@ -103,8 +103,16 @@ The core logic resides in **n8n**, where incoming Webhooks trigger parallel exec
 <summary><b>📧 Click to View Sample Strategic AI Email Report (Detailed)</b></summary>
 <br>
 <div align="center">
-  <img src="Frontend/Assets/img/Slow_work_flow_email.png" width="450" alt="Strategic Report Email">
+  <img src="Frontend/Assets/img/Slow_work_flow_email.png" width="450" alt="Strategic Report Email 1">
   <p><i>The final AI-generated strategic report, sent as a high-level executive email.</i></p>
+</div>
+
+<div align="center">
+  <img src="Frontend/Assets/img/Slow_work_flow_email2.png" width="450" alt="Strategic Report Email 2">
+</div>
+
+<div align="center">
+  <img src="Frontend/Assets/img/Slow_work_flow_email3.png" width="450" alt="Strategic Report Email 3">
 </div>
 </details>
 
