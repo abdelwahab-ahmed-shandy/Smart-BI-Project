@@ -1,5 +1,5 @@
 # |------------------------------------------------------------------------------------------------------------
-# | Deployment Note:                                                                                            |
+# | Deployment Note:                                                                                             |
 # | This code is currently hosted and running live on PythonAnywhere.                                           |
 # | API Endpoint: https://aaas.pythonanywhere.com                                                               |
 # | Connected to Frontend at: https://abdelwahab-ahmed-shandy.github.io/Smart-BI-Project/Frontend/auth.html     |

@@ -2,6 +2,7 @@
 // Simple Auth System using Pythonanywhere as a small Server 
 // ==========================================================
 
+
 // Check login
 function checkAuth() {
     const currentUser = localStorage.getItem('currentUser');
