@@ -12,7 +12,6 @@
 </head>
 <body class="auth-page">
 
-<!-- زر تبديل الوضع -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 1000;">
     <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">
         <i class="bi bi-moon-stars-fill"></i>
@@ -32,15 +31,13 @@
         <form id="authForm">
             <div class="mb-3 text-start">
                 <label class="form-label fw-semibold small">
-                    <i class="bi bi-envelope-fill text-primary me-1"></i>
-                    البريد الإلكتروني
+                    <i class="bi bi-envelope-fill text-primary me-1"></i> البريد الإلكتروني
                 </label>
                 <input type="email" id="authEmail" class="form-control form-control-lg" required placeholder="name@example.com">
             </div>
             <div class="mb-4 text-start">
                 <label class="form-label fw-semibold small">
-                    <i class="bi bi-lock-fill text-primary me-1"></i>
-                    كلمة المرور
+                    <i class="bi bi-lock-fill text-primary me-1"></i> كلمة المرور
                 </label>
                 <input type="password" id="authPassword" class="form-control form-control-lg" required placeholder="••••••••">
             </div>
@@ -56,131 +53,106 @@
                 <span>ليس لديك حساب؟ إنشاء حساب جديد</span>
             </a>
         </div>
-        
-        <!-- مستخدم تجريبي -->
-        <div class="mt-4 pt-3 text-center border-top">
-            <p class="text-muted small mb-2">👨‍💻 حساب تجريبي للاختبار:</p>
-            <div class="d-flex justify-content-center gap-3">
-                <button type="button" class="btn btn-outline-primary btn-sm" id="demoUserBtn">
-                    <i class="bi bi-person-circle me-1"></i>demo@smartbi.com / 123456
-                </button>
-            </div>
-        </div>
     </div>
 </div>
 
+<div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer" style="z-index: 1100;"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // 1. نظام الـ Dark Mode (شغال زي ما هو)
+    // 1. Dark Mode Logic
     const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle?.querySelector('i');
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
 
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            if (themeIcon) {
-                themeIcon.className = newTheme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
-            }
-        });
-    }
+    themeToggle?.addEventListener('click', () => {
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
 
-    // 2. إعدادات التبديل بين (دخول / تسجيل)
-    const authForm = document.getElementById('authForm');
+    // 2. Auth Toggle (Login / Register)
+    let isLoginMode = true;
+    const toggleAuth = document.getElementById('toggleAuth');
     const authTitle = document.getElementById('authTitle');
-    const authSubtitle = document.getElementById('authSubtitle');
     const authBtn = document.getElementById('authBtn');
     const btnText = document.getElementById('btnText');
-    const loadingSpinner = document.getElementById('loadingSpinner');
-    const toggleAuth = document.getElementById('toggleAuth');
-    let isLoginMode = true; // الحالة الافتراضية: دخول
 
-    // وظيفة زرار التبديل (مهمة جداً لفتح إنشاء حساب)
     toggleAuth.onclick = (e) => {
         e.preventDefault();
-        isLoginMode = !isLoginMode; // اقلب الحالة
-        
-        if (isLoginMode) {
-            authTitle.innerText = "تسجيل الدخول";
-            authSubtitle.innerText = "مرحباً بعودتك! سجل دخولك للمتابعة";
-            btnText.innerText = "دخول";
-            toggleAuth.innerHTML = '<i class="bi bi-person-plus-fill me-1"></i><span>ليس لديك حساب؟ إنشاء حساب جديد</span>';
-        } else {
-            authTitle.innerText = "إنشاء حساب جديد";
-            authSubtitle.innerText = "انضم إلينا وابدأ تحليل بياناتك";
-            btnText.innerText = "تسجيل";
-            toggleAuth.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i><span>لديك حساب بالفعل؟ سجل دخولك</span>';
-        }
+        isLoginMode = !isLoginMode;
+        authTitle.innerText = isLoginMode ? "تسجيل الدخول" : "إنشاء حساب جديد";
+        btnText.innerText = isLoginMode ? "دخول" : "تسجيل";
+        toggleAuth.innerHTML = isLoginMode ? 
+            '<i class="bi bi-person-plus-fill me-1"></i><span>ليس لديك حساب؟ إنشاء حساب جديد</span>' : 
+            '<i class="bi bi-box-arrow-in-right me-1"></i><span>لديك حساب بالفعل؟ سجل دخولك</span>';
     };
 
-    // 3. الربط الفعلي مع سيرفر بايثون (Flask)
-authForm.onsubmit = async (e) => {
-    e.preventDefault();
-    
-    // 1. جلب البيانات وتجهيز الواجهة
-    const email = document.getElementById('authEmail').value.trim();
-    const password = document.getElementById('authPassword').value;
-    const submitBtn = document.getElementById('authBtn');
-    const btnText = document.getElementById('btnText');
-    const loadingSpinner = document.getElementById('loadingSpinner');
-
-    submitBtn.disabled = true;
-    loadingSpinner.style.display = 'inline-block';
-    btnText.innerText = "جاري الدخول...";
-
-    const endpoint = isLoginMode ? '/login' : '/register';
-
-    try {
-        const response = await fetch(`https://aaas.pythonanywhere.com${endpoint}`, {            
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email, password: password })
-        });
-
-        // 2. التحقق من النجاح (200 أو 201)
-        if (response.ok) {
-            localStorage.setItem('currentUser', JSON.stringify({ email: email }));
-            window.location.href = "index.html"; // أو اسم صفحة الـ Dashboard بتاعتك
+    // 3. Toast Function
+    function showToast(message, type = 'info') {
+        const container = document.getElementById('toastContainer');
+        const id = 'toast-' + Date.now();
+        const bgColor = type === 'success' ? 'bg-success' : type === 'error' ? 'bg-danger' : 'bg-primary';
+        const icon = type === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill';
         
-            
-            // احتياطي لو المتصفح رفض replace
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 100);
-            
-        } else {
-            // 3. معالجة الخطأ لو بايثون رد بكود غير 200
-            const errorData = await response.json().catch(() => ({})); 
-            alert("⚠️ " + (errorData.message || "بيانات الدخول غير صحيحة"));
-            resetUI(isLoginMode ? "دخول" : "تسجيل");
-        }
-    } catch (error) {
-        console.error("Connection Error:", error);
-        alert("⚠️ تعذر الوصول للسيرفر، تأكد من تشغيل app.py");
-        resetUI(isLoginMode ? "دخول" : "تسجيل");
+        const html = `
+            <div id="${id}" class="toast align-items-center text-white ${bgColor} border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex p-2">
+                    <div class="toast-body d-flex align-items-center gap-2">
+                        <i class="bi ${icon} fs-5"></i> ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>`;
+        
+        container.insertAdjacentHTML('beforeend', html);
+        const el = document.getElementById(id);
+        const toast = new bootstrap.Toast(el, { delay: 3000 });
+        toast.show();
+        el.addEventListener('hidden.bs.toast', () => el.remove());
     }
-};
 
-function resetUI(text) {
-    const authBtn = document.getElementById('authBtn');
-    const btnText = document.getElementById('btnText');
-    const loadingSpinner = document.getElementById('loadingSpinner');
-    authBtn.disabled = false;
-    loadingSpinner.style.display = 'none';
-    btnText.innerText = text;
-}
+    // 4. API Submission
+    document.getElementById('authForm').onsubmit = async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('authEmail').value.trim();
+        const password = document.getElementById('authPassword').value;
+        const spinner = document.getElementById('loadingSpinner');
+        
+        authBtn.disabled = true;
+        spinner.style.display = 'inline-block';
+        btnText.innerText = isLoginMode ? "جاري الدخول..." : "جاري التسجيل...";
 
-    // زر الحساب التجريبي
-    document.getElementById('demoUserBtn').onclick = () => {
-        document.getElementById('authEmail').value = "demo@smartbi.com";
-        document.getElementById('authPassword').value = "123456";
+        const endpoint = isLoginMode ? '/login' : '/register';
+
+        try {
+            const response = await fetch(`https://aaas.pythonanywhere.com${endpoint}`, {            
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (response.ok) {
+                localStorage.setItem('currentUser', JSON.stringify({ email }));
+                showToast(isLoginMode ? "تم تسجيل الدخول بنجاح!" : "تم إنشاء الحساب بنجاح!", "success");
+                setTimeout(() => window.location.href = "index.html", 1500);
+            } else {
+                showToast(data.message || "البريد الإلكتروني أو كلمة المرور غير صحيحة", "error");
+                resetUI();
+            }
+        } catch (error) {
+            showToast("تعذر الاتصال بالسيرفر السحابي", "error");
+            resetUI();
+        }
     };
-</script>
 
+    function resetUI() {
+        authBtn.disabled = false;
+        document.getElementById('loadingSpinner').style.display = 'none';
+        btnText.innerText = isLoginMode ? "دخول" : "تسجيل";
+    }
+</script>
 </body>
 </html>
