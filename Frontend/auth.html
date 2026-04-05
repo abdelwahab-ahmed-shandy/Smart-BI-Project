@@ -134,7 +134,7 @@ authForm.onsubmit = async (e) => {
     const endpoint = isLoginMode ? '/login' : '/register';
 
     try {
-        const response = await fetch(`http://127.0.0.1:5000${endpoint}`, {            
+        const response = await fetch(`https://aaas.pythonanywhere.com${endpoint}`, {            
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
