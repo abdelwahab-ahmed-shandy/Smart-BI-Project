@@ -1,4 +1,4 @@
-# 📊 Smart Business Intelligence Reporting System (Smart BI Project)
+# 📊 Smart BI Project
 
 <p align="center">
   <img src="Frontend/Assets/img/logomci.jpeg" width="120" alt="MCI Logo">
@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Graduation Project – MCI Academy 2026</strong><br>
-  An Automated, AI-powered Business Intelligence pipeline using <b>n8n</b>, <b>LLMs</b>, and <b>Excel</b>.
+  An Automated, AI-powered Business Intelligence pipeline using <b>n8n</b>, <b>AI Agent</b>, and <b>Excel</b>.
 </p>
 
 <p align="center">
