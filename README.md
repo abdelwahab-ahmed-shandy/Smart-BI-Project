@@ -1,4 +1,4 @@
-# 📊 Smart BI Project
+# 📊 Smart BI 
 
 <p align="center">
   <img src="Frontend/Assets/img/logomci.jpeg" width="120" alt="MCI Logo">
