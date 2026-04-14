@@ -1,8 +1,9 @@
-// ============================================
-// Simple Auth System using Local Storage
-// ============================================
+// ==========================================================
+// Simple Auth System using Pythonanywhere as a small Server 
+// ==========================================================
 
-// التحقق من تسجيل الدخول
+
+// Check login
 function checkAuth() {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
@@ -12,7 +13,7 @@ function checkAuth() {
     return JSON.parse(currentUser);
 }
 
-// عرض معلومات المستخدم
+// Display user information
 function displayUserInfo() {
     const currentUser = checkAuth();
     if (currentUser) {
@@ -23,7 +24,7 @@ function displayUserInfo() {
     }
 }
 
-// تسجيل الخروج
+// Log out
 function logout() {
     localStorage.removeItem('currentUser');
     window.location.href = "auth.html";
@@ -495,14 +496,14 @@ if (themeToggle) {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // التحقق من تسجيل الدخول أولاً
+    // Check login first
     const user = checkAuth();
     if (!user) return;
     
-    // عرض معلومات المستخدم
+    // Display user information
     displayUserInfo();
     
-    // إعداد زر تسجيل الخروج
+    // Setting up the logout button
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.onclick = (e) => {
@@ -511,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
     
-    // باقي الأحداث
+    // The rest of the events
     const emailInput = document.getElementById('email');
     if (emailInput) {
         emailInput.addEventListener('focus', () => {

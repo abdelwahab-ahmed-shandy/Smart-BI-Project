@@ -643,7 +643,7 @@ body {
     
     .ai-badge {
         font-size: 0.7rem;
-        padding: 6px 12px;
+     .hover-lift {   padding: 6px 12px;
     }
     
     .dashboard-title {
@@ -654,6 +654,7 @@ body {
         width: 35px;
         height: 35px;
         font-size: 1rem;
+    }
     }
 }
 
@@ -729,7 +730,7 @@ body {
    Guidance Section Styles
    ============================================ */
 
-/* تنسيق عناصر الإرشادات */
+/* Formatting of Guideline Elements */
 .guidance-item {
     transition: var(--transition-fast);
 }
@@ -752,7 +753,7 @@ body {
     background: var(--primary-soft) !important;
 }
 
-/* تنسيق منطقة الإرشادات في الوضع الداكن */
+/* Guidelines area format in dark mode */
 [data-theme="dark"] .guidance-item code {
     background: var(--bg-gray) !important;
     color: var(--text-primary) !important;
@@ -772,7 +773,7 @@ body {
     color: var(--text-primary) !important;
 }
 
-/* تنسيق alert التوضيحي */
+/* explanatory alert format */
 .bg-soft-info {
     background: linear-gradient(135deg, rgba(13, 202, 240, 0.1) 0%, rgba(13, 202, 240, 0.05) 100%);
     border: 1px solid rgba(13, 202, 240, 0.2);
@@ -783,12 +784,12 @@ body {
     border: 1px solid rgba(13, 202, 240, 0.15);
 }
 
-/* تنسيق الأيقونات والألوان */
+/* Icon and color formatting */
 .guidance-item i {
     font-size: 1.1rem;
 }
 
-/* تحسينات للهواتف */
+/* Improvements for phones */
 @media (max-width: 768px) {
     .guidance-item code {
         font-size: 0.75rem;
@@ -800,10 +801,12 @@ body {
     }
 }
 
+
 /* ============================================
    Auth Page Styles
    ============================================ */
 
+   
 .auth-page {
     background: var(--bg-light);
     min-height: 100vh;

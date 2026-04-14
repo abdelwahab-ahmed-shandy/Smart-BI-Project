@@ -1,4 +1,5 @@
--- Supabase SQL creation script
+-- SQLite Database Schema for Smart BI Project
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
