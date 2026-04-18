@@ -183,19 +183,19 @@ Smart-BI-Project/
 
 ## 👥 Project Team
 
-**Abdelwahab Shandy – Team Lead & Automation Architect**
+**Abdelwahab Shandy – Team Lead**
 
-**Hadeer Abdelaziz – Business Intelligence  & QA**
+**Hadeer Abdelaziz**
 
-**Hamed Tarek – Backend & Database Developer**
+**Hamed Tarek**
 
-**Howarah Ali Abdo – Data Analyst (Jupyter & BI)**
+**Howarah Ali Abdo**
 
-**Marwan Singer – Frontend Developer & UI/UX**
+**Marwan Singer**
 
-**Sanaa Ahmed Mohamed – Graphic Designer** 
+**Sanaa Ahmed Mohamed** 
 
-**Abdelrahman Taher – Writer & Presentation**
+**Abdelrahman Taher**
 
 
 ---
